@@ -3,433 +3,678 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OVERLORD™ | Miebach Autonomous Warehouse Go-Live Accelerator</title>
+  <title>OVERLORD™ // TOP SECRET C4ISR GO-LIVE ACCELERATOR (MIEBACH)</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
+    :root {
+      --radar-cyan: #00f0ff;
+      --radar-amber: #ffaa00;
+      --radar-emerald: #00ff88;
+      --radar-crimson: #ff2a55;
+    }
     body {
-      background-color: #070b13;
-      color: #e2e8f0;
+      background-color: #04070e;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.05) 0%, transparent 60%),
+        linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 32px 32px, 32px 32px;
+      color: #cbd5e1;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
+    .font-mono-tech {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
     .custom-scroll::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
+      width: 4px;
+      height: 4px;
     }
     .custom-scroll::-webkit-scrollbar-thumb {
       background: #1e293b;
-      border-radius: 3px;
+      border-radius: 2px;
     }
-    .subtle-glow {
-      box-shadow: 0 0 35px rgba(0, 210, 255, 0.08);
+    /* HUD BRACKETS & CROSSHAIRS */
+    .hud-panel {
+      position: relative;
+      background: rgba(8, 14, 26, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(56, 189, 248, 0.18);
+    }
+    .hud-panel::before, .hud-panel::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-color: rgba(0, 240, 255, 0.7);
+      pointer-events: none;
+    }
+    .hud-panel::before {
+      top: -1px; left: -1px;
+      border-top: 2px solid; border-left: 2px solid;
+    }
+    .hud-panel::after {
+      bottom: -1px; right: -1px;
+      border-bottom: 2px solid; border-right: 2px solid;
+    }
+    .scanline {
+      position: relative;
+      overflow: hidden;
+    }
+    .scanline::after {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+      background-size: 100% 4px;
+      z-index: 10;
+      pointer-events: none;
+      opacity: 0.4;
+    }
+    .glow-cyan {
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
+    }
+    .glow-crimson {
+      box-shadow: 0 0 30px rgba(255, 42, 85, 0.2);
+    }
+    .glow-amber {
+      box-shadow: 0 0 25px rgba(255, 170, 0, 0.15);
+    }
+    .pulse-dot {
+      animation: pulseDot 1.8s infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.85); }
     }
     .audio-wave {
       display: inline-flex;
       align-items: center;
-      gap: 2px;
-      height: 14px;
+      gap: 2.5px;
+      height: 16px;
     }
     .audio-bar {
-      width: 2px;
-      background: #00d2ff;
+      width: 2.5px;
+      background: #00f0ff;
       border-radius: 1px;
       animation: sound-wave 1.2s infinite ease-in-out;
     }
-    .audio-bar:nth-child(1) { height: 5px; animation-delay: 0.1s; }
-    .audio-bar:nth-child(2) { height: 12px; animation-delay: 0.3s; }
-    .audio-bar:nth-child(3) { height: 7px; animation-delay: 0.2s; }
-    .audio-bar:nth-child(4) { height: 14px; animation-delay: 0.4s; }
-    .audio-bar:nth-child(5) { height: 6px; animation-delay: 0.15s; }
+    .audio-bar:nth-child(1) { height: 6px; animation-delay: 0.1s; }
+    .audio-bar:nth-child(2) { height: 14px; animation-delay: 0.3s; }
+    .audio-bar:nth-child(3) { height: 8px; animation-delay: 0.2s; }
+    .audio-bar:nth-child(4) { height: 16px; animation-delay: 0.4s; }
+    .audio-bar:nth-child(5) { height: 7px; animation-delay: 0.15s; }
     @keyframes sound-wave {
-      0%, 100% { transform: scaleY(0.4); }
+      0%, 100% { transform: scaleY(0.35); }
       50% { transform: scaleY(1); }
     }
     .chat-slide-up {
-      animation: slideUp 0.25s ease-out forwards;
+      animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     @keyframes slideUp {
-      from { opacity: 0; transform: translateY(16px); }
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased">
+<body class="min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-black">
 
-  <!-- STICKY TOP APP BAR -->
-  <header class="border-b border-slate-800 bg-[#090e1a]/95 backdrop-blur px-6 py-3.5 sticky top-0 z-40 flex flex-wrap items-center justify-between gap-4">
-    <div class="flex items-center gap-3">
-      <div class="relative flex items-center justify-center">
-        <svg class="w-9 h-9 text-cyan-400 drop-shadow-[0_0_8px_rgba(0,210,255,0.4)]" viewBox="0 0 40 40" fill="none">
-          <polygon points="20,2 38,20 20,38 2,20" stroke="currentColor" stroke-width="2.2" fill="#0d1b30"/>
-          <path d="M10 20 Q 20 12 30 20 Q 20 28 10 20 Z" stroke="#38bdf8" stroke-width="1.8" fill="none"/>
-          <circle cx="20" cy="20" r="3.5" fill="#00d2ff"/>
-          <circle cx="20" cy="20" r="1.5" fill="#ffffff"/>
-        </svg>
-      </div>
-      <div>
-        <div class="flex items-center gap-2">
-          <span class="font-extrabold text-white tracking-widest text-base font-mono">OVERLORD</span>
-          <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-950/70 text-cyan-300 font-semibold border border-cyan-800/60 font-mono">
-            MIEBACH
-          </span>
-        </div>
-        <p class="text-[11px] text-slate-400">Warehouse Launch & Synergy Engine</p>
-      </div>
+  <!-- ======================================================== -->
+  <!-- CLASSIFICATION BANNER (TOP SECRET // EYES ONLY) -->
+  <!-- ======================================================== -->
+  <div class="bg-black border-b border-rose-950/80 px-4 py-1 text-center flex items-center justify-between text-[10px] font-mono-tech uppercase tracking-widest text-slate-400">
+    <div class="hidden sm:flex items-center gap-2 text-rose-400">
+      <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+      <span>CLASSIFIED // LEVEL 4 SPECIAL ACCESS REQUIRED</span>
     </div>
+    <div class="mx-auto font-bold text-rose-300 flex items-center gap-2">
+      <span>TOP SECRET // EYES ONLY // MIEBACH-TS-092 // OPERATION COLD-START</span>
+    </div>
+    <div class="hidden sm:flex items-center gap-3 text-slate-400">
+      <span>FACILITY: BER-04</span>
+      <span id="utc-clock" class="text-cyan-400 font-bold">22:14:08 UTC</span>
+    </div>
+  </div>
 
-    <!-- CLEAN TABS -->
-    <div class="flex items-center bg-[#050811] border border-slate-800 rounded-xl p-1 text-xs">
-      <button id="tab-synergy" onclick="switchView('synergy')" class="tab-btn px-3.5 py-1.5 rounded-lg text-white bg-blue-600 transition font-medium">
-        Overview
-      </button>
-      <button id="tab-desktop" onclick="switchView('desktop')" class="tab-btn px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition font-medium">
-        Desktop (Engineer)
-      </button>
-      <button id="tab-tablet" onclick="switchView('tablet')" class="tab-btn px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition font-medium relative">
-        Tablet (Site Team)
-        <span id="badge-open-issues" class="w-3.5 h-3.5 rounded-full bg-rose-500 text-white text-[8px] font-bold inline-flex items-center justify-center ml-1">3</span>
-      </button>
-      <button id="tab-mobile" onclick="switchView('mobile')" class="tab-btn px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition font-medium">
-        Mobile (Director)
-      </button>
+  <!-- ======================================================== -->
+  <!-- FLOATING COMMAND HUD (INSPIRED BY NAVBAR.GALLERY) -->
+  <!-- ======================================================== -->
+  <header class="border-b border-cyan-950/80 bg-[#060a14]/90 backdrop-blur-md px-6 py-3.5 sticky top-0 z-40">
+    <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      
+      <!-- LOGO: DEFENSE INSIGNIA (RHOMBUS + EYE) -->
+      <div class="flex items-center gap-3.5 cursor-pointer" onclick="switchView('synergy')">
+        <div class="relative flex items-center justify-center">
+          <svg class="w-10 h-10 text-cyan-400 drop-shadow-[0_0_12px_rgba(0,240,255,0.6)]" viewBox="0 0 40 40" fill="none">
+            <polygon points="20,2 38,20 20,38 2,20" stroke="currentColor" stroke-width="2.4" fill="#071224"/>
+            <polygon points="20,7 33,20 20,33 7,20" stroke="#0284c7" stroke-width="1.2" fill="none" opacity="0.6"/>
+            <path d="M9 20 Q 20 10 31 20 Q 20 30 9 20 Z" stroke="#38bdf8" stroke-width="2" fill="none"/>
+            <circle cx="20" cy="20" r="4" fill="#00f0ff"/>
+            <circle cx="20" cy="20" r="1.5" fill="#ffffff"/>
+            <!-- TACTICAL RETICLE TICKS -->
+            <line x1="20" y1="2" x2="20" y2="6" stroke="#00f0ff" stroke-width="1.5"/>
+            <line x1="20" y1="34" x2="20" y2="38" stroke="#00f0ff" stroke-width="1.5"/>
+            <line x1="2" y1="20" x2="6" y2="20" stroke="#00f0ff" stroke-width="1.5"/>
+            <line x1="34" y1="20" x2="38" y2="20" stroke="#00f0ff" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="font-black text-white tracking-widest text-lg font-mono-tech">OVERLORD<span class="text-cyan-400 text-xs align-top">™</span></span>
+            <span class="text-[9px] px-2 py-0.5 rounded bg-cyan-950/90 text-cyan-300 font-bold border border-cyan-700/80 font-mono-tech tracking-wider">
+              MIEBACH DEFENSE-TECH
+            </span>
+          </div>
+          <p class="text-[11px] text-slate-400 font-mono-tech tracking-tight">Autonomous Go-Live Launch & Synergy Command Engine</p>
+        </div>
+      </div>
+
+      <!-- TACTICAL TABS (ROLE PERSPECTIVES) -->
+      <div class="flex items-center bg-[#02050b] border border-cyan-900/60 rounded-xl p-1 text-xs font-mono-tech">
+        <button id="tab-synergy" onclick="switchView('synergy')" class="tab-btn px-3.5 py-1.5 rounded-lg text-black bg-cyan-400 font-bold transition flex items-center gap-1.5 shadow-[0_0_15px_rgba(0,240,255,0.4)]">
+          <span>01 // SITREP</span>
+        </button>
+        <button id="tab-desktop" onclick="switchView('desktop')" class="tab-btn px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition font-medium flex items-center gap-1.5">
+          <span>02 // DESKTOP (JAVIER)</span>
+        </button>
+        <button id="tab-tablet" onclick="switchView('tablet')" class="tab-btn px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition font-medium flex items-center gap-1.5 relative">
+          <span>03 // FIELD (TABLET)</span>
+          <span id="badge-open-issues" class="w-4 h-4 rounded-full bg-rose-500 text-white text-[9px] font-bold inline-flex items-center justify-center ml-0.5">3</span>
+        </button>
+        <button id="tab-mobile" onclick="switchView('mobile')" class="tab-btn px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition font-medium flex items-center gap-1.5">
+          <span>04 // EXECUTIVE (MOBILE)</span>
+        </button>
+      </div>
+
+      <!-- SECURE UPLINK STATUS CHIP -->
+      <div class="hidden lg:flex items-center gap-3 pl-3 border-l border-slate-800 text-[10px] font-mono-tech">
+        <div class="flex items-center gap-1.5 text-emerald-400 bg-emerald-950/50 border border-emerald-800/60 px-2.5 py-1 rounded-md">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></span>
+          <span>AES-256 ENCRYPTED</span>
+        </div>
+        <span class="text-slate-500">DEFCON 2</span>
+      </div>
+
     </div>
   </header>
 
-  <!-- CLEAN TOP STATUS BAR -->
-  <section class="bg-[#0b101c] border-b border-slate-800/80 px-6 py-4">
-    <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
-      <div class="bg-[#0e1424] border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
-        <span class="text-[11px] text-slate-400 font-medium">Launch Day (Go-Live)</span>
-        <div class="text-lg font-bold text-white font-mono mt-1">15 Mar 2026</div>
-        <span class="text-[10px] text-emerald-400 mt-1 font-semibold">21 days remaining</span>
+  <!-- ======================================================== -->
+  <!-- DEFCON THREAT & LIVE TELEMETRY BAR (INSPIRED BY SUPAHERO.IO) -->
+  <!-- ======================================================== -->
+  <section class="bg-[#03060c] border-b border-slate-800/90 px-6 py-4">
+    <div class="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-3.5 text-xs font-mono-tech">
+      
+      <!-- KPI 1: GO-LIVE COUNTDOWN -->
+      <div class="hud-panel rounded-xl p-3.5 flex flex-col justify-between">
+        <div class="flex justify-between items-center text-[10px] text-slate-400 uppercase tracking-wider">
+          <span>TARGET GO-LIVE</span>
+          <span class="text-cyan-400">T-21 DAYS</span>
+        </div>
+        <div class="text-xl font-bold text-white mt-1 tracking-tight">15 MAR 2026</div>
+        <div class="flex items-center gap-1.5 text-[10px] text-emerald-400 mt-1 font-semibold">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          <span>Zero Slippage Tolerated</span>
+        </div>
       </div>
 
-      <div class="bg-[#0e1424] border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
-        <span class="text-[11px] text-slate-400 font-medium">On-Time Probability</span>
-        <div class="text-lg font-bold text-cyan-400 font-mono mt-1">96.2%</div>
-        <span class="text-[10px] text-slate-400 mt-1">Calculated from buffer</span>
+      <!-- KPI 2: PROBABILITY MATRIX -->
+      <div class="hud-panel rounded-xl p-3.5 flex flex-col justify-between">
+        <div class="flex justify-between items-center text-[10px] text-slate-400 uppercase tracking-wider">
+          <span>MISSION CONFIDENCE</span>
+          <span class="text-cyan-400 font-bold">n=10,000</span>
+        </div>
+        <div class="text-xl font-bold text-cyan-300 mt-1 tracking-tight">96.2%</div>
+        <span class="text-[10px] text-slate-400 mt-1">Calculated via Llama Monte-Carlo</span>
       </div>
 
-      <div class="bg-[#0e1424] border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
-        <span class="text-[11px] text-slate-400 font-medium">Floor Issues Active</span>
-        <div class="text-lg font-bold text-amber-400 font-mono mt-1"><span id="kpi-issues">3</span> Open</div>
-        <span class="text-[10px] text-rose-400 mt-1 font-semibold">1 needs attention</span>
+      <!-- KPI 3: ACTIVE ANOMALIES -->
+      <div class="hud-panel rounded-xl p-3.5 flex flex-col justify-between">
+        <div class="flex justify-between items-center text-[10px] text-slate-400 uppercase tracking-wider">
+          <span>ANOMALIES ACTIVE</span>
+          <span class="text-amber-400 animate-pulse font-bold">DEFCON 2</span>
+        </div>
+        <div class="text-xl font-bold text-amber-400 mt-1 tracking-tight"><span id="kpi-issues">3</span> FAULTS DETECTED</div>
+        <span class="text-[10px] text-rose-400 mt-1 font-semibold">1 Critical Path Intervention</span>
       </div>
 
-      <div class="bg-[#0e1424] border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
-        <span class="text-[11px] text-slate-400 font-medium">Downtime Loss Prevented</span>
-        <div class="text-lg font-bold text-emerald-400 font-mono mt-1">€1.23M</div>
-        <span class="text-[10px] text-slate-400 mt-1">+14.5 days recovered</span>
+      <!-- KPI 4: LOSS AVOIDED INDEX -->
+      <div class="hud-panel rounded-xl p-3.5 flex flex-col justify-between">
+        <div class="flex justify-between items-center text-[10px] text-slate-400 uppercase tracking-wider">
+          <span>CAPITAL LOSS SHIELDED</span>
+          <span class="text-emerald-400">€85K/DAY RATE</span>
+        </div>
+        <div class="text-xl font-bold text-emerald-400 mt-1 tracking-tight">€1,232,500</div>
+        <span class="text-[10px] text-slate-400 mt-1">+14.5 Delay Days Neutralized</span>
       </div>
+
     </div>
   </section>
 
-  <!-- MAIN SCROLLABLE CONTENT (MAX-W-4XL FOR COMPACT VERTICALITY) -->
-  <main class="flex-1 px-6 py-8 max-w-4xl w-full mx-auto space-y-10">
+  <!-- ======================================================== -->
+  <!-- MAIN SCROLLABLE MISSION THEATER (MAX-W-5XL VERTICAL FLOW) -->
+  <!-- ======================================================== -->
+  <main class="flex-1 px-6 py-8 max-w-5xl w-full mx-auto space-y-10">
 
     <!-- ======================================================== -->
-    <!-- VIEW 1: OVERVIEW -->
+    <!-- VIEW 1: SYNERGY SITREP (PRIMARY COMMAND THEATER) -->
     <!-- ======================================================== -->
     <div id="view-synergy" class="view-panel space-y-10">
 
-      <!-- HERO -->
-      <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-6 subtle-glow space-y-4">
-        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+      <!-- HERO DOSSIER: MISSION DIRECTIVE -->
+      <div class="hud-panel rounded-2xl p-6 glow-cyan space-y-5">
+        <div class="flex flex-wrap items-center justify-between pb-3 border-b border-cyan-950/80 gap-3">
           <div>
-            <h2 class="text-base font-bold text-white">How OVERLORD Keeps the Warehouse Launch on Track</h2>
+            <div class="flex items-center gap-2 text-[10px] font-mono-tech text-cyan-400 uppercase tracking-widest">
+              <span>// OPERATIONAL DIRECTIVE 2026-OMEGA</span>
+              <span class="text-slate-600">|</span>
+              <span class="text-emerald-400 font-bold">REAL-TIME TELEMETRY ENGAGED</span>
+            </div>
+            <h2 class="text-lg font-black text-white tracking-wide mt-1">Autonomous Warehouse Launch & Echelon Synergy Architecture</h2>
             <p class="text-xs text-slate-400 mt-0.5">
-              Connecting Miebach engineers, on-site floor operators, and company executives in one live hub.
+              Eliminating multi-million euro go-live slippage by synchronizing consulting engineers, robotic assets, and executive authorities.
             </p>
           </div>
-          <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] text-cyan-300 font-mono">
-            Live Synchronization
+          <span class="px-3 py-1 rounded bg-[#030814] border border-cyan-700/60 text-[11px] text-cyan-300 font-mono-tech">
+            SECTOR: E-COMMERCE LOGISTICS (240,000 m²)
           </span>
         </div>
 
-        <p class="text-xs text-slate-300 leading-relaxed">
-          When launching a warehouse, teams usually get stuck sending messy Excel sheets, long emails, and static 200-page weekly PDF reports. When something breaks on the floor, it takes days to notify management. <strong>OVERLORD connects all three sides instantly</strong>:
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-2">
-          <div onclick="switchView('desktop')" class="cursor-pointer bg-[#080c15] border border-slate-800 hover:border-blue-500/50 rounded-xl p-4 transition space-y-2">
-            <div class="flex justify-between items-center text-xs">
-              <span class="font-bold text-white">1. Miebach Engineer</span>
-              <span class="text-cyan-400 font-mono text-[10px]">Desktop</span>
-            </div>
-            <p class="text-[11px] text-slate-400 leading-relaxed">
-              Uploads warehouse layouts, runs 3D simulations, and re-routes testing batches when delays happen.
-            </p>
-            <span class="text-blue-400 font-semibold text-[11px] inline-block pt-1">Open Desktop View &rarr;</span>
+        <!-- PLAIN ENGLISH TACTICAL EXPLANATION -->
+        <div class="p-4 rounded-xl bg-black/60 border border-slate-800 text-xs leading-relaxed text-slate-300 space-y-2">
+          <div class="font-bold text-cyan-300 flex items-center gap-2 font-mono-tech text-[11px] uppercase">
+            <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+            Why Traditional Warehouse Launches Bleed €85,000/Day:
           </div>
-
-          <div onclick="switchView('tablet')" class="cursor-pointer bg-[#080c15] border border-slate-800 hover:border-emerald-500/50 rounded-xl p-4 transition space-y-2">
-            <div class="flex justify-between items-center text-xs">
-              <span class="font-bold text-white">2. Site Floor Team</span>
-              <span class="text-emerald-400 font-mono text-[10px]">Tablet</span>
-            </div>
-            <p class="text-[11px] text-slate-400 leading-relaxed">
-              Checks off daily tasks on the floor. When a scanner fails, snaps a photo and alerts engineers in seconds.
-            </p>
-            <span class="text-emerald-400 font-semibold text-[11px] inline-block pt-1">Open Tablet View &rarr;</span>
-          </div>
-
-          <div onclick="switchView('mobile')" class="cursor-pointer bg-[#080c15] border border-slate-800 hover:border-amber-500/50 rounded-xl p-4 transition space-y-2">
-            <div class="flex justify-between items-center text-xs">
-              <span class="font-bold text-white">3. Client Director</span>
-              <span class="text-amber-400 font-mono text-[10px]">Mobile</span>
-            </div>
-            <p class="text-[11px] text-slate-400 leading-relaxed">
-              Checks traffic-light go-live status on their phone and approves or rejects urgent budget items with one tap.
-            </p>
-            <span class="text-amber-400 font-semibold text-[11px] inline-block pt-1">Open Mobile View &rarr;</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 5-STEP PLAN FLOW -->
-      <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-6 space-y-4">
-        <div>
-          <h3 class="text-sm font-bold text-white uppercase tracking-wider">How OVERLORD's AI Prepares the Project Plan</h3>
-          <p class="text-xs text-slate-400 mt-1">
-            Using client warehouse records and our proposed database of 200–300 previous Miebach implementation reports.
+          <p>
+            When installing automated facilities, industrial teams rely on disjointed spreadsheets, static 200-page weekly PDF status binders, and delayed emails. When an optical scanner breaks or WMS packets fail, it takes <strong>4 to 7 business days</strong> to notify executive decision-makers. 
+            <strong>OVERLORD creates a single, zero-friction command link</strong> across all three operational tiers:
           </p>
         </div>
 
-        <div class="space-y-2.5 text-xs">
-          <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3.5 flex items-start gap-3">
-            <span class="w-6 h-6 rounded-full bg-blue-950 text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs">1</span>
-            <div>
-              <strong class="text-white">Client Provides Data:</strong>
-              <p class="text-[11px] text-slate-400 mt-0.5">Records from the client's Warehouse Management System (WMS) and ERP (order volumes, SKU counts, pallet dimensions).</p>
+        <!-- 3 OPERATIONAL TIERS (INTERACTIVE COMMAND TILES) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1 font-mono-tech">
+          
+          <!-- TIER 1: DESKTOP -->
+          <div onclick="switchView('desktop')" class="cursor-pointer bg-[#030712] border border-slate-800 hover:border-cyan-500/70 rounded-xl p-4 transition group relative overflow-hidden">
+            <div class="flex justify-between items-center text-xs pb-2 border-b border-slate-900">
+              <span class="font-bold text-white group-hover:text-cyan-300 transition">ECHELON 01 // DESKTOP</span>
+              <span class="text-cyan-400 text-[10px]">MIEBACH SYSTEMS</span>
+            </div>
+            <p class="text-[11px] text-slate-400 leading-relaxed mt-2.5 font-sans">
+              Lead Engineer <strong>Javier</strong> ingests WMS CAD schemas, runs 3D physics simulations, and dynamically re-routes conveyor flows when bottlenecks emerge.
+            </p>
+            <div class="pt-3 flex items-center justify-between text-[11px] text-cyan-400 font-bold">
+              <span>Engage Engineering HUD</span>
+              <span class="group-hover:translate-x-1 transition">&rarr;</span>
             </div>
           </div>
 
-          <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3.5 flex items-start gap-3">
-            <span class="w-6 h-6 rounded-full bg-blue-950 text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs">2</span>
-            <div>
-              <strong class="text-white">Knowledge Base Cross-Reference:</strong>
-              <p class="text-[11px] text-slate-400 mt-0.5">The system cross-references 250+ past Miebach launch reports to find similar warehouses and avoid past mistakes.</p>
+          <!-- TIER 2: TABLET -->
+          <div onclick="switchView('tablet')" class="cursor-pointer bg-[#030712] border border-slate-800 hover:border-emerald-500/70 rounded-xl p-4 transition group relative overflow-hidden">
+            <div class="flex justify-between items-center text-xs pb-2 border-b border-slate-900">
+              <span class="font-bold text-white group-hover:text-emerald-300 transition">ECHELON 02 // TABLET</span>
+              <span class="text-emerald-400 text-[10px]">FLOOR BRIGADE</span>
+            </div>
+            <p class="text-[11px] text-slate-400 leading-relaxed mt-2.5 font-sans">
+              Floor supervisors verify daily punch-lists on ruggedized handhelds. When optical scanners drop packets, they capture geotagged photo evidence in seconds.
+            </p>
+            <div class="pt-3 flex items-center justify-between text-[11px] text-emerald-400 font-bold">
+              <span>Inspect Floor Faults (3)</span>
+              <span class="group-hover:translate-x-1 transition">&rarr;</span>
             </div>
           </div>
 
-          <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3.5 flex items-start gap-3">
-            <span class="w-6 h-6 rounded-full bg-blue-950 text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs">3</span>
-            <div>
-              <strong class="text-white">Llama AI Drafts the First Schedule:</strong>
-              <p class="text-[11px] text-slate-400 mt-0.5">The AI model drafts the milestones and testing steps needed to reach Go-Live on 15 March.</p>
+          <!-- TIER 3: MOBILE -->
+          <div onclick="switchView('mobile')" class="cursor-pointer bg-[#030712] border border-slate-800 hover:border-amber-500/70 rounded-xl p-4 transition group relative overflow-hidden">
+            <div class="flex justify-between items-center text-xs pb-2 border-b border-slate-900">
+              <span class="font-bold text-white group-hover:text-amber-300 transition">ECHELON 03 // MOBILE</span>
+              <span class="text-amber-400 text-[10px]">EXECUTIVE DIRECTIVE</span>
+            </div>
+            <p class="text-[11px] text-slate-400 leading-relaxed mt-2.5 font-sans">
+              Client C-Suite monitors launch trajectory via traffic-light status, receives 30-second encrypted SITREPs, and executes one-tap budget approvals or vetoes.
+            </p>
+            <div class="pt-3 flex items-center justify-between text-[11px] text-amber-400 font-bold">
+              <span>Review Directive Card</span>
+              <span class="group-hover:translate-x-1 transition">&rarr;</span>
             </div>
           </div>
 
-          <div class="bg-[#080c15] border border-emerald-500/40 rounded-xl p-3.5 flex items-start gap-3">
-            <span class="w-6 h-6 rounded-full bg-emerald-950 text-emerald-400 font-bold flex items-center justify-center shrink-0 text-xs">4</span>
-            <div>
-              <strong class="text-white">Miebach Consultants Review & Correct (Human-in-the-Loop):</strong>
-              <p class="text-[11px] text-slate-400 mt-0.5">Engineers check whether the draft fits the physical warehouse, fix any unrealistic assumptions, and approve the schedule.</p>
-            </div>
-          </div>
-
-          <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3.5 flex items-start gap-3">
-            <span class="w-6 h-6 rounded-full bg-blue-950 text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs">5</span>
-            <div>
-              <strong class="text-white">Live Execution on the Dashboard:</strong>
-              <p class="text-[11px] text-slate-400 mt-0.5">The approved plan stays updated live on everyone's screen, flagging bottlenecks before they cause delays.</p>
-            </div>
-          </div>
         </div>
       </div>
 
-      <!-- MULTI-VENDOR ACCOUNTABILITY -->
-      <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-6 space-y-4">
-        <div>
-          <h3 class="text-sm font-bold text-white uppercase tracking-wider">Who Is Responsible? (Zero Finger-Pointing)</h3>
-          <p class="text-xs text-slate-400 mt-1">
-            Tracking each partner's readiness so delays are solved instead of blamed on others.
-          </p>
+      <!-- SECTION 2: 5-STAGE MISSION BLUEPRINT (LLAMA AI ENGINE + 250 REPORTS) -->
+      <div class="hud-panel rounded-2xl p-6 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+          <div>
+            <h3 class="text-sm font-bold text-white font-mono-tech uppercase tracking-wider flex items-center gap-2">
+              <span class="w-2 h-2 rounded bg-cyan-400"></span>
+              Autonomous Plan Generation Engine (5-Stage Architecture)
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">
+              Fusing client WMS/ERP databases with our proposed 200–300 historical Miebach launch reports.
+            </p>
+          </div>
+          <span class="px-2.5 py-0.5 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-800 font-mono-tech text-[10px]">
+            AI ENGINE: LLAMA-3.3 ARCHITECTURE
+          </span>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-          <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3.5">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-white">AutoStore (Robotics Vendor)</span>
-              <span class="text-emerald-400 font-mono font-bold text-[11px]">98.5% Ready</span>
+        <div class="space-y-2.5 text-xs font-mono-tech">
+          
+          <div class="bg-[#030712] border border-slate-800 rounded-xl p-3.5 flex items-start gap-3.5">
+            <span class="w-6 h-6 rounded bg-cyan-950 text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs border border-cyan-800">01</span>
+            <div>
+              <strong class="text-white text-xs">CLIENT INGESTION (ERP/WMS DATA):</strong>
+              <p class="text-[11px] text-slate-400 mt-0.5 font-sans">
+                Secure API connector ingests SKU velocities, pallet geometry limits, dock turnaround thresholds, and warehouse dispatch parameters.
+              </p>
             </div>
-            <p class="text-[11px] text-slate-400 mt-1">16 robots active. Passed high-speed bin sorting tests.</p>
           </div>
 
-          <div class="bg-[#080c15] border border-rose-500/40 rounded-xl p-3.5">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-white">Client IT (SAP Software Team)</span>
-              <span class="text-rose-400 font-mono font-bold text-[11px]">Retest Needed</span>
+          <div class="bg-[#030712] border border-slate-800 rounded-xl p-3.5 flex items-start gap-3.5">
+            <span class="w-6 h-6 rounded bg-cyan-950 text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs border border-cyan-800">02</span>
+            <div>
+              <strong class="text-white text-xs">CROSS-MISSION ARCHIVE SYNTHESIS (250 HISTORICAL REPORTS):</strong>
+              <p class="text-[11px] text-slate-400 mt-0.5 font-sans">
+                Vector embeddings query 250+ past Miebach industrial launch databases to identify historical failure patterns, supplier lead-time buffers, and integration risks.
+              </p>
             </div>
-            <p class="text-[11px] text-slate-400 mt-1">7% of picking messages failed test. Joint retest set for 18 Feb.</p>
           </div>
 
-          <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3.5">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-white">Miebach Consulting</span>
-              <span class="text-cyan-400 font-mono font-bold text-[11px]">100% Buffer</span>
+          <div class="bg-[#030712] border border-slate-800 rounded-xl p-3.5 flex items-start gap-3.5">
+            <span class="w-6 h-6 rounded bg-cyan-950 text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs border border-cyan-800">03</span>
+            <div>
+              <strong class="text-white text-xs">LLAMA-AI DRAFTS THE MASTER TESTING TRAJECTORY:</strong>
+              <p class="text-[11px] text-slate-400 mt-0.5 font-sans">
+                Large language and planning models auto-generate the preliminary critical-path schedule, sequence testing gates, and compute buffer margins.
+              </p>
             </div>
-            <p class="text-[11px] text-slate-400 mt-1">Managing overall timeline and absorbing minor delays.</p>
           </div>
 
-          <div class="bg-[#080c15] border border-amber-500/40 rounded-xl p-3.5">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-white">Client Operations (Floor Staff)</span>
-              <span id="ops-sla-val" class="text-amber-400 font-mono font-bold text-[11px]">76% Ready</span>
+          <div class="bg-[#030712] border border-emerald-500/50 rounded-xl p-3.5 flex items-start gap-3.5 bg-emerald-950/10">
+            <span class="w-6 h-6 rounded bg-emerald-950 text-emerald-400 font-bold flex items-center justify-center shrink-0 text-xs border border-emerald-700">04</span>
+            <div>
+              <strong class="text-emerald-300 text-xs">MIEBACH HUMAN-IN-THE-LOOP COMMAND VALIDATION:</strong>
+              <p class="text-[11px] text-slate-300 mt-0.5 font-sans">
+                Certified Miebach systems consultants review draft assumptions, calibrate physical floor constraints, and validate the master plan prior to deployment.
+              </p>
             </div>
-            <p id="ops-sla-status" class="text-[11px] text-amber-300 mt-1">Worker training behind. Awaiting Director decision on Mobile.</p>
           </div>
+
+          <div class="bg-[#030712] border border-slate-800 rounded-xl p-3.5 flex items-start gap-3.5">
+            <span class="w-6 h-6 rounded bg-cyan-950 text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs border border-cyan-800">05</span>
+            <div>
+              <strong class="text-white text-xs">REAL-TIME MULTI-STAKEHOLDER GOVERNANCE:</strong>
+              <p class="text-[11px] text-slate-400 mt-0.5 font-sans">
+                The validated live model operates across all displays, automatically routing anomalies before they breach critical timeline thresholds.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SECTION 3: MULTI-VENDOR DEFENSE CONTAINMENT MATRIX (INSPIRED BY PRICINGPAGES & SOCIALPROOF) -->
+      <div class="hud-panel rounded-2xl p-6 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+          <div>
+            <h3 class="text-sm font-bold text-white font-mono-tech uppercase tracking-wider flex items-center gap-2">
+              <span class="w-2 h-2 rounded bg-amber-400"></span>
+              Multi-Agency Containment Matrix (Zero-Finger-Pointing Governance)
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">
+              Live contractual readiness tracking across hardware, software, engineering, and workforce units.
+            </p>
+          </div>
+          <span class="text-[10px] text-slate-400 font-mono-tech">SLA COMPLIANCE HASH: 0x89B4..E1</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs font-mono-tech">
+          
+          <div class="bg-[#030712] border border-slate-800 rounded-xl p-4">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-white text-xs">AGENCY 01 // AUTOSTORE (ROBOTICS)</span>
+              <span class="text-emerald-400 font-bold text-[11px] bg-emerald-950/60 border border-emerald-800/80 px-2 py-0.5 rounded">98.5% NOMINAL</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-1.5 font-sans">
+              16/16 grid robots calibrated. High-density picking throughput exceeds threshold at 650 bins/hour (target 600).
+            </p>
+          </div>
+
+          <div class="bg-[#030712] border border-rose-500/60 rounded-xl p-4 bg-rose-950/10">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-white text-xs">AGENCY 02 // CLIENT IT (SAP BACKBONE)</span>
+              <span class="text-rose-400 font-bold text-[11px] bg-rose-950/60 border border-rose-800/80 px-2 py-0.5 rounded animate-pulse">RETEST REQ (IF-03)</span>
+            </div>
+            <p class="text-[11px] text-slate-300 mt-1.5 font-sans">
+              7% packet rejection rate in stock-adjustment messaging. Joint remediation retest mandated for 18 Feb with ERP squad.
+            </p>
+          </div>
+
+          <div class="bg-[#030712] border border-slate-800 rounded-xl p-4">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-white text-xs">AGENCY 03 // MIEBACH CONSULTING</span>
+              <span class="text-cyan-400 font-bold text-[11px] bg-cyan-950/60 border border-cyan-800/80 px-2 py-0.5 rounded">100% BUFFER ACTIVE</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-1.5 font-sans">
+              Overall integration authority. Dynamic buffer absorbs minor floor discrepancies without slipping 15 March deadline.
+            </p>
+          </div>
+
+          <div class="bg-[#030712] border border-amber-500/60 rounded-xl p-4 bg-amber-950/10">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-white text-xs">AGENCY 04 // CLIENT OPERATIONS (STAFF)</span>
+              <span id="ops-sla-val" class="text-amber-400 font-bold text-[11px] bg-amber-950/60 border border-amber-800/80 px-2 py-0.5 rounded">76% READY</span>
+            </div>
+            <p id="ops-sla-status" class="text-[11px] text-amber-300 mt-1.5 font-sans">
+              Worker scanner certification lagged. Contingency decision currently pending with Client Director on Mobile.
+            </p>
+          </div>
+
         </div>
       </div>
 
     </div>
 
     <!-- ======================================================== -->
-    <!-- VIEW 2: DESKTOP -->
+    <!-- VIEW 2: DESKTOP (MIEBACH ENGINEERING COMMAND) -->
     <!-- ======================================================== -->
     <div id="view-desktop" class="view-panel hidden space-y-8">
-      <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-6 space-y-5">
-        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+      <div class="hud-panel rounded-2xl p-6 space-y-6">
+        
+        <div class="flex flex-wrap items-center justify-between pb-3 border-b border-cyan-950/80 gap-3">
           <div>
-            <h2 class="text-base font-bold text-white">Miebach Engineering Workstation</h2>
-            <p class="text-xs text-slate-400">Layout Telemetry & Dynamic Go-Live Recovery</p>
+            <div class="flex items-center gap-2 text-[10px] font-mono-tech text-cyan-400 uppercase tracking-widest">
+              <span>// ENGINEERING TACTICAL TERMINAL</span>
+              <span class="text-slate-600">|</span>
+              <span class="text-slate-400">CLEARANCE: TS//SI-TK</span>
+            </div>
+            <h2 class="text-lg font-black text-white font-mono-tech tracking-wide mt-1">Miebach Engineering Workstation</h2>
+            <p class="text-xs text-slate-400">Layout Telemetry, Bottleneck Re-routing & Buffer Defense</p>
           </div>
-          <span class="px-2.5 py-1 rounded bg-blue-950 text-cyan-300 font-mono text-xs border border-blue-800">
-            Lead Engineer: Javier
+          <span class="px-3 py-1 rounded bg-blue-950/80 text-cyan-300 font-mono-tech text-xs border border-blue-700">
+            CHIEF SYSTEMS ARCHITECT: JAVIER
           </span>
         </div>
 
-        <div class="space-y-3">
-          <h3 class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Warehouse Zones Status</h3>
+        <!-- SECTORS RADAR GRID -->
+        <div class="space-y-3 font-mono-tech">
+          <div class="flex justify-between items-center text-xs text-slate-300 uppercase tracking-wider">
+            <span class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              Facility Sectors Telemetry (SCADA Link)
+            </span>
+            <span class="text-[10px] text-slate-500">REFRESH RATE: 250ms</span>
+          </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-            <div class="bg-[#080c15] border border-slate-800 rounded-xl p-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs">
+            <div class="bg-[#030712] border border-slate-800 rounded-xl p-4">
               <div class="flex justify-between items-center">
-                <span class="font-bold text-white text-sm">Zone 01: Inbound Docks</span>
-                <span class="text-emerald-400 font-semibold">✓ 100% Ready</span>
+                <span class="font-bold text-white text-xs">SECTOR 01: INBOUND DOCKS (A1-A18)</span>
+                <span class="text-emerald-400 font-semibold text-[11px]">✓ 100% NOMINAL</span>
               </div>
-              <p class="text-[11px] text-slate-400 mt-1">18 dock doors calibrated with automated safety locks.</p>
+              <p class="text-[11px] text-slate-400 mt-1 font-sans">
+                18 automated vehicle dock doors calibrated with infrared safety interlocks.
+              </p>
             </div>
 
-            <div class="bg-[#080c15] border border-slate-800 rounded-xl p-4">
+            <div class="bg-[#030712] border border-slate-800 rounded-xl p-4">
               <div class="flex justify-between items-center">
-                <span class="font-bold text-white text-sm">Zone 02: AutoStore Robotics</span>
-                <span class="text-cyan-400 font-semibold">94% Speed</span>
+                <span class="font-bold text-white text-xs">SECTOR 02: AUTOSTORE ROBOTIC CUBE</span>
+                <span class="text-cyan-400 font-semibold text-[11px]">94% VELOCITY</span>
               </div>
-              <p class="text-[11px] text-slate-400 mt-1">16 robots active. Achieved 650 bins/hr throughput.</p>
+              <p class="text-[11px] text-slate-400 mt-1 font-sans">
+                16 grid robots active. Achieved sustained 650 bins/hour pick rate.
+              </p>
             </div>
           </div>
 
-          <div class="bg-rose-950/30 border border-rose-500/50 rounded-2xl p-5 space-y-3">
+          <!-- BOTTLENECK INTERVENTION ALERT -->
+          <div id="conveyor-alert-box" class="hud-panel rounded-xl p-5 border-rose-500/60 bg-rose-950/20 glow-crimson space-y-3">
             <div class="flex justify-between items-center">
-              <span class="font-bold text-rose-300 text-sm flex items-center gap-2">
+              <span class="font-bold text-rose-300 text-xs flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>
-                Zone 03: Conveyor Loop Optical Scanners (Bottleneck)
+                SECTOR 03: PICKING CONVEYOR LOOP (BOTTLENECK INTERCEPTION)
               </span>
-              <span class="px-2 py-0.5 rounded bg-rose-900 text-rose-200 text-[10px] font-bold">Needs Action</span>
+              <span class="px-2 py-0.5 rounded bg-rose-900/80 text-rose-200 text-[10px] font-bold">DEFCON 2 CRITICAL</span>
             </div>
-            <p class="text-xs text-slate-300">
-              Floor Manager reported: Optical barcode scanners in Picking Zone not configured properly. 7% rejected messages during operational tests.
+            <p class="text-xs text-slate-300 font-sans leading-relaxed">
+              Floor supervisor telemetry: Optical barcode scanners in Picking Zone miscalibrated. 7% packet transmission failures observed during high-velocity test batches.
             </p>
-            <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-rose-900/50 text-xs">
-              <span class="text-slate-400">Miebach Lead Engineer can re-route testing to bypass the bottleneck.</span>
-              <button onclick="resolveConveyorIssue()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold transition">
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-rose-900/60 text-xs">
+              <span class="text-slate-400 font-mono-tech text-[11px]">ACTION: Lead Engineer Javier can dynamically re-route testing flow to Secondary Induction Loop B.</span>
+              <button onclick="resolveConveyorIssue()" class="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs transition shadow-[0_0_15px_rgba(0,240,255,0.4)]">
                 Absorb Delay & Protect 15 March Launch &rarr;
               </button>
             </div>
           </div>
         </div>
 
-        <div class="space-y-3 pt-3 border-t border-slate-800">
-          <h3 class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Go-Live Milestones</h3>
+        <!-- MASTER TIMELINE GATES -->
+        <div class="space-y-3 pt-3 border-t border-slate-800 font-mono-tech">
+          <h3 class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Mission Milestones & Gate Verification</h3>
           <div class="space-y-2 text-xs">
-            <div class="p-3 rounded-xl bg-[#080c15] border border-slate-800 flex justify-between items-center">
-              <span class="text-slate-300">1. Mechanical Hardware Installation</span>
-              <span class="text-emerald-400 font-semibold">✓ Completed</span>
+            <div class="p-3 rounded-xl bg-[#030712] border border-slate-800 flex justify-between items-center">
+              <span class="text-slate-300">GATE 01 // MECHANICAL HARDWARE INSTALLATION</span>
+              <span class="text-emerald-400 font-semibold">✓ VERIFIED & LOCKED</span>
             </div>
-            <div class="p-3 rounded-xl bg-rose-950/40 border border-rose-500/40 flex justify-between items-center">
-              <span class="text-rose-300">2. Software Interface Retest (WMS/ERP IF-03)</span>
-              <span class="text-rose-400 font-mono font-semibold">Retest set for 18 Feb</span>
+            <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/50 flex justify-between items-center">
+              <span class="text-rose-300">GATE 02 // SOFTWARE INTERFACE RETEST (WMS/ERP IF-03)</span>
+              <span class="text-rose-400 font-semibold">SCHEDULED: 18 FEB 09:00 UTC</span>
             </div>
-            <div id="desktop-milestone-training" class="p-3 rounded-xl bg-amber-950/40 border border-amber-500/40 flex justify-between items-center">
-              <span class="text-amber-300">3. Worker Safety & Picking Training (38/64 certified)</span>
-              <span id="desktop-training-status" class="text-amber-400 font-mono font-semibold">Awaiting Director Overtime Decision</span>
+            <div id="desktop-milestone-training" class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/50 flex justify-between items-center">
+              <span class="text-amber-300">GATE 03 // WORKFORCE PICKING CERTIFICATION (38/64 CERTIFIED)</span>
+              <span id="desktop-training-status" class="text-amber-400 font-semibold">AWAITING EXECUTIVE DIRECTIVE</span>
             </div>
-            <div class="p-3.5 rounded-xl bg-blue-950/60 border border-blue-500/50 flex justify-between items-center font-bold">
-              <span class="text-cyan-300 text-sm">4. Official Go-Live Launch Day</span>
-              <span class="text-white font-mono text-sm">15 Mar 2026 (Protected)</span>
+            <div class="p-3.5 rounded-xl bg-cyan-950/40 border border-cyan-500/60 flex justify-between items-center font-bold">
+              <span class="text-cyan-300 text-xs">GATE 04 // OFFICIAL FACILITY GO-LIVE (15 MAR 2026)</span>
+              <span class="text-white text-xs">TRAJECTORY PROTECTED (96.2%)</span>
             </div>
           </div>
         </div>
+
       </div>
     </div>
 
-    <!-- VIEW 3: TABLET -->
+    <!-- ======================================================== -->
+    <!-- VIEW 3: TABLET (FIELD BRIGADE SCANNER & LOGGING) -->
+    <!-- ======================================================== -->
     <div id="view-tablet" class="view-panel hidden space-y-6">
-      <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-6 space-y-5">
-        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+      <div class="hud-panel rounded-2xl p-6 space-y-5">
+        
+        <div class="flex flex-wrap items-center justify-between pb-3 border-b border-cyan-950/80 gap-3">
           <div>
-            <h2 class="text-base font-bold text-white">Warehouse Floor — Today's Issues</h2>
-            <p class="text-xs text-slate-400">Used by floor managers to log live issues directly from the floor.</p>
+            <div class="flex items-center gap-2 text-[10px] font-mono-tech text-emerald-400 uppercase tracking-widest">
+              <span>// RUGGEDIZED FIELD OPERATING HUD</span>
+              <span class="text-slate-600">|</span>
+              <span class="text-slate-400">TABLET TERMINAL #04</span>
+            </div>
+            <h2 class="text-lg font-black text-white font-mono-tech tracking-wide mt-1">Warehouse Floor — Active Field Incidents</h2>
+            <p class="text-xs text-slate-400 font-sans">Used by site managers to log real-time mechanical or software faults directly from the picking aisles.</p>
           </div>
-          <button onclick="openReportModal()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition flex items-center gap-1.5 shadow-md">
-            <span>+</span> Report a Problem
+          <button onclick="openReportModal()" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs transition flex items-center gap-1.5 shadow-[0_0_15px_rgba(0,255,136,0.3)] font-mono-tech">
+            <span>+</span> LOG FIELD INCIDENT
           </button>
         </div>
 
-        <div class="space-y-3 text-xs">
-          <div id="card-wms-issue" class="bg-[#080c15] border-l-4 border-l-rose-500 border border-slate-800 rounded-xl p-4 space-y-2">
+        <div class="space-y-3 text-xs font-mono-tech">
+          
+          <!-- INCIDENT 1: WMS IF-03 -->
+          <div id="card-wms-issue" class="bg-[#030712] border-l-4 border-l-rose-500 border border-slate-800 rounded-xl p-4 space-y-2">
             <div class="flex justify-between items-center">
-              <span class="font-bold text-white text-sm">WMS interface test failed (IF-03)</span>
-              <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-bold text-[10px] uppercase">Critical</span>
+              <span class="font-bold text-white text-xs">FAULT #WMS-03: STOCK-ADJUSTMENT INTERFACE FAILURE</span>
+              <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-bold text-[10px] uppercase border border-rose-800">Critical Priority</span>
             </div>
-            <p class="text-[11px] text-slate-300">
-              7% of stock-adjustment messages rejected during picking induction. Retest scheduled for 18 Feb with ERP team.
+            <p class="text-[11px] text-slate-300 font-sans leading-relaxed">
+              7% of stock-adjustment messages rejected during picking induction. Retest scheduled for 18 Feb with ERP engineering team.
             </p>
-            <div class="flex justify-end pt-2 border-t border-slate-800/80">
-              <button onclick="resolveIssue('card-wms-issue', 'WMS Interface Test')" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs">
+            <div class="flex justify-end pt-2 border-t border-slate-900">
+              <button onclick="resolveIssue('card-wms-issue', 'WMS Interface Test')" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition">
                 Mark Retest Passed
               </button>
             </div>
           </div>
 
-          <div id="card-training-issue" class="bg-[#080c15] border-l-4 border-l-amber-500 border border-slate-800 rounded-xl p-4 space-y-2">
+          <!-- INCIDENT 2: STAFF TRAINING -->
+          <div id="card-training-issue" class="bg-[#030712] border-l-4 border-l-amber-500 border border-slate-800 rounded-xl p-4 space-y-2">
             <div class="flex justify-between items-center">
-              <span class="font-bold text-white text-sm">Staff training behind (38 of 64 certified)</span>
-              <span id="training-badge" class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-[10px] uppercase">Needs Director Decision</span>
+              <span class="font-bold text-white text-xs">FAULT #TRN-09: WORKFORCE CERTIFICATION BEHIND (38/64)</span>
+              <span id="training-badge" class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-[10px] uppercase border border-amber-800">Awaiting Executive Directive</span>
             </div>
-            <p id="training-desc-tablet" class="text-[11px] text-slate-300">
+            <p id="training-desc-tablet" class="text-[11px] text-slate-300 font-sans leading-relaxed">
               Picking teams need certification before launch dry-run. Overtime budget proposal sent to Client Director on Mobile.
             </p>
-            <div class="flex justify-end pt-2 border-t border-slate-800/80">
-              <button onclick="switchView('mobile')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 font-semibold text-xs">
-                Check Mobile Director Decision &rarr;
+            <div class="flex justify-end pt-2 border-t border-slate-900">
+              <button onclick="switchView('mobile')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 font-semibold text-xs transition">
+                Open Executive Directive on Mobile &rarr;
               </button>
             </div>
           </div>
+
+          <!-- INCIDENT 3: SKU MASTER DATA -->
+          <div id="card-sku-issue" class="bg-[#030712] border-l-4 border-l-slate-600 border border-slate-800 rounded-xl p-4 space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-white text-xs">FAULT #DAT-01: SKU MASTER DATA 4% DUPLICATES</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 font-bold text-[10px] uppercase">Non-Urgent</span>
+            </div>
+            <p class="text-[11px] text-slate-400 font-sans leading-relaxed">
+              1,180 SKUs contain conflicting unit of measure tags. Miebach auto-cleansing script running in background.
+            </p>
+          </div>
+
         </div>
       </div>
     </div>
 
-    <!-- VIEW 4: MOBILE (DIRECTOR - WITH APPROVE & DISAPPROVE OPTIONS) -->
+    <!-- ======================================================== -->
+    <!-- VIEW 4: MOBILE (EXECUTIVE DIRECTIVE WITH DUAL APPROVAL/VETO) -->
+    <!-- ======================================================== -->
     <div id="view-mobile" class="view-panel hidden space-y-6">
-      <div class="max-w-md mx-auto bg-[#0a0f1d] border-2 border-slate-700 rounded-[36px] p-6 shadow-2xl space-y-5">
-        <div class="w-24 h-3 bg-slate-800 rounded-full mx-auto"></div>
+      
+      <!-- PHONE CONTAINER SIMULATOR -->
+      <div class="max-w-md mx-auto hud-panel rounded-[40px] p-6 shadow-2xl space-y-5 border-2 border-slate-700 glow-cyan">
+        
+        <!-- PHONE SPEAKER NOTCH -->
+        <div class="w-24 h-2.5 bg-slate-800 rounded-full mx-auto"></div>
 
-        <div class="flex justify-between items-center text-xs pb-3 border-b border-slate-800">
+        <div class="flex justify-between items-center text-xs pb-3 border-b border-slate-800 font-mono-tech">
           <span class="font-bold text-white">OVERLORD // EXECUTIVE MOBILE</span>
-          <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 font-mono text-[10px] font-semibold">LIVE</span>
+          <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 font-bold text-[10px] border border-emerald-800 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
+            LIVE UPLINK
+          </span>
         </div>
 
-        <!-- BIG READABLE STATUS -->
-        <div class="bg-gradient-to-br from-emerald-950/70 to-[#0e1628] border border-emerald-500/40 rounded-2xl p-5 text-center space-y-1">
-          <span class="text-[11px] text-emerald-300 uppercase tracking-wider font-semibold">Launch Target Status</span>
-          <div class="text-3xl font-black text-white font-mono">15 MAR 2026</div>
-          <div class="text-xs font-bold text-emerald-400 uppercase">✓ On Track for Launch</div>
-          <p class="text-[11px] text-slate-400 pt-1">Confidence Score: <strong class="text-cyan-400">96.2%</strong> (21 Days to Go)</p>
+        <!-- TRAFFIC-LIGHT STATUS CARD -->
+        <div class="bg-gradient-to-br from-emerald-950/80 to-[#050b18] border border-emerald-500/50 rounded-2xl p-5 text-center space-y-1 font-mono-tech">
+          <span class="text-[10px] text-emerald-300 uppercase tracking-widest font-bold">// GO-LIVE MISSION STATUS</span>
+          <div class="text-3xl font-black text-white mt-1">15 MAR 2026</div>
+          <div class="text-xs font-bold text-emerald-400 uppercase tracking-wide">✓ GO-LIVE TRAJECTORY SECURE</div>
+          <p class="text-[11px] text-slate-400 pt-1 font-sans">System Confidence: <strong class="text-cyan-400 font-mono-tech">96.2%</strong> (21 Days Remaining)</p>
         </div>
 
-        <!-- 30-SEC AUDIO BRIEFING -->
-        <div class="bg-[#0e1424] border border-cyan-500/30 rounded-2xl p-4 space-y-2 text-xs">
+        <!-- 30-SEC ENCRYPTED SITREP AUDIO COMMS -->
+        <div class="bg-[#030712] border border-cyan-500/40 rounded-2xl p-4 space-y-2.5 text-xs font-mono-tech">
           <div class="flex justify-between items-center">
             <span class="font-bold text-white flex items-center gap-2">
               <span class="audio-wave">
@@ -439,46 +684,47 @@
                 <span class="audio-bar"></span>
                 <span class="audio-bar"></span>
               </span>
-              Llama Morning Briefing
+              <span>ENCRYPTED SITREP DISPATCH</span>
             </span>
-            <span class="text-slate-400 font-mono text-[10px]">0:32</span>
+            <span class="text-cyan-400 text-[10px] bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800">0:32</span>
           </div>
-          <p class="text-[11px] text-slate-300 italic bg-black/40 p-3 rounded-xl border border-slate-800 leading-relaxed">
-            "Good morning Director. 16 AutoStore robots achieved 650 bins/hr. Conveyor scanner latency is being resolved today. 1 urgent budget decision requires your approval or decline below."
-          </p>
+          <div class="text-[11px] text-slate-300 italic bg-black/60 p-3 rounded-xl border border-slate-800/80 leading-relaxed font-sans">
+            "Good morning Director. 16 AutoStore robots achieved 650 bins/hr. Conveyor scanner latency is being absorbed by Javier on secondary loops. One budget decision requires your authorization or veto below."
+          </div>
         </div>
 
-        <!-- DECISION CARD: BOTH APPROVE AND DISAPPROVE AVAILABLE -->
-        <div id="director-approval-card" class="bg-amber-950/30 border border-amber-500/50 rounded-2xl p-4 space-y-3 text-xs">
+        <!-- EXECUTIVE DIRECTIVE: DUAL BUTTONS (APPROVE & DISAPPROVE) -->
+        <div id="director-approval-card" class="bg-amber-950/30 border border-amber-500/60 rounded-2xl p-4 space-y-3 text-xs font-mono-tech">
           <div class="flex justify-between items-center">
-            <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-[10px] uppercase">
-              Action Required
+            <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-[10px] uppercase border border-amber-800">
+              ACTION REQUIRED // PRIORITY ALPHA
             </span>
-            <span class="text-[10px] text-slate-400 font-mono">Budget Sign-off</span>
+            <span class="text-[10px] text-slate-400">SIGN-OFF ID: #DIR-881</span>
           </div>
           <div>
-            <h4 class="font-bold text-white text-sm">Approve €12,800 Training Overtime?</h4>
-            <p class="text-[11px] text-slate-300 mt-1 leading-relaxed">
-              Authorizes 2 weekend shifts for 26 warehouse pickers to finish certification before launch day.
+            <h4 class="font-bold text-white text-sm">Authorize €12,800 Overtime Budget?</h4>
+            <p class="text-[11px] text-slate-300 mt-1 leading-relaxed font-sans">
+              Authorizes 2 weekend shifts for 26 warehouse pickers to complete safety & system certification before launch day.
             </p>
           </div>
-          <div class="pt-2 border-t border-amber-900/40 flex gap-2">
-            <button onclick="approveDirectorOvertime()" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-bold text-xs transition shadow-lg">
-              ✓ Approve €12.8k
+          <div class="pt-2 border-t border-amber-900/60 flex gap-2">
+            <button onclick="approveDirectorOvertime()" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-bold text-xs transition shadow-lg flex items-center justify-center gap-1">
+              <span>✓</span> Approve €12.8k
             </button>
-            <button onclick="disapproveDirectorOvertime()" class="flex-1 py-2.5 rounded-xl bg-rose-950/80 hover:bg-rose-900 border border-rose-600/60 text-rose-200 font-bold text-xs transition">
-              ✕ Disapprove / Reject
+            <button onclick="disapproveDirectorOvertime()" class="flex-1 py-2.5 rounded-xl bg-rose-950/90 hover:bg-rose-900 border border-rose-600 text-rose-200 font-bold text-xs transition flex items-center justify-center gap-1">
+              <span>✕</span> Disapprove / Reject
             </button>
           </div>
         </div>
 
-        <!-- DOWNTIME LOSS AVOIDED -->
-        <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-4 text-center text-xs">
+        <!-- DOWNTIME LOSS INDEX -->
+        <div class="bg-[#030712] border border-slate-800 rounded-2xl p-4 text-center text-xs font-mono-tech">
           <div class="text-[11px] text-slate-400">Total Downtime Loss Avoided:</div>
-          <div class="text-xl font-bold text-emerald-400 font-mono mt-0.5">€1,232,500</div>
-          <p class="text-[10px] text-slate-500 mt-0.5">14.5 launch delay days eliminated</p>
+          <div class="text-2xl font-bold text-emerald-400 mt-0.5">€1,232,500</div>
+          <p class="text-[10px] text-slate-500 mt-0.5">14.5 Launch Delay Days Neutralized</p>
         </div>
 
+        <!-- HOME INDICATOR -->
         <div class="w-24 h-1 bg-slate-700 rounded-full mx-auto"></div>
       </div>
     </div>
@@ -486,91 +732,115 @@
   </main>
 
   <!-- ======================================================== -->
-  <!-- "OVY" AI HELPER CHATBOT (FLOATING BOTTOM RIGHT) -->
+  <!-- "OVY" TACTICAL AI CO-PILOT HUD (FLOATING BOTTOM RIGHT) -->
   <!-- ======================================================== -->
   <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
     
     <!-- CHAT POPUP WINDOW -->
-    <div id="ovy-chat-window" class="hidden w-80 sm:w-96 bg-[#0c1220] border-2 border-cyan-500/50 rounded-2xl shadow-2xl mb-3 overflow-hidden flex flex-col chat-slide-up">
-      <div class="bg-[#0e172a] px-4 py-3 border-b border-slate-800 flex items-center justify-between">
-        <div class="flex items-center gap-2">
+    <div id="ovy-chat-window" class="hidden w-80 sm:w-96 hud-panel rounded-2xl shadow-2xl mb-3 overflow-hidden flex flex-col chat-slide-up border-2 border-cyan-500/70 glow-cyan">
+      <div class="bg-[#030712] px-4 py-3 border-b border-cyan-950 flex items-center justify-between font-mono-tech">
+        <div class="flex items-center gap-2.5">
           <svg class="w-6 h-6 text-cyan-400" viewBox="0 0 40 40" fill="none">
-            <polygon points="20,2 38,20 20,38 2,20" stroke="currentColor" stroke-width="2.5" fill="#0d1b30"/>
+            <polygon points="20,2 38,20 20,38 2,20" stroke="currentColor" stroke-width="2.5" fill="#071224"/>
             <path d="M10 20 Q 20 12 30 20 Q 20 28 10 20 Z" stroke="#38bdf8" stroke-width="2" fill="none"/>
-            <circle cx="20" cy="20" r="3.5" fill="#00d2ff"/>
+            <circle cx="20" cy="20" r="3.5" fill="#00f0ff"/>
           </svg>
           <div>
-            <h4 class="font-bold text-white text-xs">Ovy // Overlord Assistant</h4>
-            <span class="text-[10px] text-emerald-400">Explains everything in plain English</span>
+            <h4 class="font-bold text-white text-xs">OVY-01 // TACTICAL ADVISOR</h4>
+            <span class="text-[10px] text-emerald-400">Declassified plain-English briefing</span>
           </div>
         </div>
-        <button onclick="toggleOvyChat()" class="text-slate-400 hover:text-white text-sm">✕</button>
+        <button onclick="toggleOvyChat()" class="text-slate-400 hover:text-white text-sm font-bold">✕</button>
       </div>
 
-      <div id="ovy-messages" class="p-3.5 h-64 overflow-y-auto custom-scroll space-y-2.5 text-xs">
-        <div class="bg-slate-900 border border-slate-800 p-2.5 rounded-xl text-slate-200">
-          Hi! I'm <strong>Ovy</strong>. Ask me anything about the warehouse launch, or tap a question below!
+      <!-- MESSAGES LOG -->
+      <div id="ovy-messages" class="p-3.5 h-64 overflow-y-auto custom-scroll space-y-2.5 text-xs font-sans">
+        <div class="bg-black/80 border border-cyan-900/40 p-2.5 rounded-xl text-slate-200">
+          Greetings Commander. I am <strong>Ovy</strong>, your autonomous launch co-pilot. Inquire on any telemetry metric, or execute a query below:
         </div>
 
-        <div class="flex flex-wrap gap-1.5 pt-1">
-          <button onclick="askOvyPredefined('loss')" class="text-[10px] px-2 py-0.5 rounded-full bg-blue-950 text-cyan-300 border border-blue-800">What does "Loss Avoided" mean?</button>
-          <button onclick="askOvyPredefined('golive')" class="text-[10px] px-2 py-0.5 rounded-full bg-blue-950 text-cyan-300 border border-blue-800">What is "Go-Live"?</button>
-          <button onclick="askOvyPredefined('training')" class="text-[10px] px-2 py-0.5 rounded-full bg-blue-950 text-cyan-300 border border-blue-800">Why is training behind?</button>
-          <button onclick="askOvyPredefined('disapprove')" class="text-[10px] px-2 py-0.5 rounded-full bg-blue-950 text-cyan-300 border border-blue-800">Can the Director reject overtime?</button>
+        <div class="flex flex-wrap gap-1.5 pt-1 font-mono-tech">
+          <button onclick="askOvyPredefined('loss')" class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800 hover:bg-cyan-900">What does "Loss Avoided" mean?</button>
+          <button onclick="askOvyPredefined('golive')" class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800 hover:bg-cyan-900">What is "Go-Live"?</button>
+          <button onclick="askOvyPredefined('training')" class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800 hover:bg-cyan-900">Why is training behind?</button>
+          <button onclick="askOvyPredefined('disapprove')" class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800 hover:bg-cyan-900">Can the Director reject overtime?</button>
         </div>
       </div>
 
-      <div class="p-2 border-t border-slate-800 bg-[#080c15] flex gap-2">
-        <input id="ovy-input" type="text" placeholder="Ask Ovy anything..." onkeydown="handleOvyKey(event)" class="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none">
-        <button onclick="sendOvyMessage()" class="px-3 py-1 rounded-lg bg-blue-600 text-white font-bold text-xs">Send</button>
+      <!-- TERMINAL INPUT -->
+      <div class="p-2 border-t border-slate-800 bg-[#02050c] flex gap-2 font-mono-tech">
+        <input id="ovy-input" type="text" placeholder="Command Ovy..." onkeydown="handleOvyKey(event)" class="flex-1 bg-black border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-cyan-400">
+        <button onclick="sendOvyMessage()" class="px-3 py-1 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs transition">TRANSMIT</button>
       </div>
     </div>
 
     <!-- TOGGLE BUTTON -->
-    <button onclick="toggleOvyChat()" class="flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#0d1629] border-2 border-cyan-400 text-white shadow-xl hover:scale-105 transition">
+    <button onclick="toggleOvyChat()" class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#030917] border-2 border-cyan-400 text-white shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:scale-105 transition font-mono-tech">
       <svg class="w-5 h-5 text-cyan-400" viewBox="0 0 40 40" fill="none">
-        <polygon points="20,2 38,20 20,38 2,20" stroke="currentColor" stroke-width="2.5" fill="#0d1b30"/>
+        <polygon points="20,2 38,20 20,38 2,20" stroke="currentColor" stroke-width="2.5" fill="#071224"/>
         <path d="M10 20 Q 20 12 30 20 Q 20 28 10 20 Z" stroke="#38bdf8" stroke-width="2" fill="none"/>
-        <circle cx="20" cy="20" r="3.5" fill="#00d2ff"/>
+        <circle cx="20" cy="20" r="3.5" fill="#00f0ff"/>
       </svg>
-      <span class="text-xs font-bold">Ask Ovy</span>
+      <span class="text-xs font-bold text-cyan-300">COMM // OVY</span>
     </button>
   </div>
 
+  <!-- ======================================================== -->
   <!-- REPORT A PROBLEM MODAL -->
-  <div id="report-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
-    <div class="bg-[#0e1424] border border-slate-700 rounded-2xl max-w-sm w-full p-4 space-y-3 text-xs shadow-2xl">
+  <!-- ======================================================== -->
+  <div id="report-modal" class="hidden fixed inset-0 bg-black/85 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="hud-panel rounded-2xl max-w-sm w-full p-4 space-y-3 text-xs shadow-2xl border-cyan-500/60 font-mono-tech">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-        <h3 class="font-bold text-white">Report a Floor Problem</h3>
+        <h3 class="font-bold text-white uppercase tracking-wider flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+          Log Floor Incident // Telemetry Uplink
+        </h3>
         <button onclick="closeReportModal()" class="text-slate-400 hover:text-white">✕</button>
       </div>
-      <button onclick="prefillDemoExample()" class="w-full py-1 rounded bg-emerald-950/60 border border-dashed border-emerald-500/50 text-emerald-300 text-[11px]">🪄 Use demo example (scanners)</button>
+      <button onclick="prefillDemoExample()" class="w-full py-1.5 rounded bg-emerald-950/60 border border-dashed border-emerald-500/60 text-emerald-300 text-[11px]">
+        ⚡ Autofill Scanner Telemetry Failure
+      </button>
       <div>
-        <label class="block text-slate-300 font-medium mb-0.5">What is wrong?</label>
-        <input id="input-wrong" type="text" placeholder="e.g. Scanners not configured" class="w-full bg-[#080c15] border border-slate-700 rounded px-2.5 py-1 text-white text-xs">
+        <label class="block text-slate-300 font-medium mb-1">Incident Description:</label>
+        <input id="input-wrong" type="text" placeholder="e.g. Optical scanners not configured" class="w-full bg-black border border-slate-700 rounded px-2.5 py-1.5 text-white text-xs focus:border-cyan-400 focus:outline-none">
       </div>
       <div>
-        <label class="block text-slate-300 font-medium mb-0.5">Where?</label>
-        <select id="select-where" class="w-full bg-[#080c15] border border-slate-700 rounded px-2 py-1 text-white text-xs">
-          <option value="Picking">Picking Zone</option>
-          <option value="Conveyor">Conveyor Loop</option>
+        <label class="block text-slate-300 font-medium mb-1">Facility Sector:</label>
+        <select id="select-where" class="w-full bg-black border border-slate-700 rounded px-2 py-1.5 text-white text-xs focus:border-cyan-400 focus:outline-none">
+          <option value="Picking Zone">Sector 03: Picking Zone</option>
+          <option value="Conveyor Loop">Sector 03: Conveyor Loop</option>
+          <option value="Inbound Docks">Sector 01: Inbound Docks</option>
         </select>
       </div>
       <div class="pt-2 border-t border-slate-800 flex justify-end gap-2">
-        <button onclick="closeReportModal()" class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-xs">Cancel</button>
-        <button onclick="submitFloorIssue()" class="px-3 py-1 rounded bg-emerald-600 text-white font-bold text-xs">Submit &rarr;</button>
+        <button onclick="closeReportModal()" class="px-3 py-1.5 rounded bg-slate-800 text-slate-300 text-xs">Cancel</button>
+        <button onclick="submitFloorIssue()" class="px-3.5 py-1.5 rounded bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs transition">Transmit Incident &rarr;</button>
       </div>
     </div>
   </div>
 
-  <!-- JAVASCRIPT STATE ENGINE & SMARTER OVY AI -->
+  <!-- ======================================================== -->
+  <!-- JAVASCRIPT STATE ENGINE & OVY AI LOGIC -->
+  <!-- ======================================================== -->
   <script>
     let openIssuesCount = 3;
+
+    // LIVE UTC CLOCK
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getUTCHours()).padStart(2, '0');
+      const m = String(now.getUTCMinutes()).padStart(2, '0');
+      const s = String(now.getUTCSeconds()).padStart(2, '0');
+      const el = document.getElementById('utc-clock');
+      if (el) el.innerText = `${h}:${m}:${s} UTC`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
 
     function switchView(viewName) {
       document.querySelectorAll('.view-panel').forEach(p => p.classList.add('hidden'));
       document.querySelectorAll('.tab-btn').forEach(b => {
-        b.classList.remove('bg-blue-600', 'text-white');
+        b.classList.remove('bg-cyan-400', 'text-black', 'font-bold', 'shadow-[0_0_15px_rgba(0,240,255,0.4)]');
         b.classList.add('text-slate-400');
       });
 
@@ -580,7 +850,7 @@
       const btn = document.getElementById('tab-' + viewName);
       if (btn) {
         btn.classList.remove('text-slate-400');
-        btn.classList.add('bg-blue-600', 'text-white');
+        btn.classList.add('bg-cyan-400', 'text-black', 'font-bold', 'shadow-[0_0_15px_rgba(0,240,255,0.4)]');
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -588,18 +858,18 @@
     function openReportModal() { document.getElementById('report-modal').classList.remove('hidden'); }
     function closeReportModal() { document.getElementById('report-modal').classList.add('hidden'); }
     function prefillDemoExample() {
-      document.getElementById('input-wrong').value = 'Scanners not configured';
-      document.getElementById('select-where').value = 'Picking';
+      document.getElementById('input-wrong').value = 'Optical scanners not configured';
+      document.getElementById('select-where').value = 'Picking Zone';
     }
 
     function submitFloorIssue() {
-      const issueText = document.getElementById('input-wrong').value || 'Scanners not configured';
+      const issueText = document.getElementById('input-wrong').value || 'Optical scanners not configured';
       const where = document.getElementById('select-where').value;
       openIssuesCount++;
       document.getElementById('kpi-issues').innerText = openIssuesCount;
       document.getElementById('badge-open-issues').innerText = openIssuesCount;
       closeReportModal();
-      alert(`Issue Logged to OVERLORD!\n\n"${issueText}" in ${where}.\n• Engineer notified on Desktop.\n• Schedule protected.`);
+      alert(`[INCIDENT TRANSMITTED TO OVERLORD]\n\n"${issueText}" in ${where}.\n• Systems Engineer Javier notified on Desktop.\n• Launch trajectory protected.`);
       switchView('desktop');
     }
 
@@ -611,73 +881,87 @@
         openIssuesCount = Math.max(0, openIssuesCount - 1);
         document.getElementById('kpi-issues').innerText = openIssuesCount;
         document.getElementById('badge-open-issues').innerText = openIssuesCount;
-        alert(`✓ Issue Resolved: ${title}.`);
+        alert(`[INCIDENT RESOLVED]: ${title}.\nTelemetry link normalized.`);
       }
     }
 
     function resolveConveyorIssue() {
-      alert("Miebach Engineer Javier re-routed testing lines!\n\n• Delay absorbed.\n• Target Go-Live: 15 Mar protected.");
+      const alertBox = document.getElementById('conveyor-alert-box');
+      if (alertBox) {
+        alertBox.className = "hud-panel rounded-xl p-5 border-emerald-500/50 bg-emerald-950/20 space-y-2";
+        alertBox.innerHTML = `
+          <div class="flex justify-between items-center font-mono-tech">
+            <span class="font-bold text-emerald-300 text-xs flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+              SECTOR 03: CONVEYOR LOOP RE-ROUTED TO INDUCTION B (NORMALIZED)
+            </span>
+            <span class="px-2 py-0.5 rounded bg-emerald-900/80 text-emerald-200 text-[10px] font-bold">SOLVED BY JAVIER</span>
+          </div>
+          <p class="text-xs text-slate-300 font-sans">Testing throughput restored to 100%. Delay completely absorbed by engineering buffer. 15 March Launch secure.</p>
+        `;
+      }
+      alert("[DIRECTIVE EXECUTED]\n\nMiebach Systems Engineer Javier re-routed testing flow to Loop B.\n• Bottleneck absorbed.\n• 15 March Launch protected.");
     }
 
     // DIRECTOR APPROVE ACTION
     function approveDirectorOvertime() {
       const card = document.getElementById('director-approval-card');
-      card.className = "bg-emerald-950/40 border border-emerald-500/50 rounded-2xl p-4 space-y-2";
+      card.className = "bg-emerald-950/40 border border-emerald-500/60 rounded-2xl p-4 space-y-2 font-mono-tech";
       card.innerHTML = `
         <div class="flex justify-between items-center">
-          <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-bold text-[10px] uppercase">✓ Budget Approved</span>
-          <button onclick="resetDirectorDecision()" class="text-[10px] text-slate-400 hover:text-white underline">Change Decision</button>
+          <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-bold text-[10px] uppercase border border-emerald-700">✓ BUDGET AUTHORIZED (CRYPTO-SIGNED)</span>
+          <button onclick="resetDirectorDecision()" class="text-[10px] text-slate-400 hover:text-white underline">Change Directive</button>
         </div>
-        <h4 class="font-bold text-white text-xs">€12,800 Overtime Budget Approved</h4>
-        <p class="text-[11px] text-slate-300">2 weekend shifts activated. 26 pickers scheduled for Feb 22-23. Staff Training milestone restored to 100% on schedule.</p>
+        <h4 class="font-bold text-white text-xs">€12,800 Overtime Budget Allocated</h4>
+        <p class="text-[11px] text-slate-300 font-sans">2 weekend shifts activated. 26 pickers scheduled for Feb 22-23. Staff Training milestone restored to 100% on schedule.</p>
       `;
 
       // Update Tablet
       const badge = document.getElementById('training-badge');
       if (badge) {
-        badge.className = "px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-bold text-[10px] uppercase";
-        badge.innerText = "✓ Overtime Approved";
+        badge.className = "px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-bold text-[10px] uppercase border border-emerald-700";
+        badge.innerText = "✓ Overtime Authorized";
       }
       const desc = document.getElementById('training-desc-tablet');
-      if (desc) desc.innerText = "Director approved €12.8k overtime. 2 weekend training shifts scheduled for 26 pickers.";
+      if (desc) desc.innerText = "Executive Director authorized €12.8k overtime. 2 weekend shifts scheduled for 26 pickers.";
 
       // Update Desktop
       const desktopMilestone = document.getElementById('desktop-milestone-training');
       if (desktopMilestone) {
-        desktopMilestone.className = "p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/40 flex justify-between";
-        desktopMilestone.innerHTML = `<span class="text-emerald-300">3. Worker Training (38/64 certified)</span><span class="text-emerald-400 font-mono text-xs font-semibold">Recovered (28 Feb)</span>`;
+        desktopMilestone.className = "p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/50 flex justify-between";
+        desktopMilestone.innerHTML = `<span class="text-emerald-300">GATE 03 // WORKFORCE CERTIFICATION (38/64 CERTIFIED)</span><span class="text-emerald-400 font-mono text-xs font-semibold">RECOVERED (28 FEB)</span>`;
       }
 
       // Update SLA
       const opsSla = document.getElementById('ops-sla-val');
-      if (opsSla) opsSla.innerText = "96% Ready";
+      if (opsSla) opsSla.innerText = "96% READY";
       const opsStatus = document.getElementById('ops-sla-status');
       if (opsStatus) {
-        opsStatus.className = "text-[11px] text-emerald-400 mt-1";
-        opsStatus.innerText = "✓ Overtime approved. 2 weekend shifts scheduled.";
+        opsStatus.className = "text-[11px] text-emerald-400 mt-1.5 font-sans";
+        opsStatus.innerText = "✓ Overtime authorized. 2 weekend training shifts locked.";
       }
 
-      alert("EXECUTIVE DECISION LOGGED:\n\n• €12,800 overtime APPROVED by Client Director.\n• Staff Training turns Green on Desktop and Tablet.\n• 15 March Go-Live remains firm.");
+      alert("[EXECUTIVE DIRECTIVE LOGGED]\n\n• €12,800 overtime AUTHORIZED by Client Director.\n• Workforce certification restored to Green.\n• 15 March Go-Live remains firm.");
     }
 
     // DIRECTOR DISAPPROVE ACTION
     function disapproveDirectorOvertime() {
       const card = document.getElementById('director-approval-card');
-      card.className = "bg-rose-950/40 border border-rose-500/50 rounded-2xl p-4 space-y-2";
+      card.className = "bg-rose-950/40 border border-rose-500/60 rounded-2xl p-4 space-y-2 font-mono-tech";
       card.innerHTML = `
         <div class="flex justify-between items-center">
-          <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-bold text-[10px] uppercase">✕ Overtime Disapproved</span>
-          <button onclick="resetDirectorDecision()" class="text-[10px] text-slate-400 hover:text-white underline">Change Decision</button>
+          <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-bold text-[10px] uppercase border border-rose-700">✕ BUDGET VETOED BY DIRECTOR</span>
+          <button onclick="resetDirectorDecision()" class="text-[10px] text-slate-400 hover:text-white underline">Change Directive</button>
         </div>
-        <h4 class="font-bold text-white text-xs">€12,800 Budget Rejected by Director</h4>
-        <p class="text-[11px] text-slate-300">Miebach Lead Engineer Javier notified to stagger weekday training hours without additional budget.</p>
+        <h4 class="font-bold text-white text-xs">€12,800 Budget Rejected</h4>
+        <p class="text-[11px] text-slate-300 font-sans">Miebach Lead Engineer Javier notified to stagger weekday training hours without additional budget expenditure.</p>
       `;
 
       // Update Tablet
       const badge = document.getElementById('training-badge');
       if (badge) {
-        badge.className = "px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-bold text-[10px] uppercase";
-        badge.innerText = "Overtime Declined";
+        badge.className = "px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-bold text-[10px] uppercase border border-rose-700";
+        badge.innerText = "Overtime Vetoed";
       }
       const desc = document.getElementById('training-desc-tablet');
       if (desc) desc.innerText = "Director declined overtime budget. Miebach will stagger weekday training sessions instead.";
@@ -686,42 +970,42 @@
       const desktopMilestone = document.getElementById('desktop-milestone-training');
       if (desktopMilestone) {
         desktopMilestone.className = "p-3 rounded-xl bg-slate-900 border border-slate-700 flex justify-between";
-        desktopMilestone.innerHTML = `<span class="text-slate-300">3. Worker Training (38/64 certified)</span><span class="text-slate-400 font-mono text-xs">Weekday Stagger Shift Active</span>`;
+        desktopMilestone.innerHTML = `<span class="text-slate-300">GATE 03 // WORKFORCE CERTIFICATION (38/64 CERTIFIED)</span><span class="text-slate-400 font-mono text-xs">WEEKDAY STAGGER ACTIVE</span>`;
       }
 
       // Update SLA
       const opsSla = document.getElementById('ops-sla-val');
-      if (opsSla) opsSla.innerText = "82% Adjusted";
+      if (opsSla) opsSla.innerText = "82% ADJUSTED";
       const opsStatus = document.getElementById('ops-sla-status');
       if (opsStatus) {
-        opsStatus.className = "text-[11px] text-slate-400 mt-1";
-        opsStatus.innerText = "Overtime declined. Weekday training stagger active.";
+        opsStatus.className = "text-[11px] text-slate-400 mt-1.5 font-sans";
+        opsStatus.innerText = "Overtime declined. Weekday training stagger active (Zero extra spend).";
       }
 
-      alert("EXECUTIVE DECISION LOGGED:\n\n• Overtime budget DECLINED by Client Director.\n• Miebach engineer Javier notified.\n• Switched to weekday stagger shifts (zero extra budget).");
+      alert("[EXECUTIVE DIRECTIVE LOGGED]\n\n• Overtime budget VETOED by Client Director.\n• Lead Engineer Javier notified.\n• Switched to weekday stagger shifts (Zero extra spend).");
     }
 
     function resetDirectorDecision() {
       const card = document.getElementById('director-approval-card');
-      card.className = "bg-amber-950/30 border border-amber-500/50 rounded-2xl p-4 space-y-3 text-xs";
+      card.className = "bg-amber-950/30 border border-amber-500/60 rounded-2xl p-4 space-y-3 text-xs font-mono-tech";
       card.innerHTML = `
         <div class="flex justify-between items-center">
-          <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-[10px] uppercase">Action Required</span>
-          <span class="text-[10px] text-slate-400 font-mono">Budget Sign-off</span>
+          <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-[10px] uppercase border border-amber-800">ACTION REQUIRED // PRIORITY ALPHA</span>
+          <span class="text-[10px] text-slate-400">SIGN-OFF ID: #DIR-881</span>
         </div>
         <div>
-          <h4 class="font-bold text-white text-sm">Approve €12,800 Training Overtime?</h4>
-          <p class="text-[11px] text-slate-300 mt-1 leading-relaxed">Authorizes 2 weekend shifts for 26 warehouse pickers to finish certification before launch day.</p>
+          <h4 class="font-bold text-white text-sm">Authorize €12,800 Overtime Budget?</h4>
+          <p class="text-[11px] text-slate-300 mt-1 leading-relaxed font-sans">Authorizes 2 weekend shifts for 26 warehouse pickers to complete safety & system certification before launch day.</p>
         </div>
-        <div class="pt-2 border-t border-amber-900/40 flex gap-2">
-          <button onclick="approveDirectorOvertime()" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-bold text-xs transition shadow-lg">✓ Approve €12.8k</button>
-          <button onclick="disapproveDirectorOvertime()" class="flex-1 py-2.5 rounded-xl bg-rose-950/80 hover:bg-rose-900 border border-rose-600/60 text-rose-200 font-bold text-xs transition">✕ Disapprove / Reject</button>
+        <div class="pt-2 border-t border-amber-900/60 flex gap-2">
+          <button onclick="approveDirectorOvertime()" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-bold text-xs transition shadow-lg flex items-center justify-center gap-1"><span>✓</span> Approve €12.8k</button>
+          <button onclick="disapproveDirectorOvertime()" class="flex-1 py-2.5 rounded-xl bg-rose-950/90 hover:bg-rose-900 border border-rose-600 text-rose-200 font-bold text-xs transition flex items-center justify-center gap-1"><span>✕</span> Disapprove / Reject</button>
         </div>
       `;
     }
 
     // ==========================================
-    // IMPROVED "OVY" AI CHATBOT LOGIC
+    // "OVY" AI HELPER CHATBOT LOGIC
     // ==========================================
     function toggleOvyChat() {
       document.getElementById('ovy-chat-window').classList.toggle('hidden');
@@ -731,11 +1015,11 @@
       const msgContainer = document.getElementById('ovy-messages');
       const div = document.createElement('div');
       if (sender === 'user') {
-        div.className = "bg-blue-600 text-white p-2 rounded-xl ml-6 text-xs";
+        div.className = "bg-cyan-950/80 border border-cyan-700/60 text-cyan-200 p-2.5 rounded-xl ml-6 text-xs font-mono-tech";
         div.innerText = text;
       } else {
-        div.className = "bg-slate-900 border border-slate-800 text-slate-200 p-2.5 rounded-xl mr-6 text-xs space-y-1";
-        div.innerHTML = `<span class="text-cyan-400 font-bold font-mono text-[9px]">OVY:</span><div>${text}</div>`;
+        div.className = "bg-black/80 border border-slate-800 text-slate-200 p-2.5 rounded-xl mr-6 text-xs space-y-1 font-sans";
+        div.innerHTML = `<span class="text-cyan-400 font-bold font-mono-tech text-[9px]">OVY-01 // DEBRIEF:</span><div>${text}</div>`;
       }
       msgContainer.appendChild(div);
       msgContainer.scrollTop = msgContainer.scrollHeight;
@@ -745,23 +1029,23 @@
       if (topic === 'loss') {
         addOvyMessage('user', 'What does "Loss Avoided" mean?');
         setTimeout(() => {
-          addOvyMessage('ovy', '<strong>"Downtime Loss Avoided"</strong> is the money saved by stopping delays before they happen! Every single day an automated warehouse launch is delayed costs the company about <strong>€85,000</strong> in lost sales and emergency storage. By catching issues early, OVERLORD prevented 14.5 days of delays—saving <strong>€1,232,500</strong>!');
-        }, 300);
+          addOvyMessage('ovy', '<strong>"Downtime Loss Avoided"</strong> is the capital protected by resolving launch bottlenecks before go-live. Every single day an automated warehouse launch is delayed costs approximately <strong>€85,000/day</strong> in unfulfilled orders, contractor stand-by overhead, and idle facility carry costs. By preempting 14.5 days of delay, OVERLORD has protected <strong>€1,232,500</strong> to date.');
+        }, 250);
       } else if (topic === 'golive') {
         addOvyMessage('user', 'What is "Go-Live"?');
         setTimeout(() => {
-          addOvyMessage('ovy', '<strong>Go-Live Day (15 March)</strong> is the official opening day when the warehouse begins shipping real packages to real customers. All testing and worker training must be finished before this day.');
-        }, 300);
+          addOvyMessage('ovy', '<strong>Go-Live Day (15 March 2026)</strong> is the target operational date when the facility begins fulfilling live customer orders. All hardware commissioning, WMS software interface verification, and operator certifications must achieve 100% readiness prior to this date.');
+        }, 250);
       } else if (topic === 'training') {
         addOvyMessage('user', 'Why is staff training behind?');
         setTimeout(() => {
-          addOvyMessage('ovy', 'Only 38 out of 64 workers completed scanner certification. Miebach proposed adding 2 weekend shifts for €12,800. The Client Director on Mobile can now choose to <strong>Approve</strong> or <strong>Disapprove</strong> this budget.');
-        }, 300);
+          addOvyMessage('ovy', 'Currently 38 out of 64 picking operators are certified. To prevent timeline slippage, Miebach requested €12,800 to fund 2 weekend overtime training shifts. The Client Director on Mobile holds the authority to <strong>Approve</strong> or <strong>Disapprove</strong> this spend.');
+        }, 250);
       } else if (topic === 'disapprove') {
         addOvyMessage('user', 'Can the Director reject overtime?');
         setTimeout(() => {
-          addOvyMessage('ovy', 'Yes! On the <strong>Mobile (Director)</strong> tab, you can tap <strong>"✕ Disapprove / Reject"</strong>. If rejected, Miebach engineer Javier is forced to stagger weekday training shifts instead, so zero extra money is spent.');
-        }, 300);
+          addOvyMessage('ovy', 'Affirmative. On the <strong>Executive Mobile</strong> console, the Director can execute <strong>"✕ Disapprove / Reject"</strong>. This commands Miebach Systems Architect Javier to stagger weekday training shifts instead, conserving €12,800 with zero additional capital expense.');
+        }, 250);
       }
     }
 
@@ -778,27 +1062,27 @@
       const lower = q.toLowerCase();
       setTimeout(() => {
         if (lower.includes('loss') || lower.includes('avoid') || lower.includes('money') || lower.includes('save') || lower.includes('cost')) {
-          addOvyMessage('ovy', '<strong>"Loss Avoided"</strong> means money saved by preventing delays. A warehouse delay costs ~€85,000 every day in idle building costs, worker standby pay, and lost orders. OVERLORD has already prevented 14.5 days of slippage—saving <strong>€1,232,500</strong>!');
-        } else if (lower.includes('disapprove') || lower.includes('reject') || lower.includes('decline')) {
-          addOvyMessage('ovy', 'On the <strong>Mobile (Director)</strong> tab, you can now tap <strong>"✕ Disapprove / Reject"</strong>! If you reject the €12.8k budget, Miebach Javier will re-allocate regular weekday shifts instead of paying weekend overtime.');
+          addOvyMessage('ovy', '<strong>"Loss Avoided"</strong> calculates capital preserved by eliminating delay days. In automated facilities, delay exposure runs at ~€85,000 every single day. OVERLORD has pre-empted 14.5 days of slippage—locking in <strong>€1,232,500</strong> in direct savings.');
+        } else if (lower.includes('disapprove') || lower.includes('reject') || lower.includes('decline') || lower.includes('veto')) {
+          addOvyMessage('ovy', 'On the <strong>Executive Mobile</strong> tab, you can tap <strong>"✕ Disapprove / Reject"</strong>. Rejecting forces Miebach systems engineering to re-schedule training during standard weekday hours, incurring €0 in overtime expenses.');
         } else if (lower.includes('approve') || lower.includes('overtime') || lower.includes('budget') || lower.includes('12')) {
-          addOvyMessage('ovy', 'If you tap <strong>"✓ Approve €12.8k"</strong> on Mobile, 2 weekend shifts are activated for 26 workers, and the training milestone turns green across Desktop and Tablet.');
+          addOvyMessage('ovy', 'Tapping <strong>"✓ Approve €12.8k"</strong> executes a crypto-stamped directive allocating 2 weekend shifts for 26 operators, instantly turning the training milestone green across Desktop and Tablet.');
         } else if (lower.includes('golive') || lower.includes('go-live') || lower.includes('launch') || lower.includes('15')) {
-          addOvyMessage('ovy', '<strong>Go-Live Day (15 March)</strong> is the target date when the warehouse goes operational. We currently have a 96.2% on-time probability.');
+          addOvyMessage('ovy', '<strong>Go-Live Day (15 March 2026)</strong> is our non-negotiable operational deadline. The launch trajectory is currently holding at <strong>96.2% on-time confidence</strong>.');
         } else if (lower.includes('wms') || lower.includes('erp') || lower.includes('software')) {
-          addOvyMessage('ovy', '<strong>WMS (Warehouse Management System)</strong> is the software brain directing the warehouse. The interface test (IF-03) had a 7% message error rate, so client IT and Miebach have scheduled a retest on 18 Feb.');
+          addOvyMessage('ovy', '<strong>WMS (Warehouse Management System)</strong> is the core software nervous system. Interface test IF-03 recorded a 7% message rejection anomaly; a joint remediation retest is locked for 18 Feb.');
         } else if (lower.includes('autostore') || lower.includes('robot')) {
-          addOvyMessage('ovy', '<strong>AutoStore</strong> is the cube-grid robotics system. 16 robots are active and passed testing at 650 bins/hour, beating the 600 target.');
+          addOvyMessage('ovy', '<strong>AutoStore Robotics</strong>: 16 grid robots are operating at 94% speed and delivering 650 bins/hour, exceeding our contractual target of 600.');
         } else if (lower.includes('javier') || lower.includes('engineer') || lower.includes('miebach')) {
-          addOvyMessage('ovy', '<strong>Miebach Consulting</strong> designed this automated facility. <strong>Javier</strong> is the lead systems engineer who re-routes testing lines when bottlenecks happen.');
+          addOvyMessage('ovy', '<strong>Miebach Consulting</strong> is the chief systems integrator. <strong>Javier</strong> is the lead systems architect who absorbs floor delays by dynamically rerouting testing lines around bottlenecks.');
         } else if (lower.includes('director') || lower.includes('mobile')) {
-          addOvyMessage('ovy', 'The <strong>Director view</strong> gives executives high-level status, a 30-second audio summary, and one-tap buttons to approve or reject budget requests.');
+          addOvyMessage('ovy', 'The <strong>Executive Mobile HUD</strong> provides C-level visibility, an encrypted 30-second audio SITREP, and instant one-tap authority to approve or veto capital items.');
         } else if (lower.includes('tablet') || lower.includes('floor') || lower.includes('site')) {
-          addOvyMessage('ovy', 'The <strong>Tablet view</strong> is used by floor teams to conduct daily launch checks and report broken scanners or conveyor issues with a photo.');
+          addOvyMessage('ovy', 'The <strong>Field Tablet HUD</strong> equips on-site floor supervisors to log optical or mechanical faults in real time with photo geotagging.');
         } else {
-          addOvyMessage('ovy', `Here is what's happening: OVERLORD is currently tracking the warehouse toward its 15 March launch. You can test approving or rejecting overtime on Mobile, resolve the conveyor bottleneck on Desktop, or check floor issues on Tablet!`);
+          addOvyMessage('ovy', `Telemetry status confirmed: OVERLORD is synchronizing operations toward the 15 March launch target. You can test approving/vetoing overtime on Mobile, re-routing Sector 03 on Desktop, or logging field faults on Tablet.`);
         }
-      }, 350);
+      }, 300);
     }
   </script>
 </body>
