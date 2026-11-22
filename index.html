@@ -94,7 +94,7 @@
     </div>
   </header>
 
-  <!-- CLEAN TOP STATUS BAR (EXPLAINED IN PLAIN ENGLISH) -->
+  <!-- CLEAN TOP STATUS BAR -->
   <section class="bg-[#0b101c] border-b border-slate-800/80 px-6 py-4">
     <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
       <div class="bg-[#0e1424] border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
@@ -123,15 +123,15 @@
     </div>
   </section>
 
-  <!-- MAIN SCROLLABLE CONTENT (MAX-W-4XL FOR COMPACT, NATURAL VERTICALITY) -->
+  <!-- MAIN SCROLLABLE CONTENT (MAX-W-4XL FOR COMPACT VERTICALITY) -->
   <main class="flex-1 px-6 py-8 max-w-4xl w-full mx-auto space-y-10">
 
     <!-- ======================================================== -->
-    <!-- VIEW 1: OVERVIEW (CLEAN VERTICAL FLOW) -->
+    <!-- VIEW 1: OVERVIEW -->
     <!-- ======================================================== -->
     <div id="view-synergy" class="view-panel space-y-10">
 
-      <!-- SECTION 1: WHAT IS OVERLORD (PLAIN ENGLISH HERO) -->
+      <!-- HERO -->
       <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-6 subtle-glow space-y-4">
         <div class="flex items-center justify-between pb-3 border-b border-slate-800">
           <div>
@@ -146,10 +146,9 @@
         </div>
 
         <p class="text-xs text-slate-300 leading-relaxed">
-          When launching a multi-million euro automated warehouse, teams usually get stuck sending messy Excel sheets, long email chains, and static 200-page weekly PDF reports. When something breaks on the floor, it takes days to notify management. <strong>OVERLORD connects all three sides instantly</strong>:
+          When launching a warehouse, teams usually get stuck sending messy Excel sheets, long emails, and static 200-page weekly PDF reports. When something breaks on the floor, it takes days to notify management. <strong>OVERLORD connects all three sides instantly</strong>:
         </p>
 
-        <!-- 3 PERSONA SUMMARY CARDS (STACKED VERTICALLY) -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-2">
           <div onclick="switchView('desktop')" class="cursor-pointer bg-[#080c15] border border-slate-800 hover:border-blue-500/50 rounded-xl p-4 transition space-y-2">
             <div class="flex justify-between items-center text-xs">
@@ -179,14 +178,14 @@
               <span class="text-amber-400 font-mono text-[10px]">Mobile</span>
             </div>
             <p class="text-[11px] text-slate-400 leading-relaxed">
-              Checks traffic-light go-live status on their phone and approves urgent budget items with one tap.
+              Checks traffic-light go-live status on their phone and approves or rejects urgent budget items with one tap.
             </p>
             <span class="text-amber-400 font-semibold text-[11px] inline-block pt-1">Open Mobile View &rarr;</span>
           </div>
         </div>
       </div>
 
-      <!-- SECTION 2: HOW AI (LLAMA) + PAST 250 REPORTS BUILDS THE PLAN -->
+      <!-- 5-STEP PLAN FLOW -->
       <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-6 space-y-4">
         <div>
           <h3 class="text-sm font-bold text-white uppercase tracking-wider">How OVERLORD's AI Prepares the Project Plan</h3>
@@ -238,7 +237,7 @@
         </div>
       </div>
 
-      <!-- SECTION 3: MULTI-VENDOR ACCOUNTABILITY (WHO IS RESPONSIBLE?) -->
+      <!-- MULTI-VENDOR ACCOUNTABILITY -->
       <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-6 space-y-4">
         <div>
           <h3 class="text-sm font-bold text-white uppercase tracking-wider">Who Is Responsible? (Zero Finger-Pointing)</h3>
@@ -277,7 +276,7 @@
               <span class="font-bold text-white">Client Operations (Floor Staff)</span>
               <span id="ops-sla-val" class="text-amber-400 font-mono font-bold text-[11px]">76% Ready</span>
             </div>
-            <p id="ops-sla-status" class="text-[11px] text-amber-300 mt-1">Worker training behind. Awaiting Director overtime sign-off.</p>
+            <p id="ops-sla-status" class="text-[11px] text-amber-300 mt-1">Worker training behind. Awaiting Director decision on Mobile.</p>
           </div>
         </div>
       </div>
@@ -285,7 +284,7 @@
     </div>
 
     <!-- ======================================================== -->
-    <!-- VIEW 2: DESKTOP (MIEBACH ENGINEER VIEW - SCROLLABLE) -->
+    <!-- VIEW 2: DESKTOP -->
     <!-- ======================================================== -->
     <div id="view-desktop" class="view-panel hidden space-y-8">
       <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-6 space-y-5">
@@ -299,7 +298,6 @@
           </span>
         </div>
 
-        <!-- WAREHOUSE ZONES (CLEAN VERTICAL CARDS) -->
         <div class="space-y-3">
           <h3 class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Warehouse Zones Status</h3>
 
@@ -321,7 +319,6 @@
             </div>
           </div>
 
-          <!-- THE CRITICAL ISSUE (LARGE, CLEAR) -->
           <div class="bg-rose-950/30 border border-rose-500/50 rounded-2xl p-5 space-y-3">
             <div class="flex justify-between items-center">
               <span class="font-bold text-rose-300 text-sm flex items-center gap-2">
@@ -342,7 +339,6 @@
           </div>
         </div>
 
-        <!-- TIMELINE MILESTONES -->
         <div class="space-y-3 pt-3 border-t border-slate-800">
           <h3 class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Go-Live Milestones</h3>
           <div class="space-y-2 text-xs">
@@ -356,7 +352,7 @@
             </div>
             <div id="desktop-milestone-training" class="p-3 rounded-xl bg-amber-950/40 border border-amber-500/40 flex justify-between items-center">
               <span class="text-amber-300">3. Worker Safety & Picking Training (38/64 certified)</span>
-              <span class="text-amber-400 font-mono font-semibold">Awaiting Director Overtime Sign-off</span>
+              <span id="desktop-training-status" class="text-amber-400 font-mono font-semibold">Awaiting Director Overtime Decision</span>
             </div>
             <div class="p-3.5 rounded-xl bg-blue-950/60 border border-blue-500/50 flex justify-between items-center font-bold">
               <span class="text-cyan-300 text-sm">4. Official Go-Live Launch Day</span>
@@ -367,9 +363,7 @@
       </div>
     </div>
 
-    <!-- ======================================================== -->
-    <!-- VIEW 3: TABLET (SITE TEAM VIEW - SCROLLABLE) -->
-    <!-- ======================================================== -->
+    <!-- VIEW 3: TABLET -->
     <div id="view-tablet" class="view-panel hidden space-y-6">
       <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-6 space-y-5">
         <div class="flex items-center justify-between pb-3 border-b border-slate-800">
@@ -383,7 +377,6 @@
         </div>
 
         <div class="space-y-3 text-xs">
-          <!-- CARD 1 -->
           <div id="card-wms-issue" class="bg-[#080c15] border-l-4 border-l-rose-500 border border-slate-800 rounded-xl p-4 space-y-2">
             <div class="flex justify-between items-center">
               <span class="font-bold text-white text-sm">WMS interface test failed (IF-03)</span>
@@ -399,18 +392,17 @@
             </div>
           </div>
 
-          <!-- CARD 2 -->
           <div id="card-training-issue" class="bg-[#080c15] border-l-4 border-l-amber-500 border border-slate-800 rounded-xl p-4 space-y-2">
             <div class="flex justify-between items-center">
               <span class="font-bold text-white text-sm">Staff training behind (38 of 64 certified)</span>
-              <span id="training-badge" class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-[10px] uppercase">Needs Director Sign-off</span>
+              <span id="training-badge" class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-[10px] uppercase">Needs Director Decision</span>
             </div>
-            <p class="text-[11px] text-slate-300">
+            <p id="training-desc-tablet" class="text-[11px] text-slate-300">
               Picking teams need certification before launch dry-run. Overtime budget proposal sent to Client Director on Mobile.
             </p>
             <div class="flex justify-end pt-2 border-t border-slate-800/80">
               <button onclick="switchView('mobile')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 font-semibold text-xs">
-                Check Mobile Sign-off Status &rarr;
+                Check Mobile Director Decision &rarr;
               </button>
             </div>
           </div>
@@ -418,12 +410,9 @@
       </div>
     </div>
 
-    <!-- ======================================================== -->
-    <!-- VIEW 4: MOBILE (EXECUTIVE VIEW - SCROLLABLE & INTUITIVE) -->
-    <!-- ======================================================== -->
+    <!-- VIEW 4: MOBILE (DIRECTOR - WITH APPROVE & DISAPPROVE OPTIONS) -->
     <div id="view-mobile" class="view-panel hidden space-y-6">
       <div class="max-w-md mx-auto bg-[#0a0f1d] border-2 border-slate-700 rounded-[36px] p-6 shadow-2xl space-y-5">
-        <!-- NOTCH -->
         <div class="w-24 h-3 bg-slate-800 rounded-full mx-auto"></div>
 
         <div class="flex justify-between items-center text-xs pb-3 border-b border-slate-800">
@@ -455,11 +444,11 @@
             <span class="text-slate-400 font-mono text-[10px]">0:32</span>
           </div>
           <p class="text-[11px] text-slate-300 italic bg-black/40 p-3 rounded-xl border border-slate-800 leading-relaxed">
-            "Good morning Director. 16 AutoStore robots achieved 650 bins/hr. Conveyor scanner latency is being resolved today. 1 urgent budget approval requires your sign-off below."
+            "Good morning Director. 16 AutoStore robots achieved 650 bins/hr. Conveyor scanner latency is being resolved today. 1 urgent budget decision requires your approval or decline below."
           </p>
         </div>
 
-        <!-- ONE-TAP APPROVAL CARD (THE KEY ACTION) -->
+        <!-- DECISION CARD: BOTH APPROVE AND DISAPPROVE AVAILABLE -->
         <div id="director-approval-card" class="bg-amber-950/30 border border-amber-500/50 rounded-2xl p-4 space-y-3 text-xs">
           <div class="flex justify-between items-center">
             <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-[10px] uppercase">
@@ -475,17 +464,17 @@
           </div>
           <div class="pt-2 border-t border-amber-900/40 flex gap-2">
             <button onclick="approveDirectorOvertime()" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-bold text-xs transition shadow-lg">
-              ✓ Approve €12.8k Overtime
+              ✓ Approve €12.8k
             </button>
-            <button onclick="alert('Requested alternative weekday schedule.')" class="px-3 py-2.5 rounded-xl bg-slate-800 text-slate-300 text-xs">
-              Alt Plan
+            <button onclick="disapproveDirectorOvertime()" class="flex-1 py-2.5 rounded-xl bg-rose-950/80 hover:bg-rose-900 border border-rose-600/60 text-rose-200 font-bold text-xs transition">
+              ✕ Disapprove / Reject
             </button>
           </div>
         </div>
 
         <!-- DOWNTIME LOSS AVOIDED -->
-        <div class="bg-[#0e1628] border border-slate-800 rounded-2xl p-4 text-center text-xs">
-          <div class="text-[11px] text-slate-400">Total Downtime Cost Avoided:</div>
+        <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-4 text-center text-xs">
+          <div class="text-[11px] text-slate-400">Total Downtime Loss Avoided:</div>
           <div class="text-xl font-bold text-emerald-400 font-mono mt-0.5">€1,232,500</div>
           <p class="text-[10px] text-slate-500 mt-0.5">14.5 launch delay days eliminated</p>
         </div>
@@ -503,9 +492,8 @@
     
     <!-- CHAT POPUP WINDOW -->
     <div id="ovy-chat-window" class="hidden w-80 sm:w-96 bg-[#0c1220] border-2 border-cyan-500/50 rounded-2xl shadow-2xl mb-3 overflow-hidden flex flex-col chat-slide-up">
-      <!-- HEADER -->
       <div class="bg-[#0e172a] px-4 py-3 border-b border-slate-800 flex items-center justify-between">
-        <div class="flex items-center gap-2.5">
+        <div class="flex items-center gap-2">
           <svg class="w-6 h-6 text-cyan-400" viewBox="0 0 40 40" fill="none">
             <polygon points="20,2 38,20 20,38 2,20" stroke="currentColor" stroke-width="2.5" fill="#0d1b30"/>
             <path d="M10 20 Q 20 12 30 20 Q 20 28 10 20 Z" stroke="#38bdf8" stroke-width="2" fill="none"/>
@@ -513,105 +501,69 @@
           </svg>
           <div>
             <h4 class="font-bold text-white text-xs">Ovy // Overlord Assistant</h4>
-            <span class="text-[10px] text-emerald-400 flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Always here to explain
-            </span>
+            <span class="text-[10px] text-emerald-400">Explains everything in plain English</span>
           </div>
         </div>
         <button onclick="toggleOvyChat()" class="text-slate-400 hover:text-white text-sm">✕</button>
       </div>
 
-      <!-- MESSAGES SCROLL AREA -->
-      <div id="ovy-messages" class="p-3.5 h-72 overflow-y-auto custom-scroll space-y-3 text-xs">
-        <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl text-slate-200">
-          Hi! I'm <strong>Ovy</strong>, your Overlord guide! Warehouses have a lot of confusing technical words. Tap any question below or ask me anything!
+      <div id="ovy-messages" class="p-3.5 h-64 overflow-y-auto custom-scroll space-y-2.5 text-xs">
+        <div class="bg-slate-900 border border-slate-800 p-2.5 rounded-xl text-slate-200">
+          Hi! I'm <strong>Ovy</strong>. Ask me anything about the warehouse launch, or tap a question below!
         </div>
 
-        <!-- QUICK QUESTION PILLS -->
         <div class="flex flex-wrap gap-1.5 pt-1">
-          <button onclick="askOvyPredefined('golive')" class="text-[10px] px-2.5 py-1 rounded-full bg-blue-950 text-cyan-300 border border-blue-800 hover:bg-blue-900 transition">
-            What is "Go-Live"?
-          </button>
-          <button onclick="askOvyPredefined('training')" class="text-[10px] px-2.5 py-1 rounded-full bg-blue-950 text-cyan-300 border border-blue-800 hover:bg-blue-900 transition">
-            Why is staff training behind?
-          </button>
-          <button onclick="askOvyPredefined('miebach')" class="text-[10px] px-2.5 py-1 rounded-full bg-blue-950 text-cyan-300 border border-blue-800 hover:bg-blue-900 transition">
-            What is Miebach's job?
-          </button>
-          <button onclick="askOvyPredefined('overtime')" class="text-[10px] px-2.5 py-1 rounded-full bg-blue-950 text-cyan-300 border border-blue-800 hover:bg-blue-900 transition">
-            How does the Director approve overtime?
-          </button>
+          <button onclick="askOvyPredefined('loss')" class="text-[10px] px-2 py-0.5 rounded-full bg-blue-950 text-cyan-300 border border-blue-800">What does "Loss Avoided" mean?</button>
+          <button onclick="askOvyPredefined('golive')" class="text-[10px] px-2 py-0.5 rounded-full bg-blue-950 text-cyan-300 border border-blue-800">What is "Go-Live"?</button>
+          <button onclick="askOvyPredefined('training')" class="text-[10px] px-2 py-0.5 rounded-full bg-blue-950 text-cyan-300 border border-blue-800">Why is training behind?</button>
+          <button onclick="askOvyPredefined('disapprove')" class="text-[10px] px-2 py-0.5 rounded-full bg-blue-950 text-cyan-300 border border-blue-800">Can the Director reject overtime?</button>
         </div>
       </div>
 
-      <!-- INPUT BAR -->
-      <div class="p-2.5 border-t border-slate-800 bg-[#080c15] flex gap-2">
-        <input id="ovy-input" type="text" placeholder="Ask Ovy anything..." onkeydown="handleOvyKey(event)" class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-400">
-        <button onclick="sendOvyMessage()" class="px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition">
-          Send
-        </button>
+      <div class="p-2 border-t border-slate-800 bg-[#080c15] flex gap-2">
+        <input id="ovy-input" type="text" placeholder="Ask Ovy anything..." onkeydown="handleOvyKey(event)" class="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none">
+        <button onclick="sendOvyMessage()" class="px-3 py-1 rounded-lg bg-blue-600 text-white font-bold text-xs">Send</button>
       </div>
     </div>
 
-    <!-- FLOATING TOGGLE BUTTON (RHOMBUS + EYE LOGO) -->
-    <button onclick="toggleOvyChat()" class="flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-[#0d1629] border-2 border-cyan-400/80 hover:border-cyan-300 text-white shadow-2xl hover:scale-105 transition group">
-      <svg class="w-6 h-6 text-cyan-400" viewBox="0 0 40 40" fill="none">
+    <!-- TOGGLE BUTTON -->
+    <button onclick="toggleOvyChat()" class="flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#0d1629] border-2 border-cyan-400 text-white shadow-xl hover:scale-105 transition">
+      <svg class="w-5 h-5 text-cyan-400" viewBox="0 0 40 40" fill="none">
         <polygon points="20,2 38,20 20,38 2,20" stroke="currentColor" stroke-width="2.5" fill="#0d1b30"/>
         <path d="M10 20 Q 20 12 30 20 Q 20 28 10 20 Z" stroke="#38bdf8" stroke-width="2" fill="none"/>
         <circle cx="20" cy="20" r="3.5" fill="#00d2ff"/>
       </svg>
-      <div class="text-left">
-        <div class="text-xs font-bold leading-tight flex items-center gap-1.5">
-          Ask Ovy <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-        </div>
-        <div class="text-[9px] text-slate-400 leading-tight">Need help? Tap here</div>
-      </div>
+      <span class="text-xs font-bold">Ask Ovy</span>
     </button>
   </div>
 
   <!-- REPORT A PROBLEM MODAL -->
-  <div id="report-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <div class="bg-[#0e1424] border border-slate-700 rounded-2xl max-w-md w-full p-5 space-y-3 text-xs shadow-2xl">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-        <h3 class="text-sm font-bold text-white">Report a Floor Problem</h3>
+  <div id="report-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+    <div class="bg-[#0e1424] border border-slate-700 rounded-2xl max-w-sm w-full p-4 space-y-3 text-xs shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+        <h3 class="font-bold text-white">Report a Floor Problem</h3>
         <button onclick="closeReportModal()" class="text-slate-400 hover:text-white">✕</button>
       </div>
-
-      <button onclick="prefillDemoExample()" class="w-full py-1.5 px-2 rounded-xl bg-emerald-950/60 border border-dashed border-emerald-500/50 text-emerald-300 text-xs font-semibold">
-        🪄 Use demo example (scanners)
-      </button>
-
-      <div class="space-y-2.5">
-        <div>
-          <label class="block text-slate-300 font-medium mb-0.5">What is wrong?</label>
-          <input id="input-wrong" type="text" placeholder="e.g. Scanners not configured" class="w-full bg-[#080c15] border border-slate-700 rounded-lg px-2.5 py-1.5 text-white text-xs">
-        </div>
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block text-slate-300 font-medium mb-0.5">Where?</label>
-            <select id="select-where" class="w-full bg-[#080c15] border border-slate-700 rounded-lg px-2 py-1.5 text-white text-xs">
-              <option value="Picking">Picking Zone</option>
-              <option value="Conveyor">Conveyor Loop</option>
-              <option value="AutoStore">AutoStore ASRS</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-slate-300 font-medium mb-0.5">Possible delay:</label>
-            <input type="text" value="2 days" class="w-full bg-[#080c15] border border-slate-700 rounded-lg px-2 py-1.5 text-cyan-300 text-xs font-mono font-bold" readonly>
-          </div>
-        </div>
+      <button onclick="prefillDemoExample()" class="w-full py-1 rounded bg-emerald-950/60 border border-dashed border-emerald-500/50 text-emerald-300 text-[11px]">🪄 Use demo example (scanners)</button>
+      <div>
+        <label class="block text-slate-300 font-medium mb-0.5">What is wrong?</label>
+        <input id="input-wrong" type="text" placeholder="e.g. Scanners not configured" class="w-full bg-[#080c15] border border-slate-700 rounded px-2.5 py-1 text-white text-xs">
       </div>
-
+      <div>
+        <label class="block text-slate-300 font-medium mb-0.5">Where?</label>
+        <select id="select-where" class="w-full bg-[#080c15] border border-slate-700 rounded px-2 py-1 text-white text-xs">
+          <option value="Picking">Picking Zone</option>
+          <option value="Conveyor">Conveyor Loop</option>
+        </select>
+      </div>
       <div class="pt-2 border-t border-slate-800 flex justify-end gap-2">
-        <button onclick="closeReportModal()" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 text-xs">Cancel</button>
-        <button onclick="submitFloorIssue()" class="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-emerald-600 to-cyan-600 text-white font-bold text-xs">
-          Submit to Overlord Hub &rarr;
-        </button>
+        <button onclick="closeReportModal()" class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-xs">Cancel</button>
+        <button onclick="submitFloorIssue()" class="px-3 py-1 rounded bg-emerald-600 text-white font-bold text-xs">Submit &rarr;</button>
       </div>
     </div>
   </div>
 
-  <!-- JAVASCRIPT STATE ENGINE & OVY AI CHATBOT -->
+  <!-- JAVASCRIPT STATE ENGINE & SMARTER OVY AI -->
   <script>
     let openIssuesCount = 3;
 
@@ -633,13 +585,8 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function openReportModal() {
-      document.getElementById('report-modal').classList.remove('hidden');
-    }
-    function closeReportModal() {
-      document.getElementById('report-modal').classList.add('hidden');
-    }
-
+    function openReportModal() { document.getElementById('report-modal').classList.remove('hidden'); }
+    function closeReportModal() { document.getElementById('report-modal').classList.add('hidden'); }
     function prefillDemoExample() {
       document.getElementById('input-wrong').value = 'Scanners not configured';
       document.getElementById('select-where').value = 'Picking';
@@ -648,13 +595,11 @@
     function submitFloorIssue() {
       const issueText = document.getElementById('input-wrong').value || 'Scanners not configured';
       const where = document.getElementById('select-where').value;
-
       openIssuesCount++;
       document.getElementById('kpi-issues').innerText = openIssuesCount;
       document.getElementById('badge-open-issues').innerText = openIssuesCount;
-
       closeReportModal();
-      alert(`Issue Logged to OVERLORD!\n\n"${issueText}" in ${where}.\n• Miebach Lead Engineer notified on Desktop.\n• Automated schedule buffer absorbed delay.\n• Go-Live date protected.`);
+      alert(`Issue Logged to OVERLORD!\n\n"${issueText}" in ${where}.\n• Engineer notified on Desktop.\n• Schedule protected.`);
       switchView('desktop');
     }
 
@@ -666,7 +611,7 @@
         openIssuesCount = Math.max(0, openIssuesCount - 1);
         document.getElementById('kpi-issues').innerText = openIssuesCount;
         document.getElementById('badge-open-issues').innerText = openIssuesCount;
-        alert(`✓ Issue Resolved: ${title}.\n\nUpdated across Tablet and Desktop. Go-Live protected.`);
+        alert(`✓ Issue Resolved: ${title}.`);
       }
     }
 
@@ -674,95 +619,153 @@
       alert("Miebach Engineer Javier re-routed testing lines!\n\n• Delay absorbed.\n• Target Go-Live: 15 Mar protected.");
     }
 
-    // DIRECTOR APPROVAL ACTION
+    // DIRECTOR APPROVE ACTION
     function approveDirectorOvertime() {
       const card = document.getElementById('director-approval-card');
       card.className = "bg-emerald-950/40 border border-emerald-500/50 rounded-2xl p-4 space-y-2";
       card.innerHTML = `
-        <div class="flex justify-between items-center text-[10px]">
-          <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-bold uppercase">
-            ✓ Sign-off Granted
-          </span>
-          <span class="text-slate-400 font-mono">Synced to ERP</span>
+        <div class="flex justify-between items-center">
+          <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-bold text-[10px] uppercase">✓ Budget Approved</span>
+          <button onclick="resetDirectorDecision()" class="text-[10px] text-slate-400 hover:text-white underline">Change Decision</button>
         </div>
         <h4 class="font-bold text-white text-xs">€12,800 Overtime Budget Approved</h4>
-        <p class="text-[11px] text-slate-300">
-          2 weekend shifts activated. 26 pickers scheduled for Feb 22-23. Certification milestone restored to 100% on schedule.
-        </p>
+        <p class="text-[11px] text-slate-300">2 weekend shifts activated. 26 pickers scheduled for Feb 22-23. Staff Training milestone restored to 100% on schedule.</p>
       `;
 
+      // Update Tablet
       const badge = document.getElementById('training-badge');
       if (badge) {
-        badge.className = "px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-bold text-[9px] uppercase";
+        badge.className = "px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-bold text-[10px] uppercase";
         badge.innerText = "✓ Overtime Approved";
       }
+      const desc = document.getElementById('training-desc-tablet');
+      if (desc) desc.innerText = "Director approved €12.8k overtime. 2 weekend training shifts scheduled for 26 pickers.";
 
+      // Update Desktop
       const desktopMilestone = document.getElementById('desktop-milestone-training');
       if (desktopMilestone) {
         desktopMilestone.className = "p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/40 flex justify-between";
         desktopMilestone.innerHTML = `<span class="text-emerald-300">3. Worker Training (38/64 certified)</span><span class="text-emerald-400 font-mono text-xs font-semibold">Recovered (28 Feb)</span>`;
       }
 
+      // Update SLA
       const opsSla = document.getElementById('ops-sla-val');
-      if (opsSla) opsSla.innerText = "96.0% Ready";
+      if (opsSla) opsSla.innerText = "96% Ready";
       const opsStatus = document.getElementById('ops-sla-status');
       if (opsStatus) {
         opsStatus.className = "text-[11px] text-emerald-400 mt-1";
         opsStatus.innerText = "✓ Overtime approved. 2 weekend shifts scheduled.";
       }
 
-      alert("EXECUTIVE DECISION LOGGED:\n\n• €12,800 overtime approved by Client Director.\n• Staff Training turns Green on Desktop and Tablet.\n• 15 March Go-Live remains firm.");
+      alert("EXECUTIVE DECISION LOGGED:\n\n• €12,800 overtime APPROVED by Client Director.\n• Staff Training turns Green on Desktop and Tablet.\n• 15 March Go-Live remains firm.");
+    }
+
+    // DIRECTOR DISAPPROVE ACTION
+    function disapproveDirectorOvertime() {
+      const card = document.getElementById('director-approval-card');
+      card.className = "bg-rose-950/40 border border-rose-500/50 rounded-2xl p-4 space-y-2";
+      card.innerHTML = `
+        <div class="flex justify-between items-center">
+          <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-bold text-[10px] uppercase">✕ Overtime Disapproved</span>
+          <button onclick="resetDirectorDecision()" class="text-[10px] text-slate-400 hover:text-white underline">Change Decision</button>
+        </div>
+        <h4 class="font-bold text-white text-xs">€12,800 Budget Rejected by Director</h4>
+        <p class="text-[11px] text-slate-300">Miebach Lead Engineer Javier notified to stagger weekday training hours without additional budget.</p>
+      `;
+
+      // Update Tablet
+      const badge = document.getElementById('training-badge');
+      if (badge) {
+        badge.className = "px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-bold text-[10px] uppercase";
+        badge.innerText = "Overtime Declined";
+      }
+      const desc = document.getElementById('training-desc-tablet');
+      if (desc) desc.innerText = "Director declined overtime budget. Miebach will stagger weekday training sessions instead.";
+
+      // Update Desktop
+      const desktopMilestone = document.getElementById('desktop-milestone-training');
+      if (desktopMilestone) {
+        desktopMilestone.className = "p-3 rounded-xl bg-slate-900 border border-slate-700 flex justify-between";
+        desktopMilestone.innerHTML = `<span class="text-slate-300">3. Worker Training (38/64 certified)</span><span class="text-slate-400 font-mono text-xs">Weekday Stagger Shift Active</span>`;
+      }
+
+      // Update SLA
+      const opsSla = document.getElementById('ops-sla-val');
+      if (opsSla) opsSla.innerText = "82% Adjusted";
+      const opsStatus = document.getElementById('ops-sla-status');
+      if (opsStatus) {
+        opsStatus.className = "text-[11px] text-slate-400 mt-1";
+        opsStatus.innerText = "Overtime declined. Weekday training stagger active.";
+      }
+
+      alert("EXECUTIVE DECISION LOGGED:\n\n• Overtime budget DECLINED by Client Director.\n• Miebach engineer Javier notified.\n• Switched to weekday stagger shifts (zero extra budget).");
+    }
+
+    function resetDirectorDecision() {
+      const card = document.getElementById('director-approval-card');
+      card.className = "bg-amber-950/30 border border-amber-500/50 rounded-2xl p-4 space-y-3 text-xs";
+      card.innerHTML = `
+        <div class="flex justify-between items-center">
+          <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-[10px] uppercase">Action Required</span>
+          <span class="text-[10px] text-slate-400 font-mono">Budget Sign-off</span>
+        </div>
+        <div>
+          <h4 class="font-bold text-white text-sm">Approve €12,800 Training Overtime?</h4>
+          <p class="text-[11px] text-slate-300 mt-1 leading-relaxed">Authorizes 2 weekend shifts for 26 warehouse pickers to finish certification before launch day.</p>
+        </div>
+        <div class="pt-2 border-t border-amber-900/40 flex gap-2">
+          <button onclick="approveDirectorOvertime()" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-bold text-xs transition shadow-lg">✓ Approve €12.8k</button>
+          <button onclick="disapproveDirectorOvertime()" class="flex-1 py-2.5 rounded-xl bg-rose-950/80 hover:bg-rose-900 border border-rose-600/60 text-rose-200 font-bold text-xs transition">✕ Disapprove / Reject</button>
+        </div>
+      `;
     }
 
     // ==========================================
-    // "OVY" AI CHATBOT LOGIC
+    // IMPROVED "OVY" AI CHATBOT LOGIC
     // ==========================================
     function toggleOvyChat() {
-      const chat = document.getElementById('ovy-chat-window');
-      chat.classList.toggle('hidden');
+      document.getElementById('ovy-chat-window').classList.toggle('hidden');
     }
 
     function addOvyMessage(sender, text) {
       const msgContainer = document.getElementById('ovy-messages');
       const div = document.createElement('div');
       if (sender === 'user') {
-        div.className = "bg-blue-600 text-white p-2.5 rounded-xl ml-6 text-xs";
+        div.className = "bg-blue-600 text-white p-2 rounded-xl ml-6 text-xs";
         div.innerText = text;
       } else {
         div.className = "bg-slate-900 border border-slate-800 text-slate-200 p-2.5 rounded-xl mr-6 text-xs space-y-1";
-        div.innerHTML = `<span class="text-cyan-400 font-bold font-mono text-[10px]">OVY:</span><div>${text}</div>`;
+        div.innerHTML = `<span class="text-cyan-400 font-bold font-mono text-[9px]">OVY:</span><div>${text}</div>`;
       }
       msgContainer.appendChild(div);
       msgContainer.scrollTop = msgContainer.scrollHeight;
     }
 
     function askOvyPredefined(topic) {
-      if (topic === 'golive') {
-        addOvyMessage('user', 'What does "Go-Live" actually mean?');
+      if (topic === 'loss') {
+        addOvyMessage('user', 'What does "Loss Avoided" mean?');
         setTimeout(() => {
-          addOvyMessage('ovy', '<strong>Go-Live Day (15 March)</strong> is the exact date the new warehouse officially opens and starts shipping real customer packages! If it slips, the client loses around €85,000 every single day in delayed orders.');
+          addOvyMessage('ovy', '<strong>"Downtime Loss Avoided"</strong> is the money saved by stopping delays before they happen! Every single day an automated warehouse launch is delayed costs the company about <strong>€85,000</strong> in lost sales and emergency storage. By catching issues early, OVERLORD prevented 14.5 days of delays—saving <strong>€1,232,500</strong>!');
+        }, 300);
+      } else if (topic === 'golive') {
+        addOvyMessage('user', 'What is "Go-Live"?');
+        setTimeout(() => {
+          addOvyMessage('ovy', '<strong>Go-Live Day (15 March)</strong> is the official opening day when the warehouse begins shipping real packages to real customers. All testing and worker training must be finished before this day.');
         }, 300);
       } else if (topic === 'training') {
         addOvyMessage('user', 'Why is staff training behind?');
         setTimeout(() => {
-          addOvyMessage('ovy', 'Only 38 out of 64 warehouse workers have completed safety and scanner training. Miebach suggested adding <strong>two weekend shifts</strong> for €12,800. The Client Director can approve this with one tap on Mobile!');
+          addOvyMessage('ovy', 'Only 38 out of 64 workers completed scanner certification. Miebach proposed adding 2 weekend shifts for €12,800. The Client Director on Mobile can now choose to <strong>Approve</strong> or <strong>Disapprove</strong> this budget.');
         }, 300);
-      } else if (topic === 'miebach') {
-        addOvyMessage('user', 'What is Miebach\'s job here?');
+      } else if (topic === 'disapprove') {
+        addOvyMessage('user', 'Can the Director reject overtime?');
         setTimeout(() => {
-          addOvyMessage('ovy', 'Miebach Consulting designed the warehouse robots, conveyors, and software integrations. Their job is to make sure all vendors (AutoStore, SAP, builders) stay on schedule so launch day is a success.');
-        }, 300);
-      } else if (topic === 'overtime') {
-        addOvyMessage('user', 'How does the Director approve overtime?');
-        setTimeout(() => {
-          addOvyMessage('ovy', 'Click the <strong>Mobile (Director)</strong> tab above! Scroll down to the amber card and tap <strong>"✓ Approve €12.8k Overtime"</strong>. You will see the whole system turn green instantly!');
+          addOvyMessage('ovy', 'Yes! On the <strong>Mobile (Director)</strong> tab, you can tap <strong>"✕ Disapprove / Reject"</strong>. If rejected, Miebach engineer Javier is forced to stagger weekday training shifts instead, so zero extra money is spent.');
         }, 300);
       }
     }
 
-    function handleOvyKey(e) {
-      if (e.key === 'Enter') sendOvyMessage();
-    }
+    function handleOvyKey(e) { if (e.key === 'Enter') sendOvyMessage(); }
 
     function sendOvyMessage() {
       const input = document.getElementById('ovy-input');
@@ -774,18 +777,28 @@
 
       const lower = q.toLowerCase();
       setTimeout(() => {
-        if (lower.includes('wms') || lower.includes('software')) {
-          addOvyMessage('ovy', '<strong>WMS</strong> stands for Warehouse Management System. It is the core software brain that directs orders, tells robots which bins to move, and tracks stock.');
-        } else if (lower.includes('delay') || lower.includes('cost') || lower.includes('money')) {
-          addOvyMessage('ovy', 'A 1-day delay costs the client about <strong>€85,000</strong> in lost fulfillment. OVERLORD has already prevented 14.5 days of delays, saving €1,232,500 so far!');
-        } else if (lower.includes('llama') || lower.includes('ai') || lower.includes('plan')) {
-          addOvyMessage('ovy', 'OVERLORD uses <strong>Llama</strong> (an open-source AI) to read the client warehouse data and 250 past Miebach project reports to automatically draft the initial launch schedule.');
+        if (lower.includes('loss') || lower.includes('avoid') || lower.includes('money') || lower.includes('save') || lower.includes('cost')) {
+          addOvyMessage('ovy', '<strong>"Loss Avoided"</strong> means money saved by preventing delays. A warehouse delay costs ~€85,000 every day in idle building costs, worker standby pay, and lost orders. OVERLORD has already prevented 14.5 days of slippage—saving <strong>€1,232,500</strong>!');
+        } else if (lower.includes('disapprove') || lower.includes('reject') || lower.includes('decline')) {
+          addOvyMessage('ovy', 'On the <strong>Mobile (Director)</strong> tab, you can now tap <strong>"✕ Disapprove / Reject"</strong>! If you reject the €12.8k budget, Miebach Javier will re-allocate regular weekday shifts instead of paying weekend overtime.');
+        } else if (lower.includes('approve') || lower.includes('overtime') || lower.includes('budget') || lower.includes('12')) {
+          addOvyMessage('ovy', 'If you tap <strong>"✓ Approve €12.8k"</strong> on Mobile, 2 weekend shifts are activated for 26 workers, and the training milestone turns green across Desktop and Tablet.');
+        } else if (lower.includes('golive') || lower.includes('go-live') || lower.includes('launch') || lower.includes('15')) {
+          addOvyMessage('ovy', '<strong>Go-Live Day (15 March)</strong> is the target date when the warehouse goes operational. We currently have a 96.2% on-time probability.');
+        } else if (lower.includes('wms') || lower.includes('erp') || lower.includes('software')) {
+          addOvyMessage('ovy', '<strong>WMS (Warehouse Management System)</strong> is the software brain directing the warehouse. The interface test (IF-03) had a 7% message error rate, so client IT and Miebach have scheduled a retest on 18 Feb.');
         } else if (lower.includes('autostore') || lower.includes('robot')) {
-          addOvyMessage('ovy', 'AutoStore is the cube-storage robotics system. 16 robots are running at 94% speed, picking 650 bins per hour (higher than the 600 target!).');
+          addOvyMessage('ovy', '<strong>AutoStore</strong> is the cube-grid robotics system. 16 robots are active and passed testing at 650 bins/hour, beating the 600 target.');
+        } else if (lower.includes('javier') || lower.includes('engineer') || lower.includes('miebach')) {
+          addOvyMessage('ovy', '<strong>Miebach Consulting</strong> designed this automated facility. <strong>Javier</strong> is the lead systems engineer who re-routes testing lines when bottlenecks happen.');
+        } else if (lower.includes('director') || lower.includes('mobile')) {
+          addOvyMessage('ovy', 'The <strong>Director view</strong> gives executives high-level status, a 30-second audio summary, and one-tap buttons to approve or reject budget requests.');
+        } else if (lower.includes('tablet') || lower.includes('floor') || lower.includes('site')) {
+          addOvyMessage('ovy', 'The <strong>Tablet view</strong> is used by floor teams to conduct daily launch checks and report broken scanners or conveyor issues with a photo.');
         } else {
-          addOvyMessage('ovy', `That's a great question about "${q}"! In short: OVERLORD is the single source of truth connecting Miebach engineers, warehouse floor staff, and client executives to guarantee an on-time 15 March launch.`);
+          addOvyMessage('ovy', `Here is what's happening: OVERLORD is currently tracking the warehouse toward its 15 March launch. You can test approving or rejecting overtime on Mobile, resolve the conveyor bottleneck on Desktop, or check floor issues on Tablet!`);
         }
-      }, 400);
+      }, 350);
     }
   </script>
 </body>
