@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,50 +7,56 @@
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
     body {
-      background-color: #080c15;
+      background-color: #070b13;
       color: #e2e8f0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
     .custom-scroll::-webkit-scrollbar {
-      width: 4px;
-      height: 4px;
+      width: 5px;
+      height: 5px;
     }
     .custom-scroll::-webkit-scrollbar-thumb {
       background: #1e293b;
-      border-radius: 2px;
+      border-radius: 3px;
     }
     .subtle-glow {
-      box-shadow: 0 0 30px rgba(0, 210, 255, 0.12);
+      box-shadow: 0 0 35px rgba(0, 210, 255, 0.08);
     }
     .audio-wave {
       display: inline-flex;
       align-items: center;
       gap: 2px;
-      height: 16px;
+      height: 14px;
     }
     .audio-bar {
-      width: 2.5px;
+      width: 2px;
       background: #00d2ff;
-      border-radius: 2px;
+      border-radius: 1px;
       animation: sound-wave 1.2s infinite ease-in-out;
     }
-    .audio-bar:nth-child(1) { height: 6px; animation-delay: 0.1s; }
-    .audio-bar:nth-child(2) { height: 14px; animation-delay: 0.3s; }
-    .audio-bar:nth-child(3) { height: 9px; animation-delay: 0.2s; }
-    .audio-bar:nth-child(4) { height: 16px; animation-delay: 0.4s; }
-    .audio-bar:nth-child(5) { height: 8px; animation-delay: 0.15s; }
+    .audio-bar:nth-child(1) { height: 5px; animation-delay: 0.1s; }
+    .audio-bar:nth-child(2) { height: 12px; animation-delay: 0.3s; }
+    .audio-bar:nth-child(3) { height: 7px; animation-delay: 0.2s; }
+    .audio-bar:nth-child(4) { height: 14px; animation-delay: 0.4s; }
+    .audio-bar:nth-child(5) { height: 6px; animation-delay: 0.15s; }
     @keyframes sound-wave {
       0%, 100% { transform: scaleY(0.4); }
       50% { transform: scaleY(1); }
     }
+    .chat-slide-up {
+      animation: slideUp 0.25s ease-out forwards;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased select-none">
+<body class="min-h-screen flex flex-col antialiased">
 
-  <!-- TOP BAR -->
-  <header class="border-b border-slate-800/80 bg-[#0c1220]/95 backdrop-blur px-6 py-3.5 sticky top-0 z-50 flex flex-wrap items-center justify-between gap-4">
-    <!-- LOGO: RHOMBUS WITH AN EYE -->
-    <div class="flex items-center gap-3.5">
+  <!-- STICKY TOP APP BAR -->
+  <header class="border-b border-slate-800 bg-[#090e1a]/95 backdrop-blur px-6 py-3.5 sticky top-0 z-40 flex flex-wrap items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
       <div class="relative flex items-center justify-center">
         <svg class="w-9 h-9 text-cyan-400 drop-shadow-[0_0_8px_rgba(0,210,255,0.4)]" viewBox="0 0 40 40" fill="none">
           <polygon points="20,2 38,20 20,38 2,20" stroke="currentColor" stroke-width="2.2" fill="#0d1b30"/>
@@ -59,472 +65,352 @@
           <circle cx="20" cy="20" r="1.5" fill="#ffffff"/>
         </svg>
       </div>
-
       <div>
         <div class="flex items-center gap-2">
           <span class="font-extrabold text-white tracking-widest text-base font-mono">OVERLORD</span>
-          <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-950/70 text-cyan-300 font-semibold border border-cyan-800/60 font-mono tracking-tight">
-            MIEBACH DIGITAL TWIN
+          <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-950/70 text-cyan-300 font-semibold border border-cyan-800/60 font-mono">
+            MIEBACH
           </span>
         </div>
-        <p class="text-[11px] text-slate-400">Warehouse Go-Live & Stakeholder Synergy Engine</p>
+        <p class="text-[11px] text-slate-400">Warehouse Launch & Synergy Engine</p>
       </div>
     </div>
 
-    <!-- TABS -->
-    <div class="flex items-center bg-[#070b13] border border-slate-800 rounded-xl p-1 text-xs">
-      <button id="tab-synergy" onclick="switchView('synergy')" class="tab-btn px-3 py-1.5 rounded-lg text-white bg-blue-600 transition flex items-center gap-1.5 font-medium">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        Synergy Overview
+    <!-- CLEAN TABS -->
+    <div class="flex items-center bg-[#050811] border border-slate-800 rounded-xl p-1 text-xs">
+      <button id="tab-synergy" onclick="switchView('synergy')" class="tab-btn px-3.5 py-1.5 rounded-lg text-white bg-blue-600 transition font-medium">
+        Overview
       </button>
-      <button id="tab-engine" onclick="switchView('engine')" class="tab-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1.5 font-medium">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-        AI Plan Engine
-      </button>
-      <button id="tab-desktop" onclick="switchView('desktop')" class="tab-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1.5 font-medium">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      <button id="tab-desktop" onclick="switchView('desktop')" class="tab-btn px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition font-medium">
         Desktop (Engineer)
       </button>
-      <button id="tab-tablet" onclick="switchView('tablet')" class="tab-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1.5 font-medium relative">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+      <button id="tab-tablet" onclick="switchView('tablet')" class="tab-btn px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition font-medium relative">
         Tablet (Site Team)
-        <span id="badge-open-issues" class="w-4 h-4 rounded-full bg-rose-500 text-white text-[9px] font-bold flex items-center justify-center -ml-0.5">3</span>
+        <span id="badge-open-issues" class="w-3.5 h-3.5 rounded-full bg-rose-500 text-white text-[8px] font-bold inline-flex items-center justify-center ml-1">3</span>
       </button>
-      <button id="tab-mobile" onclick="switchView('mobile')" class="tab-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1.5 font-medium">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+      <button id="tab-mobile" onclick="switchView('mobile')" class="tab-btn px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition font-medium">
         Mobile (Director)
       </button>
     </div>
   </header>
 
-  <!-- CLEAN STATUS BAR -->
-  <section class="bg-[#0b101c] border-b border-slate-800/80 px-6 py-3">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
-      <div class="bg-[#0f1626] border border-slate-800 rounded-xl p-3 flex items-center justify-between">
-        <div>
-          <div class="text-[11px] text-slate-400 font-medium">Target Go-Live</div>
-          <div class="text-base font-bold text-white font-mono mt-0.5">15 Mar 2026</div>
-        </div>
-        <span class="px-2 py-1 rounded bg-emerald-950/70 text-emerald-400 border border-emerald-800/60 text-[11px] font-semibold font-mono">
-          T-21 Days
-        </span>
+  <!-- CLEAN TOP STATUS BAR (EXPLAINED IN PLAIN ENGLISH) -->
+  <section class="bg-[#0b101c] border-b border-slate-800/80 px-6 py-4">
+    <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+      <div class="bg-[#0e1424] border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
+        <span class="text-[11px] text-slate-400 font-medium">Launch Day (Go-Live)</span>
+        <div class="text-lg font-bold text-white font-mono mt-1">15 Mar 2026</div>
+        <span class="text-[10px] text-emerald-400 mt-1 font-semibold">21 days remaining</span>
       </div>
 
-      <div class="bg-[#0f1626] border border-slate-800 rounded-xl p-3 flex items-center justify-between">
-        <div>
-          <div class="text-[11px] text-slate-400 font-medium">Launch Confidence</div>
-          <div class="text-base font-bold text-cyan-400 font-mono mt-0.5">96.2%</div>
-        </div>
-        <span class="text-[11px] text-slate-400 font-mono">Monte Carlo Sim</span>
+      <div class="bg-[#0e1424] border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
+        <span class="text-[11px] text-slate-400 font-medium">On-Time Probability</span>
+        <div class="text-lg font-bold text-cyan-400 font-mono mt-1">96.2%</div>
+        <span class="text-[10px] text-slate-400 mt-1">Calculated from buffer</span>
       </div>
 
-      <div class="bg-[#0f1626] border border-slate-800 rounded-xl p-3 flex items-center justify-between">
-        <div>
-          <div class="text-[11px] text-slate-400 font-medium">Open Floor Issues</div>
-          <div class="text-base font-bold text-amber-400 font-mono mt-0.5"><span id="kpi-issues">3</span> Active</div>
-        </div>
-        <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-400 border border-rose-800/50 text-[10px] font-bold">
-          1 Critical
-        </span>
+      <div class="bg-[#0e1424] border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
+        <span class="text-[11px] text-slate-400 font-medium">Floor Issues Active</span>
+        <div class="text-lg font-bold text-amber-400 font-mono mt-1"><span id="kpi-issues">3</span> Open</div>
+        <span class="text-[10px] text-rose-400 mt-1 font-semibold">1 needs attention</span>
       </div>
 
-      <div class="bg-[#0f1626] border border-slate-800 rounded-xl p-3 flex items-center justify-between">
-        <div>
-          <div class="text-[11px] text-slate-400 font-medium">Downtime Loss Avoided</div>
-          <div class="text-base font-bold text-emerald-400 font-mono mt-0.5">€1,232,500</div>
-        </div>
-        <span class="text-[11px] text-slate-400 font-mono">+14.5d saved</span>
+      <div class="bg-[#0e1424] border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
+        <span class="text-[11px] text-slate-400 font-medium">Downtime Loss Prevented</span>
+        <div class="text-lg font-bold text-emerald-400 font-mono mt-1">€1.23M</div>
+        <span class="text-[10px] text-slate-400 mt-1">+14.5 days recovered</span>
       </div>
     </div>
   </section>
 
-  <!-- LLAMA COPILOT QUERY BAR (PROPOSAL G1) -->
-  <section class="bg-[#090e1a] border-b border-slate-800 px-6 py-2.5">
-    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
-      <div class="flex items-center gap-2 text-slate-300">
-        <span class="px-2 py-0.5 rounded bg-blue-950 text-cyan-300 font-mono text-[10px] font-bold border border-blue-800">
-          LLAMA COPILOT
-        </span>
-        <span class="text-slate-400">Ask the 250-Report Knowledge Engine:</span>
-      </div>
-      <div class="flex items-center gap-2 overflow-x-auto">
-        <button onclick="askCopilot('bottleneck')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition text-[11px]">
-          🔍 "What is our biggest bottleneck today?"
-        </button>
-        <button onclick="askCopilot('slip')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition text-[11px]">
-          ⏱️ "What happens if WMS retest slips 3 days?"
-        </button>
-        <button onclick="askCopilot('report142')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition text-[11px]">
-          📚 "Compare with historical Report #142"
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- MAIN VIEWPORT -->
-  <main class="flex-1 p-6 max-w-6xl w-full mx-auto flex flex-col space-y-6">
+  <!-- MAIN SCROLLABLE CONTENT (MAX-W-4XL FOR COMPACT, NATURAL VERTICALITY) -->
+  <main class="flex-1 px-6 py-8 max-w-4xl w-full mx-auto space-y-10">
 
     <!-- ======================================================== -->
-    <!-- VIEW 1: SYNERGY OVERVIEW & VENDOR MATRIX (PROPOSAL G2) -->
+    <!-- VIEW 1: OVERVIEW (CLEAN VERTICAL FLOW) -->
     <!-- ======================================================== -->
-    <div id="view-synergy" class="view-panel flex flex-col space-y-5">
-      <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-6 subtle-glow">
-        <div class="flex items-center justify-between pb-4 border-b border-slate-800/80 mb-5">
+    <div id="view-synergy" class="view-panel space-y-10">
+
+      <!-- SECTION 1: WHAT IS OVERLORD (PLAIN ENGLISH HERO) -->
+      <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-6 subtle-glow space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
           <div>
-            <h2 class="text-base font-bold text-white tracking-wide">
-              Stakeholder Synergy Architecture
-            </h2>
+            <h2 class="text-base font-bold text-white">How OVERLORD Keeps the Warehouse Launch on Track</h2>
             <p class="text-xs text-slate-400 mt-0.5">
-              Connecting Miebach Engineering, On-Site Operations, and Client Executives in real time.
+              Connecting Miebach engineers, on-site floor operators, and company executives in one live hub.
             </p>
           </div>
-          <button onclick="switchView('engine')" class="text-xs text-cyan-400 bg-cyan-950/60 hover:bg-cyan-900/60 px-3 py-1.5 rounded-lg border border-cyan-800/60 font-mono transition">
-            View AI Plan Pipeline &rarr;
-          </button>
+          <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] text-cyan-300 font-mono">
+            Live Synchronization
+          </span>
         </div>
 
-        <div class="relative w-full h-[360px] bg-[#070b13] rounded-xl border border-slate-800 overflow-hidden flex items-center justify-center">
-          <svg class="w-full h-full" viewBox="0 0 740 360">
-            <defs>
-              <linearGradient id="grad-blue" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9" />
-                <stop offset="100%" stop-color="#2563eb" stop-opacity="0.9" />
-              </linearGradient>
-              <linearGradient id="grad-green" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#34d399" stop-opacity="0.9" />
-                <stop offset="100%" stop-color="#0284c7" stop-opacity="0.9" />
-              </linearGradient>
-              <linearGradient id="grad-amber" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.9" />
-                <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.9" />
-              </linearGradient>
-            </defs>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          When launching a multi-million euro automated warehouse, teams usually get stuck sending messy Excel sheets, long email chains, and static 200-page weekly PDF reports. When something breaks on the floor, it takes days to notify management. <strong>OVERLORD connects all three sides instantly</strong>:
+        </p>
 
-            <path d="M 160 85 Q 260 120 370 180" stroke="url(#grad-blue)" stroke-width="2.5" fill="none" stroke-dasharray="6,4"/>
-            <path d="M 160 280 Q 260 245 370 180" stroke="url(#grad-green)" stroke-width="2.5" fill="none" stroke-dasharray="6,4"/>
-            <path d="M 580 180 Q 480 180 370 180" stroke="url(#grad-amber)" stroke-width="2.5" fill="none" stroke-dasharray="6,4"/>
-
-            <g class="cursor-pointer" onclick="switchView('desktop')">
-              <circle cx="370" cy="180" r="54" fill="#0c1829" stroke="#00d2ff" stroke-width="2.5"/>
-              <polygon points="370,156 386,172 370,188 354,172" stroke="#38bdf8" stroke-width="1.8" fill="none"/>
-              <circle cx="370" cy="172" r="2.5" fill="#00d2ff"/>
-              <text x="370" y="202" text-anchor="middle" font-size="11" font-weight="extrabold" fill="#ffffff" letter-spacing="0.08em" font-family="monospace">OVERLORD</text>
-              <text x="370" y="215" text-anchor="middle" font-size="8.5" fill="#7dd3fc">DIGITAL LAUNCH HUB</text>
-            </g>
-
-            <g class="cursor-pointer" onclick="switchView('desktop')">
-              <circle cx="160" cy="85" r="38" fill="#111c30" stroke="#0284c7" stroke-width="2"/>
-              <rect x="148" y="70" width="24" height="16" rx="2" stroke="#38bdf8" stroke-width="1.6" fill="none"/>
-              <text x="160" y="103" text-anchor="middle" font-size="10" font-weight="bold" fill="#ffffff">Miebach Engineer</text>
-              <text x="160" y="114" text-anchor="middle" font-size="8" fill="#94a3b8">Desktop Portal</text>
-            </g>
-
-            <g class="cursor-pointer" onclick="switchView('tablet')">
-              <circle cx="160" cy="280" r="40" fill="#09261d" stroke="#10b981" stroke-width="2"/>
-              <rect x="150" y="263" width="20" height="24" rx="2" stroke="#34d399" stroke-width="1.6" fill="none"/>
-              <text x="160" y="300" text-anchor="middle" font-size="10" font-weight="bold" fill="#ffffff">Site Floor Team</text>
-              <text x="160" y="311" text-anchor="middle" font-size="8" fill="#a7f3d0">Tablet Scanner</text>
-            </g>
-
-            <g class="cursor-pointer" onclick="switchView('mobile')">
-              <circle cx="580" cy="180" r="40" fill="#2d1c07" stroke="#f59e0b" stroke-width="2"/>
-              <rect x="572" y="164" width="16" height="24" rx="2" stroke="#fbbf24" stroke-width="1.6" fill="none"/>
-              <text x="580" y="200" text-anchor="middle" font-size="10" font-weight="bold" fill="#ffffff">Client Director</text>
-              <text x="580" y="211" text-anchor="middle" font-size="8" fill="#fde68a">Mobile Alerts</text>
-            </g>
-          </svg>
-        </div>
-      </div>
-
-      <!-- MULTI-VENDOR ACCOUNTABILITY MATRIX (PROPOSAL G2) -->
-      <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-5">
-        <div class="flex items-center justify-between pb-3 border-b border-slate-800/80 mb-3">
-          <h3 class="text-xs font-bold text-white uppercase tracking-wider">Multi-Vendor & Stakeholder SLA Matrix</h3>
-          <span class="text-[10px] text-slate-400">Eliminating Finger-Pointing</span>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
-          <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-white">AutoStore OEM</span>
-              <span class="text-emerald-400 font-mono font-bold text-[11px]">98.5%</span>
+        <!-- 3 PERSONA SUMMARY CARDS (STACKED VERTICALLY) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-2">
+          <div onclick="switchView('desktop')" class="cursor-pointer bg-[#080c15] border border-slate-800 hover:border-blue-500/50 rounded-xl p-4 transition space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <span class="font-bold text-white">1. Miebach Engineer</span>
+              <span class="text-cyan-400 font-mono text-[10px]">Desktop</span>
             </div>
-            <p class="text-[10px] text-slate-400 mt-1">Robotics hardware & bin grid commissioning.</p>
-            <div class="mt-2 text-[9px] text-emerald-400">✓ On SLA Schedule</div>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              Uploads warehouse layouts, runs 3D simulations, and re-routes testing batches when delays happen.
+            </p>
+            <span class="text-blue-400 font-semibold text-[11px] inline-block pt-1">Open Desktop View &rarr;</span>
           </div>
-          <div class="bg-[#080c15] border border-rose-500/40 rounded-xl p-3">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-white">Client IT (SAP)</span>
-              <span class="text-rose-400 font-mono font-bold text-[11px]">84.0%</span>
+
+          <div onclick="switchView('tablet')" class="cursor-pointer bg-[#080c15] border border-slate-800 hover:border-emerald-500/50 rounded-xl p-4 transition space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <span class="font-bold text-white">2. Site Floor Team</span>
+              <span class="text-emerald-400 font-mono text-[10px]">Tablet</span>
             </div>
-            <p class="text-[10px] text-slate-400 mt-1">WMS interface message telemetry (IF-03).</p>
-            <div class="mt-2 text-[9px] text-rose-300">⚠ Retest Pending 18 Feb</div>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              Checks off daily tasks on the floor. When a scanner fails, snaps a photo and alerts engineers in seconds.
+            </p>
+            <span class="text-emerald-400 font-semibold text-[11px] inline-block pt-1">Open Tablet View &rarr;</span>
           </div>
-          <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-white">Miebach Eng</span>
-              <span class="text-cyan-400 font-mono font-bold text-[11px]">100%</span>
+
+          <div onclick="switchView('mobile')" class="cursor-pointer bg-[#080c15] border border-slate-800 hover:border-amber-500/50 rounded-xl p-4 transition space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <span class="font-bold text-white">3. Client Director</span>
+              <span class="text-amber-400 font-mono text-[10px]">Mobile</span>
             </div>
-            <p class="text-[10px] text-slate-400 mt-1">Lead integration & dynamic schedule buffer.</p>
-            <div class="mt-2 text-[9px] text-cyan-300">✓ Buffer Intact (+2.5d)</div>
-          </div>
-          <div class="bg-[#080c15] border border-amber-500/40 rounded-xl p-3">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-white">Client Ops</span>
-              <span id="ops-sla-val" class="text-amber-400 font-mono font-bold text-[11px]">76.0%</span>
-            </div>
-            <p class="text-[10px] text-slate-400 mt-1">Picker certifications (38/64 trained).</p>
-            <div id="ops-sla-status" class="mt-2 text-[9px] text-amber-300">⚠ Overtime Sign-off Req</div>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              Checks traffic-light go-live status on their phone and approves urgent budget items with one tap.
+            </p>
+            <span class="text-amber-400 font-semibold text-[11px] inline-block pt-1">Open Mobile View &rarr;</span>
           </div>
         </div>
       </div>
+
+      <!-- SECTION 2: HOW AI (LLAMA) + PAST 250 REPORTS BUILDS THE PLAN -->
+      <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-6 space-y-4">
+        <div>
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider">How OVERLORD's AI Prepares the Project Plan</h3>
+          <p class="text-xs text-slate-400 mt-1">
+            Using client warehouse records and our proposed database of 200–300 previous Miebach implementation reports.
+          </p>
+        </div>
+
+        <div class="space-y-2.5 text-xs">
+          <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3.5 flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-blue-950 text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs">1</span>
+            <div>
+              <strong class="text-white">Client Provides Data:</strong>
+              <p class="text-[11px] text-slate-400 mt-0.5">Records from the client's Warehouse Management System (WMS) and ERP (order volumes, SKU counts, pallet dimensions).</p>
+            </div>
+          </div>
+
+          <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3.5 flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-blue-950 text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs">2</span>
+            <div>
+              <strong class="text-white">Knowledge Base Cross-Reference:</strong>
+              <p class="text-[11px] text-slate-400 mt-0.5">The system cross-references 250+ past Miebach launch reports to find similar warehouses and avoid past mistakes.</p>
+            </div>
+          </div>
+
+          <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3.5 flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-blue-950 text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs">3</span>
+            <div>
+              <strong class="text-white">Llama AI Drafts the First Schedule:</strong>
+              <p class="text-[11px] text-slate-400 mt-0.5">The AI model drafts the milestones and testing steps needed to reach Go-Live on 15 March.</p>
+            </div>
+          </div>
+
+          <div class="bg-[#080c15] border border-emerald-500/40 rounded-xl p-3.5 flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-emerald-950 text-emerald-400 font-bold flex items-center justify-center shrink-0 text-xs">4</span>
+            <div>
+              <strong class="text-white">Miebach Consultants Review & Correct (Human-in-the-Loop):</strong>
+              <p class="text-[11px] text-slate-400 mt-0.5">Engineers check whether the draft fits the physical warehouse, fix any unrealistic assumptions, and approve the schedule.</p>
+            </div>
+          </div>
+
+          <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3.5 flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-blue-950 text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs">5</span>
+            <div>
+              <strong class="text-white">Live Execution on the Dashboard:</strong>
+              <p class="text-[11px] text-slate-400 mt-0.5">The approved plan stays updated live on everyone's screen, flagging bottlenecks before they cause delays.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: MULTI-VENDOR ACCOUNTABILITY (WHO IS RESPONSIBLE?) -->
+      <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-6 space-y-4">
+        <div>
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider">Who Is Responsible? (Zero Finger-Pointing)</h3>
+          <p class="text-xs text-slate-400 mt-1">
+            Tracking each partner's readiness so delays are solved instead of blamed on others.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3.5">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-white">AutoStore (Robotics Vendor)</span>
+              <span class="text-emerald-400 font-mono font-bold text-[11px]">98.5% Ready</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-1">16 robots active. Passed high-speed bin sorting tests.</p>
+          </div>
+
+          <div class="bg-[#080c15] border border-rose-500/40 rounded-xl p-3.5">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-white">Client IT (SAP Software Team)</span>
+              <span class="text-rose-400 font-mono font-bold text-[11px]">Retest Needed</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-1">7% of picking messages failed test. Joint retest set for 18 Feb.</p>
+          </div>
+
+          <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3.5">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-white">Miebach Consulting</span>
+              <span class="text-cyan-400 font-mono font-bold text-[11px]">100% Buffer</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-1">Managing overall timeline and absorbing minor delays.</p>
+          </div>
+
+          <div class="bg-[#080c15] border border-amber-500/40 rounded-xl p-3.5">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-white">Client Operations (Floor Staff)</span>
+              <span id="ops-sla-val" class="text-amber-400 font-mono font-bold text-[11px]">76% Ready</span>
+            </div>
+            <p id="ops-sla-status" class="text-[11px] text-amber-300 mt-1">Worker training behind. Awaiting Director overtime sign-off.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- ======================================================== -->
-    <!-- VIEW 2: AI PLAN ENGINE & 90-DAY RAMP-UP SIMULATOR (PROPOSAL G3) -->
+    <!-- VIEW 2: DESKTOP (MIEBACH ENGINEER VIEW - SCROLLABLE) -->
     <!-- ======================================================== -->
-    <div id="view-engine" class="view-panel hidden flex flex-col space-y-4">
-      <div class="bg-[#0e1424] border border-cyan-500/40 rounded-2xl p-6 subtle-glow">
-        <div class="flex items-center justify-between pb-4 border-b border-slate-800/80 mb-5">
+    <div id="view-desktop" class="view-panel hidden space-y-8">
+      <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-6 space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
           <div>
-            <h2 class="text-base font-bold text-white tracking-wide">Llama AI Plan Engine & Knowledge Base</h2>
-            <p class="text-xs text-slate-400 mt-0.5">Synthesizing WMS/ERP records with 200–300 historical Miebach implementation reports.</p>
+            <h2 class="text-base font-bold text-white">Miebach Engineering Workstation</h2>
+            <p class="text-xs text-slate-400">Layout Telemetry & Dynamic Go-Live Recovery</p>
           </div>
-          <button onclick="simulateLlamaPlan()" class="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs transition">
-            Run Llama Synthesis &rarr;
-          </button>
-        </div>
-
-        <!-- 5 STEPS -->
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-3 text-xs mb-6">
-          <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3 flex flex-col justify-between">
-            <div>
-              <span class="text-[9px] text-cyan-400 font-mono font-bold uppercase">Step 01</span>
-              <h4 class="font-bold text-white mt-0.5">Client Data</h4>
-              <p class="text-[10px] text-slate-400 mt-1">WMS inventory records & ERP velocity.</p>
-            </div>
-            <span class="text-[9px] text-slate-500 font-mono">WMS / ERP dumps</span>
-          </div>
-          <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3 flex flex-col justify-between">
-            <div>
-              <span class="text-[9px] text-cyan-400 font-mono font-bold uppercase">Step 02</span>
-              <h4 class="font-bold text-white mt-0.5">Knowledge Base</h4>
-              <p class="text-[10px] text-slate-400 mt-1">200–300 past Miebach reports indexed.</p>
-            </div>
-            <span class="text-[9px] text-slate-500 font-mono">250+ reports</span>
-          </div>
-          <div class="bg-[#080c15] border border-blue-500/50 rounded-xl p-3 flex flex-col justify-between">
-            <div>
-              <span class="text-[9px] text-blue-400 font-mono font-bold uppercase">Step 03</span>
-              <h4 class="font-bold text-white mt-0.5">Llama AI Draft</h4>
-              <p class="text-[10px] text-slate-400 mt-1">Drafts initial milestone schedule.</p>
-            </div>
-            <span class="text-[9px] text-cyan-300 font-mono">Llama 3 SC-Tuned</span>
-          </div>
-          <div class="bg-[#080c15] border border-emerald-500/50 rounded-xl p-3 flex flex-col justify-between">
-            <div>
-              <span class="text-[9px] text-emerald-400 font-mono font-bold uppercase">Step 04</span>
-              <h4 class="font-bold text-white mt-0.5">Consultant Review</h4>
-              <p class="text-[10px] text-slate-400 mt-1">Miebach engineers correct & approve.</p>
-            </div>
-            <span class="text-[9px] text-emerald-300 font-mono">Human-in-the-Loop</span>
-          </div>
-          <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3 flex flex-col justify-between">
-            <div>
-              <span class="text-[9px] text-cyan-400 font-mono font-bold uppercase">Step 05</span>
-              <h4 class="font-bold text-white mt-0.5">Execution Sync</h4>
-              <p class="text-[10px] text-slate-400 mt-1">Pushed to Desktop, Tablet, Mobile.</p>
-            </div>
-            <span class="text-[9px] text-cyan-300 font-mono">Target: 15 Mar</span>
-          </div>
-        </div>
-
-        <!-- 90-DAY RAMP-UP SIMULATOR SLIDER (PROPOSAL G3) -->
-        <div class="bg-[#080c15] border border-slate-800 rounded-xl p-5 text-xs space-y-4">
-          <div class="flex justify-between items-center">
-            <div>
-              <h3 class="font-bold text-white text-xs uppercase tracking-wider">90-Day Post-Launch Ramp-Up S-Curve Simulator</h3>
-              <p class="text-[11px] text-slate-400">Scale target throughput to simulate staffing requirements and automation capacity.</p>
-            </div>
-            <span id="slider-orders-display" class="text-cyan-300 font-mono font-bold text-sm bg-blue-950 px-3 py-1 rounded border border-blue-800">
-              25,000 orders/day
-            </span>
-          </div>
-
-          <input id="slider-orders" type="range" min="10000" max="50000" value="25000" step="2500" oninput="updateRampUpSimulator()" class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-400">
-
-          <div class="grid grid-cols-3 gap-3 text-center pt-2">
-            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800">
-              <span class="text-slate-400 text-[10px]">Month 1 (Days 1–30)</span>
-              <div id="sim-m1-orders" class="text-sm font-bold text-white font-mono mt-0.5">10,000 orders/d</div>
-              <div id="sim-m1-staff" class="text-[10px] text-cyan-300 mt-1">42 Pickers | 8 Robots</div>
-            </div>
-            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800">
-              <span class="text-slate-400 text-[10px]">Month 2 (Days 31–60)</span>
-              <div id="sim-m2-orders" class="text-sm font-bold text-white font-mono mt-0.5">18,750 orders/d</div>
-              <div id="sim-m2-staff" class="text-[10px] text-cyan-300 mt-1">56 Pickers | 12 Robots</div>
-            </div>
-            <div class="bg-blue-950/40 p-3 rounded-lg border border-blue-800/60">
-              <span class="text-cyan-300 text-[10px] font-bold">Month 3 (Full Target)</span>
-              <div id="sim-m3-orders" class="text-sm font-bold text-emerald-400 font-mono mt-0.5">25,000 orders/d</div>
-              <div id="sim-m3-staff" class="text-[10px] text-emerald-300 mt-1">64 Certified | 16 Robots</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ======================================================== -->
-    <!-- VIEW 3: DESKTOP (ENGINEER) -->
-    <!-- ======================================================== -->
-    <div id="view-desktop" class="view-panel hidden flex flex-col space-y-4">
-      <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-6">
-        <div class="flex items-center justify-between pb-4 border-b border-slate-800/80 mb-5">
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-lg bg-blue-950 border border-blue-700/60 flex items-center justify-center text-cyan-400">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            </div>
-            <div>
-              <h2 class="text-base font-bold text-white">Miebach Engineering Digital Launch Portal</h2>
-              <p class="text-xs text-slate-400">Validated Llama Plan & Dynamic Go-Live Recovery</p>
-            </div>
-          </div>
-          <span class="text-xs px-2.5 py-1 rounded bg-blue-950 text-cyan-300 border border-blue-800 font-mono">
+          <span class="px-2.5 py-1 rounded bg-blue-950 text-cyan-300 font-mono text-xs border border-blue-800">
             Lead Engineer: Javier
           </span>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-          <div class="lg:col-span-2 space-y-3">
-            <div class="text-xs font-semibold text-slate-300 uppercase tracking-wider flex items-center justify-between">
-              <span>Automated Warehouse Zones</span>
-              <span class="text-slate-500 font-mono text-[11px]">WMS Telemetry Synced</span>
+        <!-- WAREHOUSE ZONES (CLEAN VERTICAL CARDS) -->
+        <div class="space-y-3">
+          <h3 class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Warehouse Zones Status</h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+            <div class="bg-[#080c15] border border-slate-800 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-white text-sm">Zone 01: Inbound Docks</span>
+                <span class="text-emerald-400 font-semibold">✓ 100% Ready</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">18 dock doors calibrated with automated safety locks.</p>
             </div>
 
-            <div class="grid grid-cols-2 gap-3 text-xs">
-              <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between h-28">
-                <div class="flex justify-between items-center">
-                  <span class="font-bold text-white">01. Inbound Docks</span>
-                  <span class="text-emerald-400 font-mono text-[11px]">100% Ready</span>
-                </div>
-                <p class="text-[11px] text-slate-400">18 dock doors calibrated with dock-lock automation.</p>
-                <span class="text-[10px] text-emerald-400">✓ Commissioning Complete</span>
+            <div class="bg-[#080c15] border border-slate-800 rounded-xl p-4">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-white text-sm">Zone 02: AutoStore Robotics</span>
+                <span class="text-cyan-400 font-semibold">94% Speed</span>
               </div>
-
-              <div class="bg-[#080c15] border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between h-28">
-                <div class="flex justify-between items-center">
-                  <span class="font-bold text-white">02. AutoStore ASRS</span>
-                  <span class="text-emerald-400 font-mono text-[11px]">94% Speed</span>
-                </div>
-                <p class="text-[11px] text-slate-400">16 robots active. Achieved 650 bins/hr throughput.</p>
-                <span class="text-[10px] text-cyan-400">Target surpassed (600 bins/hr)</span>
-              </div>
-
-              <div class="bg-rose-950/30 border border-rose-500/50 rounded-xl p-3.5 flex flex-col justify-between h-32 col-span-2">
-                <div class="flex justify-between items-center">
-                  <span class="font-bold text-rose-300 flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
-                    03. Main Conveyor Loop & Optical Sorting (Bottleneck)
-                  </span>
-                  <span class="px-2 py-0.5 rounded bg-rose-900/60 text-rose-200 text-[10px] font-bold">Action Required</span>
-                </div>
-                <p class="text-[11px] text-slate-300">
-                  Floor Manager reported: Optical barcode scanners in Picking Zone not configured. 7% rejected messages.
-                </p>
-                <div class="flex justify-between items-center pt-2 border-t border-rose-900/50">
-                  <span class="text-[10px] text-slate-400">Vendor technician re-allocated to Zone 03.</span>
-                  <button onclick="resolveConveyorIssue()" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs transition">
-                    Absorb Delay & Protect Go-Live &rarr;
-                  </button>
-                </div>
-              </div>
+              <p class="text-[11px] text-slate-400 mt-1">16 robots active. Achieved 650 bins/hr throughput.</p>
             </div>
           </div>
 
-          <div class="bg-[#080c15] border border-slate-800 rounded-xl p-4 flex flex-col justify-between space-y-3">
-            <div>
-              <div class="text-xs font-semibold text-slate-300 uppercase tracking-wider mb-3">
-                Llama Drafted Milestones
-              </div>
-              <div class="space-y-2.5 text-xs">
-                <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 flex justify-between items-center">
-                  <span class="text-slate-300">Mechanical Install</span>
-                  <span class="text-emerald-400 font-mono text-[11px]">100%</span>
-                </div>
-                <div class="p-2.5 rounded-lg bg-rose-950/40 border border-rose-500/40 flex justify-between items-center">
-                  <span class="text-rose-300">WMS/ERP Retest (IF-03)</span>
-                  <span class="text-rose-400 font-mono text-[11px]">18 Feb</span>
-                </div>
-                <div id="desktop-milestone-training" class="p-2.5 rounded-lg bg-amber-950/40 border border-amber-500/40 flex justify-between items-center">
-                  <span class="text-amber-300">Staff Training (38/64)</span>
-                  <span class="text-amber-400 font-mono text-[11px]">Pending Approval</span>
-                </div>
-                <div class="p-2.5 rounded-lg bg-blue-950/60 border border-blue-500/50 flex justify-between items-center font-bold">
-                  <span class="text-cyan-300">Target Go-Live</span>
-                  <span class="text-white font-mono">15 Mar 2026</span>
-                </div>
-              </div>
+          <!-- THE CRITICAL ISSUE (LARGE, CLEAR) -->
+          <div class="bg-rose-950/30 border border-rose-500/50 rounded-2xl p-5 space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-rose-300 text-sm flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>
+                Zone 03: Conveyor Loop Optical Scanners (Bottleneck)
+              </span>
+              <span class="px-2 py-0.5 rounded bg-rose-900 text-rose-200 text-[10px] font-bold">Needs Action</span>
             </div>
+            <p class="text-xs text-slate-300">
+              Floor Manager reported: Optical barcode scanners in Picking Zone not configured properly. 7% rejected messages during operational tests.
+            </p>
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-rose-900/50 text-xs">
+              <span class="text-slate-400">Miebach Lead Engineer can re-route testing to bypass the bottleneck.</span>
+              <button onclick="resolveConveyorIssue()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold transition">
+                Absorb Delay & Protect 15 March Launch &rarr;
+              </button>
+            </div>
+          </div>
+        </div>
 
-            <button onclick="switchView('mobile')" class="w-full py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition">
-              Open Mobile Director View &rarr;
-            </button>
+        <!-- TIMELINE MILESTONES -->
+        <div class="space-y-3 pt-3 border-t border-slate-800">
+          <h3 class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Go-Live Milestones</h3>
+          <div class="space-y-2 text-xs">
+            <div class="p-3 rounded-xl bg-[#080c15] border border-slate-800 flex justify-between items-center">
+              <span class="text-slate-300">1. Mechanical Hardware Installation</span>
+              <span class="text-emerald-400 font-semibold">✓ Completed</span>
+            </div>
+            <div class="p-3 rounded-xl bg-rose-950/40 border border-rose-500/40 flex justify-between items-center">
+              <span class="text-rose-300">2. Software Interface Retest (WMS/ERP IF-03)</span>
+              <span class="text-rose-400 font-mono font-semibold">Retest set for 18 Feb</span>
+            </div>
+            <div id="desktop-milestone-training" class="p-3 rounded-xl bg-amber-950/40 border border-amber-500/40 flex justify-between items-center">
+              <span class="text-amber-300">3. Worker Safety & Picking Training (38/64 certified)</span>
+              <span class="text-amber-400 font-mono font-semibold">Awaiting Director Overtime Sign-off</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-blue-950/60 border border-blue-500/50 flex justify-between items-center font-bold">
+              <span class="text-cyan-300 text-sm">4. Official Go-Live Launch Day</span>
+              <span class="text-white font-mono text-sm">15 Mar 2026 (Protected)</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- ======================================================== -->
-    <!-- VIEW 4: TABLET (SITE TEAM) -->
+    <!-- VIEW 3: TABLET (SITE TEAM VIEW - SCROLLABLE) -->
     <!-- ======================================================== -->
-    <div id="view-tablet" class="view-panel hidden flex flex-col space-y-4">
-      <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-6">
-        <div class="flex items-center justify-between pb-4 border-b border-slate-800/80 mb-5">
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-lg bg-emerald-950 border border-emerald-700/60 flex items-center justify-center text-emerald-400">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-            </div>
-            <div>
-              <h2 class="text-base font-bold text-white">Warehouse Floor — Daily Workflow & Issues</h2>
-              <p class="text-xs text-slate-400">Real-time problem reporting directly from the floor</p>
-            </div>
+    <div id="view-tablet" class="view-panel hidden space-y-6">
+      <div class="bg-[#0e1424] border border-slate-800 rounded-2xl p-6 space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div>
+            <h2 class="text-base font-bold text-white">Warehouse Floor — Today's Issues</h2>
+            <p class="text-xs text-slate-400">Used by floor managers to log live issues directly from the floor.</p>
           </div>
-          <button onclick="openReportModal()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition flex items-center gap-2 shadow-lg shadow-emerald-600/20">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Report a Problem
+          <button onclick="openReportModal()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition flex items-center gap-1.5 shadow-md">
+            <span>+</span> Report a Problem
           </button>
         </div>
 
-        <div class="space-y-3">
-          <div id="card-wms-issue" class="bg-[#080c15] border-l-4 border-l-rose-500 border border-slate-800 rounded-xl p-4">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-bold text-[10px] uppercase">Critical</span>
-                <h4 class="font-bold text-white text-sm">WMS interface test failed (IF-03)</h4>
-              </div>
-              <span class="text-xs text-slate-400">Retest: 18 Feb (Javier)</span>
+        <div class="space-y-3 text-xs">
+          <!-- CARD 1 -->
+          <div id="card-wms-issue" class="bg-[#080c15] border-l-4 border-l-rose-500 border border-slate-800 rounded-xl p-4 space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-white text-sm">WMS interface test failed (IF-03)</span>
+              <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-bold text-[10px] uppercase">Critical</span>
             </div>
-            <p class="text-xs text-slate-300 mt-2">7% of stock-adjustment messages rejected during picking induction.</p>
-            <div class="mt-3 flex items-center justify-between pt-2 border-t border-slate-800 text-xs">
-              <span class="text-slate-400">Agreed: Joint retest with client ERP team.</span>
-              <button onclick="resolveIssue('card-wms-issue', 'WMS Interface Test')" class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs">
+            <p class="text-[11px] text-slate-300">
+              7% of stock-adjustment messages rejected during picking induction. Retest scheduled for 18 Feb with ERP team.
+            </p>
+            <div class="flex justify-end pt-2 border-t border-slate-800/80">
+              <button onclick="resolveIssue('card-wms-issue', 'WMS Interface Test')" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs">
                 Mark Retest Passed
               </button>
             </div>
           </div>
 
-          <div id="card-training-issue" class="bg-[#080c15] border-l-4 border-l-amber-500 border border-slate-800 rounded-xl p-4">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span id="training-badge" class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-[10px] uppercase">Pending Director Sign-off</span>
-                <h4 class="font-bold text-white text-sm">Staff training behind (38 of 64 certified)</h4>
-              </div>
-              <span class="text-xs text-slate-400">Target: 28 Feb</span>
+          <!-- CARD 2 -->
+          <div id="card-training-issue" class="bg-[#080c15] border-l-4 border-l-amber-500 border border-slate-800 rounded-xl p-4 space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-white text-sm">Staff training behind (38 of 64 certified)</span>
+              <span id="training-badge" class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-[10px] uppercase">Needs Director Sign-off</span>
             </div>
-            <p class="text-xs text-slate-300 mt-2">Picking and returns teams need certification before official go-live dry run.</p>
-            <div class="mt-3 flex items-center justify-between pt-2 border-t border-slate-800 text-xs">
-              <span id="training-action-status" class="text-amber-400">Awaiting Director approval for €12.8k weekend shift budget on Mobile.</span>
-              <button onclick="switchView('mobile')" class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 font-semibold text-xs">
-                View on Mobile &rarr;
+            <p class="text-[11px] text-slate-300">
+              Picking teams need certification before launch dry-run. Overtime budget proposal sent to Client Director on Mobile.
+            </p>
+            <div class="flex justify-end pt-2 border-t border-slate-800/80">
+              <button onclick="switchView('mobile')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 font-semibold text-xs">
+                Check Mobile Sign-off Status &rarr;
               </button>
             </div>
           </div>
@@ -533,30 +419,30 @@
     </div>
 
     <!-- ======================================================== -->
-    <!-- VIEW 5: MOBILE (EXECUTIVE / DIRECTOR) — UPGRADED WITH D1 & D4 -->
+    <!-- VIEW 4: MOBILE (EXECUTIVE VIEW - SCROLLABLE & INTUITIVE) -->
     <!-- ======================================================== -->
-    <div id="view-mobile" class="view-panel hidden flex flex-col items-center">
-      <div class="w-full max-w-sm bg-[#0a0f1d] border-2 border-slate-700 rounded-[36px] p-5 shadow-2xl space-y-4">
+    <div id="view-mobile" class="view-panel hidden space-y-6">
+      <div class="max-w-md mx-auto bg-[#0a0f1d] border-2 border-slate-700 rounded-[36px] p-6 shadow-2xl space-y-5">
         <!-- NOTCH -->
         <div class="w-24 h-3 bg-slate-800 rounded-full mx-auto"></div>
 
         <div class="flex justify-between items-center text-xs pb-3 border-b border-slate-800">
-          <span class="font-bold text-white">OVERLORD // EXECUTIVE</span>
+          <span class="font-bold text-white">OVERLORD // EXECUTIVE MOBILE</span>
           <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 font-mono text-[10px] font-semibold">LIVE</span>
         </div>
 
-        <!-- TRAFFIC LIGHT STATUS -->
-        <div class="bg-gradient-to-br from-emerald-950/70 to-[#0e1628] border border-emerald-500/40 rounded-2xl p-4 text-center">
-          <span class="text-[10px] text-emerald-300 uppercase tracking-wider font-semibold">Target Go-Live Status</span>
-          <div class="text-2xl font-black text-white mt-1 font-mono">15 MAR 2026</div>
-          <div class="text-xs font-bold text-emerald-400 mt-1 uppercase">✓ On Track for Launch</div>
-          <p class="text-[10px] text-slate-400 mt-1">Confidence Score: <strong class="text-cyan-400">96.2%</strong> | 21 Days to Go</p>
+        <!-- BIG READABLE STATUS -->
+        <div class="bg-gradient-to-br from-emerald-950/70 to-[#0e1628] border border-emerald-500/40 rounded-2xl p-5 text-center space-y-1">
+          <span class="text-[11px] text-emerald-300 uppercase tracking-wider font-semibold">Launch Target Status</span>
+          <div class="text-3xl font-black text-white font-mono">15 MAR 2026</div>
+          <div class="text-xs font-bold text-emerald-400 uppercase">✓ On Track for Launch</div>
+          <p class="text-[11px] text-slate-400 pt-1">Confidence Score: <strong class="text-cyan-400">96.2%</strong> (21 Days to Go)</p>
         </div>
 
-        <!-- LLAMA 30-SEC AUDIO/TEXT BRIEFING (PROPOSAL D4) -->
-        <div class="bg-slate-900/90 border border-cyan-500/30 rounded-2xl p-3.5 space-y-2">
-          <div class="flex justify-between items-center text-xs">
-            <span class="font-bold text-white flex items-center gap-1.5">
+        <!-- 30-SEC AUDIO BRIEFING -->
+        <div class="bg-[#0e1424] border border-cyan-500/30 rounded-2xl p-4 space-y-2 text-xs">
+          <div class="flex justify-between items-center">
+            <span class="font-bold text-white flex items-center gap-2">
               <span class="audio-wave">
                 <span class="audio-bar"></span>
                 <span class="audio-bar"></span>
@@ -564,54 +450,124 @@
                 <span class="audio-bar"></span>
                 <span class="audio-bar"></span>
               </span>
-              Llama Executive Morning Briefing
+              Llama Morning Briefing
             </span>
-            <span class="text-[10px] text-slate-400 font-mono">0:32</span>
+            <span class="text-slate-400 font-mono text-[10px]">0:32</span>
           </div>
-          <p class="text-[11px] text-slate-300 leading-relaxed italic bg-black/40 p-2.5 rounded-lg border border-slate-800">
-            "Good morning Director. 16 AutoStore robots achieved 650 bins/hr throughput. Conveyor scanner latency is being resolved today. 1 urgent budget approval requires your sign-off below to guarantee on-time launch."
+          <p class="text-[11px] text-slate-300 italic bg-black/40 p-3 rounded-xl border border-slate-800 leading-relaxed">
+            "Good morning Director. 16 AutoStore robots achieved 650 bins/hr. Conveyor scanner latency is being resolved today. 1 urgent budget approval requires your sign-off below."
           </p>
         </div>
 
-        <!-- ONE-TAP EXECUTIVE APPROVAL DRAWER (PROPOSAL D1) -->
-        <div id="director-approval-card" class="bg-amber-950/30 border border-amber-500/50 rounded-2xl p-4 space-y-3">
-          <div class="flex justify-between items-center text-xs">
+        <!-- ONE-TAP APPROVAL CARD (THE KEY ACTION) -->
+        <div id="director-approval-card" class="bg-amber-950/30 border border-amber-500/50 rounded-2xl p-4 space-y-3 text-xs">
+          <div class="flex justify-between items-center">
             <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-[10px] uppercase">
               Action Required
             </span>
             <span class="text-[10px] text-slate-400 font-mono">Budget Sign-off</span>
           </div>
-
           <div>
-            <h4 class="font-bold text-white text-xs">Approve €12,800 Training Overtime?</h4>
-            <p class="text-[11px] text-slate-300 mt-1">
-              Authorizes 2 weekend shifts for 26 warehouse pickers to complete safety & WMS certifications by Feb 28.
+            <h4 class="font-bold text-white text-sm">Approve €12,800 Training Overtime?</h4>
+            <p class="text-[11px] text-slate-300 mt-1 leading-relaxed">
+              Authorizes 2 weekend shifts for 26 warehouse pickers to finish certification before launch day.
             </p>
           </div>
-
           <div class="pt-2 border-t border-amber-900/40 flex gap-2">
-            <button id="btn-approve-overtime" onclick="approveDirectorOvertime()" class="flex-1 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-bold text-xs transition shadow-md">
-              ✓ Approve €12.8k
+            <button onclick="approveDirectorOvertime()" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-bold text-xs transition shadow-lg">
+              ✓ Approve €12.8k Overtime
             </button>
-            <button onclick="alert('Requested alternative: Re-allocating weekday stagger shifts.')" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs transition">
+            <button onclick="alert('Requested alternative weekday schedule.')" class="px-3 py-2.5 rounded-xl bg-slate-800 text-slate-300 text-xs">
               Alt Plan
             </button>
           </div>
         </div>
 
-        <!-- DOWNTIME COST AVOIDED -->
-        <div class="bg-[#0e1628] border border-slate-800 rounded-xl p-3 text-center text-xs">
+        <!-- DOWNTIME LOSS AVOIDED -->
+        <div class="bg-[#0e1628] border border-slate-800 rounded-2xl p-4 text-center text-xs">
           <div class="text-[11px] text-slate-400">Total Downtime Cost Avoided:</div>
-          <div class="text-base font-bold text-emerald-400 font-mono mt-0.5">€1,232,500</div>
-          <div class="text-[10px] text-slate-400">14.5 launch delay days eliminated</div>
+          <div class="text-xl font-bold text-emerald-400 font-mono mt-0.5">€1,232,500</div>
+          <p class="text-[10px] text-slate-500 mt-0.5">14.5 launch delay days eliminated</p>
         </div>
 
-        <!-- HOME BAR -->
         <div class="w-24 h-1 bg-slate-700 rounded-full mx-auto"></div>
       </div>
     </div>
 
   </main>
+
+  <!-- ======================================================== -->
+  <!-- "OVY" AI HELPER CHATBOT (FLOATING BOTTOM RIGHT) -->
+  <!-- ======================================================== -->
+  <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    
+    <!-- CHAT POPUP WINDOW -->
+    <div id="ovy-chat-window" class="hidden w-80 sm:w-96 bg-[#0c1220] border-2 border-cyan-500/50 rounded-2xl shadow-2xl mb-3 overflow-hidden flex flex-col chat-slide-up">
+      <!-- HEADER -->
+      <div class="bg-[#0e172a] px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <svg class="w-6 h-6 text-cyan-400" viewBox="0 0 40 40" fill="none">
+            <polygon points="20,2 38,20 20,38 2,20" stroke="currentColor" stroke-width="2.5" fill="#0d1b30"/>
+            <path d="M10 20 Q 20 12 30 20 Q 20 28 10 20 Z" stroke="#38bdf8" stroke-width="2" fill="none"/>
+            <circle cx="20" cy="20" r="3.5" fill="#00d2ff"/>
+          </svg>
+          <div>
+            <h4 class="font-bold text-white text-xs">Ovy // Overlord Assistant</h4>
+            <span class="text-[10px] text-emerald-400 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Always here to explain
+            </span>
+          </div>
+        </div>
+        <button onclick="toggleOvyChat()" class="text-slate-400 hover:text-white text-sm">✕</button>
+      </div>
+
+      <!-- MESSAGES SCROLL AREA -->
+      <div id="ovy-messages" class="p-3.5 h-72 overflow-y-auto custom-scroll space-y-3 text-xs">
+        <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl text-slate-200">
+          Hi! I'm <strong>Ovy</strong>, your Overlord guide! Warehouses have a lot of confusing technical words. Tap any question below or ask me anything!
+        </div>
+
+        <!-- QUICK QUESTION PILLS -->
+        <div class="flex flex-wrap gap-1.5 pt-1">
+          <button onclick="askOvyPredefined('golive')" class="text-[10px] px-2.5 py-1 rounded-full bg-blue-950 text-cyan-300 border border-blue-800 hover:bg-blue-900 transition">
+            What is "Go-Live"?
+          </button>
+          <button onclick="askOvyPredefined('training')" class="text-[10px] px-2.5 py-1 rounded-full bg-blue-950 text-cyan-300 border border-blue-800 hover:bg-blue-900 transition">
+            Why is staff training behind?
+          </button>
+          <button onclick="askOvyPredefined('miebach')" class="text-[10px] px-2.5 py-1 rounded-full bg-blue-950 text-cyan-300 border border-blue-800 hover:bg-blue-900 transition">
+            What is Miebach's job?
+          </button>
+          <button onclick="askOvyPredefined('overtime')" class="text-[10px] px-2.5 py-1 rounded-full bg-blue-950 text-cyan-300 border border-blue-800 hover:bg-blue-900 transition">
+            How does the Director approve overtime?
+          </button>
+        </div>
+      </div>
+
+      <!-- INPUT BAR -->
+      <div class="p-2.5 border-t border-slate-800 bg-[#080c15] flex gap-2">
+        <input id="ovy-input" type="text" placeholder="Ask Ovy anything..." onkeydown="handleOvyKey(event)" class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-400">
+        <button onclick="sendOvyMessage()" class="px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition">
+          Send
+        </button>
+      </div>
+    </div>
+
+    <!-- FLOATING TOGGLE BUTTON (RHOMBUS + EYE LOGO) -->
+    <button onclick="toggleOvyChat()" class="flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-[#0d1629] border-2 border-cyan-400/80 hover:border-cyan-300 text-white shadow-2xl hover:scale-105 transition group">
+      <svg class="w-6 h-6 text-cyan-400" viewBox="0 0 40 40" fill="none">
+        <polygon points="20,2 38,20 20,38 2,20" stroke="currentColor" stroke-width="2.5" fill="#0d1b30"/>
+        <path d="M10 20 Q 20 12 30 20 Q 20 28 10 20 Z" stroke="#38bdf8" stroke-width="2" fill="none"/>
+        <circle cx="20" cy="20" r="3.5" fill="#00d2ff"/>
+      </svg>
+      <div class="text-left">
+        <div class="text-xs font-bold leading-tight flex items-center gap-1.5">
+          Ask Ovy <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+        </div>
+        <div class="text-[9px] text-slate-400 leading-tight">Need help? Tap here</div>
+      </div>
+    </button>
+  </div>
 
   <!-- REPORT A PROBLEM MODAL -->
   <div id="report-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
@@ -637,24 +593,11 @@
               <option value="Picking">Picking Zone</option>
               <option value="Conveyor">Conveyor Loop</option>
               <option value="AutoStore">AutoStore ASRS</option>
-              <option value="Staging">Staging & Packing</option>
             </select>
           </div>
           <div>
-            <label class="block text-slate-300 font-medium mb-0.5">What does it block?</label>
-            <select id="select-block" class="w-full bg-[#080c15] border border-slate-700 rounded-lg px-2 py-1.5 text-white text-xs">
-              <option value="Operational testing">Operational testing</option>
-              <option value="Go-live launch">Go-live launch</option>
-            </select>
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-slate-300 font-medium mb-0.5">Possible delay:</label>
-          <div class="flex items-center gap-2">
-            <button onclick="adjustDelay(-1)" class="w-6 h-6 rounded bg-slate-800 text-white font-bold">-</button>
-            <span id="delay-display" class="font-mono text-cyan-400 font-bold text-xs w-14 text-center">2 days</span>
-            <button onclick="adjustDelay(1)" class="w-6 h-6 rounded bg-slate-800 text-white font-bold">+</button>
+            <label class="block text-slate-300 font-medium mb-0.5">Possible delay:</label>
+            <input type="text" value="2 days" class="w-full bg-[#080c15] border border-slate-700 rounded-lg px-2 py-1.5 text-cyan-300 text-xs font-mono font-bold" readonly>
           </div>
         </div>
       </div>
@@ -668,8 +611,8 @@
     </div>
   </div>
 
+  <!-- JAVASCRIPT STATE ENGINE & OVY AI CHATBOT -->
   <script>
-    let currentDelay = 2;
     let openIssuesCount = 3;
 
     function switchView(viewName) {
@@ -687,6 +630,7 @@
         btn.classList.remove('text-slate-400');
         btn.classList.add('bg-blue-600', 'text-white');
       }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function openReportModal() {
@@ -696,17 +640,9 @@
       document.getElementById('report-modal').classList.add('hidden');
     }
 
-    function adjustDelay(delta) {
-      currentDelay = Math.max(1, Math.min(14, currentDelay + delta));
-      document.getElementById('delay-display').innerText = currentDelay + (currentDelay === 1 ? ' day' : ' days');
-    }
-
     function prefillDemoExample() {
       document.getElementById('input-wrong').value = 'Scanners not configured';
       document.getElementById('select-where').value = 'Picking';
-      document.getElementById('select-block').value = 'Operational testing';
-      currentDelay = 2;
-      document.getElementById('delay-display').innerText = '2 days';
     }
 
     function submitFloorIssue() {
@@ -730,7 +666,7 @@
         openIssuesCount = Math.max(0, openIssuesCount - 1);
         document.getElementById('kpi-issues').innerText = openIssuesCount;
         document.getElementById('badge-open-issues').innerText = openIssuesCount;
-        alert(`✓ Issue Resolved: ${title}.\n\nUpdated on Tablet and Desktop. Go-Live protected.`);
+        alert(`✓ Issue Resolved: ${title}.\n\nUpdated across Tablet and Desktop. Go-Live protected.`);
       }
     }
 
@@ -738,21 +674,16 @@
       alert("Miebach Engineer Javier re-routed testing lines!\n\n• Delay absorbed.\n• Target Go-Live: 15 Mar protected.");
     }
 
-    function simulateLlamaPlan() {
-      alert("LLAMA 3 AI PLAN SYNTHESIS COMPLETE:\n\n1. Ingested client WMS & ERP records.\n2. Cross-referenced 284 historical Miebach project post-mortems.\n3. Generated Draft Go-Live Path (Mechanical Install -> WMS Interface Retest -> Staff Certification -> Go-Live 15 Mar).\n4. Verified by Lead Engineer Javier.\n\nPushed to Overlord live dashboards.");
-      switchView('desktop');
-    }
-
-    // PROPOSAL D1: ONE-TAP EXECUTIVE APPROVAL
+    // DIRECTOR APPROVAL ACTION
     function approveDirectorOvertime() {
       const card = document.getElementById('director-approval-card');
       card.className = "bg-emerald-950/40 border border-emerald-500/50 rounded-2xl p-4 space-y-2";
       card.innerHTML = `
-        <div class="flex justify-between items-center text-xs">
-          <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-bold text-[10px] uppercase">
+        <div class="flex justify-between items-center text-[10px]">
+          <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-bold uppercase">
             ✓ Sign-off Granted
           </span>
-          <span class="text-[10px] text-slate-400 font-mono">Synced to ERP</span>
+          <span class="text-slate-400 font-mono">Synced to ERP</span>
         </div>
         <h4 class="font-bold text-white text-xs">€12,800 Overtime Budget Approved</h4>
         <p class="text-[11px] text-slate-300">
@@ -760,69 +691,101 @@
         </p>
       `;
 
-      // Update Tablet View
       const badge = document.getElementById('training-badge');
       if (badge) {
-        badge.className = "px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-bold text-[10px] uppercase";
+        badge.className = "px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-bold text-[9px] uppercase";
         badge.innerText = "✓ Overtime Approved";
       }
-      const actionText = document.getElementById('training-action-status');
-      if (actionText) {
-        actionText.className = "text-emerald-400";
-        actionText.innerText = "Director approved €12.8k overtime. 2 weekend shifts scheduled.";
-      }
 
-      // Update Desktop View
       const desktopMilestone = document.getElementById('desktop-milestone-training');
       if (desktopMilestone) {
-        desktopMilestone.className = "p-2.5 rounded-lg bg-emerald-950/40 border border-emerald-500/40 flex justify-between items-center";
-        desktopMilestone.innerHTML = `<span class="text-emerald-300">Staff Training (38/64)</span><span class="text-emerald-400 font-mono text-[11px]">Recovered (28 Feb)</span>`;
+        desktopMilestone.className = "p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/40 flex justify-between";
+        desktopMilestone.innerHTML = `<span class="text-emerald-300">3. Worker Training (38/64 certified)</span><span class="text-emerald-400 font-mono text-xs font-semibold">Recovered (28 Feb)</span>`;
       }
 
-      // Update SLA Matrix
       const opsSla = document.getElementById('ops-sla-val');
-      if (opsSla) opsSla.innerText = "96.0%";
+      if (opsSla) opsSla.innerText = "96.0% Ready";
       const opsStatus = document.getElementById('ops-sla-status');
       if (opsStatus) {
-        opsStatus.className = "mt-2 text-[9px] text-emerald-400";
-        opsStatus.innerText = "✓ Overtime Budget Approved";
+        opsStatus.className = "text-[11px] text-emerald-400 mt-1";
+        opsStatus.innerText = "✓ Overtime approved. 2 weekend shifts scheduled.";
       }
 
-      alert("EXECUTIVE DECISION LOGGED:\n\n• €12,800 overtime approved by Client Director.\n• Staff Training milestone turns Green across Desktop & Tablet.\n• 0 days Go-Live delay. Target March 15th guaranteed.");
+      alert("EXECUTIVE DECISION LOGGED:\n\n• €12,800 overtime approved by Client Director.\n• Staff Training turns Green on Desktop and Tablet.\n• 15 March Go-Live remains firm.");
     }
 
-    // PROPOSAL G1: LLAMA COPILOT QUERIES
-    function askCopilot(queryType) {
-      if (queryType === 'bottleneck') {
-        alert("LLAMA 3 SYNTHESIS — BIGGEST BOTTLENECK TODAY:\n\nZone 03 (Conveyor Loop Optical Scanners):\n• Issue: 7% stock adjustment message rejection rate.\n• Root Cause: Incompatible baud rate in scanner firmware.\n• Critical Path Impact: High risk of 2-day operational testing delay.\n• Recommended Action: Miebach Engineer Javier has re-allocated vendor technician. Estimated resolution: 4 hours.");
-      } else if (queryType === 'slip') {
-        alert("LLAMA 3 SCENARIO SIMULATION — 3-DAY WMS RETEST DELAY:\n\n• If WMS retest slips from 18 Feb to 21 Feb, available buffer shrinks from 4.5 days to 1.5 days.\n• Monte Carlo confidence score drops from 96.2% to 78.4%.\n• Mitigation: Pre-validate picking batches on isolated test server (recommended based on Miebach Report #88).");
-      } else if (queryType === 'report142') {
-        alert("LLAMA 3 HISTORICAL COMPARISON — REPORT #142 (Retail DC 2024):\n\n• Report #142 faced identical 4% SKU unit-of-measure duplication.\n• Resolution: Automated RegEx deduplication script cleared 1,180 records in 90 minutes without halting conveyor physical testing.\n• Script deployed to current Overlord instance.");
+    // ==========================================
+    // "OVY" AI CHATBOT LOGIC
+    // ==========================================
+    function toggleOvyChat() {
+      const chat = document.getElementById('ovy-chat-window');
+      chat.classList.toggle('hidden');
+    }
+
+    function addOvyMessage(sender, text) {
+      const msgContainer = document.getElementById('ovy-messages');
+      const div = document.createElement('div');
+      if (sender === 'user') {
+        div.className = "bg-blue-600 text-white p-2.5 rounded-xl ml-6 text-xs";
+        div.innerText = text;
+      } else {
+        div.className = "bg-slate-900 border border-slate-800 text-slate-200 p-2.5 rounded-xl mr-6 text-xs space-y-1";
+        div.innerHTML = `<span class="text-cyan-400 font-bold font-mono text-[10px]">OVY:</span><div>${text}</div>`;
+      }
+      msgContainer.appendChild(div);
+      msgContainer.scrollTop = msgContainer.scrollHeight;
+    }
+
+    function askOvyPredefined(topic) {
+      if (topic === 'golive') {
+        addOvyMessage('user', 'What does "Go-Live" actually mean?');
+        setTimeout(() => {
+          addOvyMessage('ovy', '<strong>Go-Live Day (15 March)</strong> is the exact date the new warehouse officially opens and starts shipping real customer packages! If it slips, the client loses around €85,000 every single day in delayed orders.');
+        }, 300);
+      } else if (topic === 'training') {
+        addOvyMessage('user', 'Why is staff training behind?');
+        setTimeout(() => {
+          addOvyMessage('ovy', 'Only 38 out of 64 warehouse workers have completed safety and scanner training. Miebach suggested adding <strong>two weekend shifts</strong> for €12,800. The Client Director can approve this with one tap on Mobile!');
+        }, 300);
+      } else if (topic === 'miebach') {
+        addOvyMessage('user', 'What is Miebach\'s job here?');
+        setTimeout(() => {
+          addOvyMessage('ovy', 'Miebach Consulting designed the warehouse robots, conveyors, and software integrations. Their job is to make sure all vendors (AutoStore, SAP, builders) stay on schedule so launch day is a success.');
+        }, 300);
+      } else if (topic === 'overtime') {
+        addOvyMessage('user', 'How does the Director approve overtime?');
+        setTimeout(() => {
+          addOvyMessage('ovy', 'Click the <strong>Mobile (Director)</strong> tab above! Scroll down to the amber card and tap <strong>"✓ Approve €12.8k Overtime"</strong>. You will see the whole system turn green instantly!');
+        }, 300);
       }
     }
 
-    // PROPOSAL G3: 90-DAY RAMP-UP SIMULATOR
-    function updateRampUpSimulator() {
-      const orders = parseInt(document.getElementById('slider-orders').value);
-      document.getElementById('slider-orders-display').innerText = orders.toLocaleString() + " orders/day";
+    function handleOvyKey(e) {
+      if (e.key === 'Enter') sendOvyMessage();
+    }
 
-      const m1 = Math.round(orders * 0.4);
-      const m2 = Math.round(orders * 0.75);
-      const m3 = orders;
+    function sendOvyMessage() {
+      const input = document.getElementById('ovy-input');
+      const q = input.value.trim();
+      if (!q) return;
 
-      const pickersM1 = Math.round(m1 / 240);
-      const pickersM2 = Math.round(m2 / 330);
-      const pickersM3 = Math.round(m3 / 390);
+      addOvyMessage('user', q);
+      input.value = '';
 
-      document.getElementById('sim-m1-orders').innerText = m1.toLocaleString() + " orders/d";
-      document.getElementById('sim-m1-staff').innerText = pickersM1 + " Pickers | 8 Robots";
-
-      document.getElementById('sim-m2-orders').innerText = m2.toLocaleString() + " orders/d";
-      document.getElementById('sim-m2-staff').innerText = pickersM2 + " Pickers | 12 Robots";
-
-      document.getElementById('sim-m3-orders').innerText = m3.toLocaleString() + " orders/d";
-      document.getElementById('sim-m3-staff').innerText = pickersM3 + " Certified | 16 Robots";
+      const lower = q.toLowerCase();
+      setTimeout(() => {
+        if (lower.includes('wms') || lower.includes('software')) {
+          addOvyMessage('ovy', '<strong>WMS</strong> stands for Warehouse Management System. It is the core software brain that directs orders, tells robots which bins to move, and tracks stock.');
+        } else if (lower.includes('delay') || lower.includes('cost') || lower.includes('money')) {
+          addOvyMessage('ovy', 'A 1-day delay costs the client about <strong>€85,000</strong> in lost fulfillment. OVERLORD has already prevented 14.5 days of delays, saving €1,232,500 so far!');
+        } else if (lower.includes('llama') || lower.includes('ai') || lower.includes('plan')) {
+          addOvyMessage('ovy', 'OVERLORD uses <strong>Llama</strong> (an open-source AI) to read the client warehouse data and 250 past Miebach project reports to automatically draft the initial launch schedule.');
+        } else if (lower.includes('autostore') || lower.includes('robot')) {
+          addOvyMessage('ovy', 'AutoStore is the cube-storage robotics system. 16 robots are running at 94% speed, picking 650 bins per hour (higher than the 600 target!).');
+        } else {
+          addOvyMessage('ovy', `That's a great question about "${q}"! In short: OVERLORD is the single source of truth connecting Miebach engineers, warehouse floor staff, and client executives to guarantee an on-time 15 March launch.`);
+        }
+      }, 400);
     }
   </script>
 </body>
