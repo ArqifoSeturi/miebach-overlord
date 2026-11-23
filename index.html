@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OVERLORD™ // TOP SECRET C4ISR GO-LIVE ACCELERATOR (MIEBACH)</title>
+  <title>OVERLORD | Warehouse Intelligence & Go-Live Command</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
     :root {
@@ -14,7 +14,7 @@
     }
     body {
       background-color: #04070e;
-      background-image: 
+      background-image:
         radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.05) 0%, transparent 60%),
         linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
@@ -115,7 +115,9 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-  </style>
+  html{color-scheme:dark}.workspace-toolbar{max-width:1024px;margin:20px auto 0;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:12px;color:#94a3b8}.command-btn,.quiet-btn{font:600 13px/1.4 ui-monospace,monospace;cursor:pointer;border-radius:8px;padding:10px 14px;border:1px solid #0e7490;color:#a5f3fc;background:#083344}.command-btn:hover{background:#155e75}.command-btn:disabled{opacity:.5;cursor:default}.quiet-btn{background:transparent;border-color:#334155;color:#cbd5e1;padding:6px 10px}button:focus-visible,[role=button]:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #67e8f9;outline-offset:4px}.facility-panel{border:1px solid #164e63;background:#030a14;border-radius:14px;padding:18px}.facility-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.facility-heading h3{font-size:17px;color:#e2e8f0;font-weight:700}.facility-heading p{font-size:12px;color:#94a3b8;margin-top:5px}.map-chip{font:10px ui-monospace,monospace;letter-spacing:1px;background:#082f49;color:#7dd3fc;padding:6px 9px;border-radius:5px}.facility-layout{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(210px,1fr);gap:18px}#warehouse-map{width:100%;height:auto;min-height:250px;background:#040b16;border:1px solid #15314a;border-radius:9px}#warehouse-map text{font:13px ui-monospace,monospace;fill:#cbd5e1;pointer-events:none}#warehouse-map .zone-name{font-weight:700;fill:#dff8ff;font-size:14px}#warehouse-map .dock-label{font-size:10px}#warehouse-map [role=button]{cursor:pointer}#warehouse-map [role=button]:hover .zone-fill{stroke:#67e8f9;stroke-width:3}.zone-fill{fill:#0a1c2d;stroke:#24526a;stroke-width:1.5}.selected-zone .zone-fill{stroke:#22d3ee;stroke-width:3;fill:#0e2940}.map-legend{display:flex;flex-wrap:wrap;gap:14px;font:11px ui-monospace,monospace;color:#67e8f9;margin-top:12px}.map-legend .rose{color:#fb7185}#sector-detail{background:#081422;border:1px solid #19384d;border-radius:9px;padding:16px;font-size:13px}#sector-detail h4{font-size:16px;color:#e2e8f0;font-weight:700;margin:8px 0}#sector-detail p{color:#94a3b8;line-height:1.6;margin:10px 0}.telemetry-row{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid #172c40;font-size:12px}.telemetry-row strong{color:#a5f3fc;text-align:right}.zone-actions{display:grid;gap:10px;margin-top:18px}.node-pulse{animation:node-pulse 1.8s infinite;transform-origin:624px 272px}@keyframes node-pulse{50%{opacity:.3}}.robot{filter:drop-shadow(0 0 4px #22d3ee)}.incident-list{display:grid;gap:12px}.incident-card{padding:18px;border:1px solid #23374c;border-left:3px solid #f59e0b;border-radius:10px;background:#050d19}.incident-card[data-priority=High]{border-left-color:#fb7185}.incident-card.resolved{border-left-color:#34d399}.incident-card h3{font-size:14px;color:#e2e8f0;line-height:1.5;margin:10px 0}.incident-card p{font-size:12px;color:#94a3b8;line-height:1.6}.incident-card .incident-meta{display:flex;flex-wrap:wrap;gap:12px;color:#67e8f9;font:11px ui-monospace,monospace}.incident-card details{margin-top:12px;font-size:12px}.incident-card input,.incident-extra input,.incident-extra select{display:block;width:100%;padding:9px;margin:6px 0 12px;border:1px solid #334155;border-radius:6px;background:#020617;color:#e2e8f0}.incident-extra label{font-size:12px;color:#cbd5e1}.incident-extra{max-height:38vh;overflow:auto}.incident-card input{font-size:13px}#report-modal>div{max-height:94vh;overflow:auto}#incident-error{color:#fda4af;font-size:12px;min-height:18px}.audio-briefing{background:#030712;border:1px solid #155e75;border-radius:16px;padding:16px}.audio-briefing strong{font:12px ui-monospace,monospace;color:#a5f3fc}.audio-briefing p{font-size:13px;color:#cbd5e1;line-height:1.65;margin:12px 0}.audio-briefing #audio-status{display:block;font-size:11px;color:#94a3b8;margin-top:9px}.event-console{max-width:976px;margin:30px auto 100px;border:1px solid #164e63;border-radius:12px;background:#020711;padding:17px;font:12px/1.7 ui-monospace,monospace}.event-console strong{color:#67e8f9;font-size:12px}.console-context{color:#64748b;margin-left:14px;font-size:11px}#event-feed{height:145px;overflow:auto;border-top:1px solid #15314a;padding-top:10px}#event-feed p{padding:4px 0;border-bottom:1px solid #0c1a2a;color:#b5c7d9;overflow-wrap:anywhere}#event-feed time{color:#64748b}#event-feed b{color:#67e8f9;font-weight:500}#app-status{position:fixed;bottom:25px;left:24px;z-index:80;max-width:calc(100vw - 150px);background:#0c2738;color:#cffafe;border:1px solid #155e75;border-radius:9px;padding:12px 18px;font-size:13px;display:none}#ovy-widget{bottom:20px}#ovy-chat-window{max-width:calc(100vw - 32px)}@media(max-width:800px){.facility-layout{grid-template-columns:1fr}.facility-heading{flex-wrap:wrap}.workspace-toolbar{flex-wrap:wrap}.event-console{margin:20px 24px 100px}.console-context{display:block;margin:0}main{padding-left:16px!important;padding-right:16px!important}.facility-panel{padding:12px}#warehouse-map text{font-size:14px}.map-chip{font-size:9px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}.robot{display:none}}
+
+</style>
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-black">
 
@@ -125,10 +127,10 @@
   <div class="bg-black border-b border-rose-950/80 px-4 py-1 text-center flex items-center justify-between text-[10px] font-mono-tech uppercase tracking-widest text-slate-400">
     <div class="hidden sm:flex items-center gap-2 text-rose-400">
       <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
-      <span>CLASSIFIED // LEVEL 4 SPECIAL ACCESS REQUIRED</span>
+      <span>OPERATIONS INTELLIGENCE // PROJECT WORKSPACE</span>
     </div>
     <div class="mx-auto font-bold text-rose-300 flex items-center gap-2">
-      <span>TOP SECRET // EYES ONLY // MIEBACH-TS-092 // OPERATION COLD-START</span>
+      <span>OVERLORD // WAREHOUSE IMPLEMENTATION // DEMO FACILITY BER-04</span>
     </div>
     <div class="hidden sm:flex items-center gap-3 text-slate-400">
       <span>FACILITY: BER-04</span>
@@ -141,8 +143,8 @@
   <!-- ======================================================== -->
   <header class="border-b border-cyan-950/80 bg-[#060a14]/90 backdrop-blur-md px-6 py-3.5 sticky top-0 z-40">
     <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-4">
-      
-      <!-- LOGO: DEFENSE INSIGNIA (RHOMBUS + EYE) -->
+
+      <!-- LOGO: COORDINATION INSIGNIA (RHOMBUS + EYE) -->
       <div class="flex items-center gap-3.5 cursor-pointer" onclick="switchView('synergy')">
         <div class="relative flex items-center justify-center">
           <svg class="w-10 h-10 text-cyan-400 drop-shadow-[0_0_12px_rgba(0,240,255,0.6)]" viewBox="0 0 40 40" fill="none">
@@ -151,7 +153,7 @@
             <path d="M9 20 Q 20 10 31 20 Q 20 30 9 20 Z" stroke="#38bdf8" stroke-width="2" fill="none"/>
             <circle cx="20" cy="20" r="4" fill="#00f0ff"/>
             <circle cx="20" cy="20" r="1.5" fill="#ffffff"/>
-            <!-- TACTICAL RETICLE TICKS -->
+            <!-- OPERATIONS RETICLE TICKS -->
             <line x1="20" y1="2" x2="20" y2="6" stroke="#00f0ff" stroke-width="1.5"/>
             <line x1="20" y1="34" x2="20" y2="38" stroke="#00f0ff" stroke-width="1.5"/>
             <line x1="2" y1="20" x2="6" y2="20" stroke="#00f0ff" stroke-width="1.5"/>
@@ -162,14 +164,14 @@
           <div class="flex items-center gap-2.5">
             <span class="font-black text-white tracking-widest text-lg font-mono-tech">OVERLORD<span class="text-cyan-400 text-xs align-top">™</span></span>
             <span class="text-[9px] px-2 py-0.5 rounded bg-cyan-950/90 text-cyan-300 font-bold border border-cyan-700/80 font-mono-tech tracking-wider">
-              MIEBACH DEFENSE-TECH
+              IMPLEMENTATION INTELLIGENCE
             </span>
           </div>
-          <p class="text-[11px] text-slate-400 font-mono-tech tracking-tight">Autonomous Go-Live Launch & Synergy Command Engine</p>
+          <p class="text-[11px] text-slate-400 font-mono-tech tracking-tight">Warehouse Intelligence & Central Command</p>
         </div>
       </div>
 
-      <!-- TACTICAL TABS (ROLE PERSPECTIVES) -->
+      <!-- OPERATIONS TABS (ROLE PERSPECTIVES) -->
       <div class="flex items-center bg-[#02050b] border border-cyan-900/60 rounded-xl p-1 text-xs font-mono-tech">
         <button id="tab-synergy" onclick="switchView('synergy')" class="tab-btn px-3.5 py-1.5 rounded-lg text-black bg-cyan-400 font-bold transition flex items-center gap-1.5 shadow-[0_0_15px_rgba(0,240,255,0.4)]">
           <span>01 // SITREP</span>
@@ -190,9 +192,9 @@
       <div class="hidden lg:flex items-center gap-3 pl-3 border-l border-slate-800 text-[10px] font-mono-tech">
         <div class="flex items-center gap-1.5 text-emerald-400 bg-emerald-950/50 border border-emerald-800/60 px-2.5 py-1 rounded-md">
           <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></span>
-          <span>AES-256 ENCRYPTED</span>
+          <span>LOCAL DEMO WORKSPACE</span>
         </div>
-        <span class="text-slate-500">DEFCON 2</span>
+        <span class="text-slate-500">ACTION REQUIRED</span>
       </div>
 
     </div>
@@ -203,56 +205,57 @@
   <!-- ======================================================== -->
   <section class="bg-[#03060c] border-b border-slate-800/90 px-6 py-4">
     <div class="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-3.5 text-xs font-mono-tech">
-      
+
       <!-- KPI 1: GO-LIVE COUNTDOWN -->
       <div class="hud-panel rounded-xl p-3.5 flex flex-col justify-between">
         <div class="flex justify-between items-center text-[10px] text-slate-400 uppercase tracking-wider">
           <span>TARGET GO-LIVE</span>
-          <span class="text-cyan-400">T-21 DAYS</span>
+          <span class="text-cyan-400">DEMO TIMELINE</span>
         </div>
         <div class="text-xl font-bold text-white mt-1 tracking-tight">15 MAR 2026</div>
         <div class="flex items-center gap-1.5 text-[10px] text-emerald-400 mt-1 font-semibold">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-          <span>Zero Slippage Tolerated</span>
+          <span>Target date · illustrative project</span>
         </div>
       </div>
 
       <!-- KPI 2: PROBABILITY MATRIX -->
       <div class="hud-panel rounded-xl p-3.5 flex flex-col justify-between">
         <div class="flex justify-between items-center text-[10px] text-slate-400 uppercase tracking-wider">
-          <span>MISSION CONFIDENCE</span>
-          <span class="text-cyan-400 font-bold">n=10,000</span>
+          <span>ILLUSTRATIVE SCENARIO</span>
+          <span class="text-cyan-400 font-bold">DEMO</span>
         </div>
         <div class="text-xl font-bold text-cyan-300 mt-1 tracking-tight">96.2%</div>
-        <span class="text-[10px] text-slate-400 mt-1">Calculated via Llama Monte-Carlo</span>
+        <span class="text-[10px] text-slate-400 mt-1">Demo assumption · not a model prediction</span>
       </div>
 
       <!-- KPI 3: ACTIVE ANOMALIES -->
       <div class="hud-panel rounded-xl p-3.5 flex flex-col justify-between">
         <div class="flex justify-between items-center text-[10px] text-slate-400 uppercase tracking-wider">
-          <span>ANOMALIES ACTIVE</span>
-          <span class="text-amber-400 animate-pulse font-bold">DEFCON 2</span>
+          <span>PROJECT ISSUES</span>
+          <span class="text-amber-400 animate-pulse font-bold">ACTION REQUIRED</span>
         </div>
-        <div class="text-xl font-bold text-amber-400 mt-1 tracking-tight"><span id="kpi-issues">3</span> FAULTS DETECTED</div>
-        <span class="text-[10px] text-rose-400 mt-1 font-semibold">1 Critical Path Intervention</span>
+        <div class="text-xl font-bold text-amber-400 mt-1 tracking-tight"><span id="kpi-issues">3</span> OPEN ISSUES</div>
+        <span class="text-[10px] text-rose-400 mt-1 font-semibold">See current sector incidents</span>
       </div>
 
       <!-- KPI 4: LOSS AVOIDED INDEX -->
       <div class="hud-panel rounded-xl p-3.5 flex flex-col justify-between">
         <div class="flex justify-between items-center text-[10px] text-slate-400 uppercase tracking-wider">
-          <span>CAPITAL LOSS SHIELDED</span>
+          <span>DELAY EXPOSURE SCENARIO</span>
           <span class="text-emerald-400">€85K/DAY RATE</span>
         </div>
         <div class="text-xl font-bold text-emerald-400 mt-1 tracking-tight">€1,232,500</div>
-        <span class="text-[10px] text-slate-400 mt-1">+14.5 Delay Days Neutralized</span>
+        <span class="text-[10px] text-slate-400 mt-1">14.5 assumed days × €85,000/day</span>
       </div>
 
     </div>
   </section>
 
   <!-- ======================================================== -->
-  <!-- MAIN SCROLLABLE MISSION THEATER (MAX-W-5XL VERTICAL FLOW) -->
+  <!-- MAIN SCROLLABLE PROJECT THEATER (MAX-W-5XL VERTICAL FLOW) -->
   <!-- ======================================================== -->
+  <div class="workspace-toolbar"><span>DEMO PROJECT · Shared state in this browser · No live warehouse connection</span><button class="command-btn" onclick="exportSitrep()">Export Operations SITREP · PDF</button></div>
   <main class="flex-1 px-6 py-8 max-w-5xl w-full mx-auto space-y-10">
 
     <!-- ======================================================== -->
@@ -260,18 +263,18 @@
     <!-- ======================================================== -->
     <div id="view-synergy" class="view-panel space-y-10">
 
-      <!-- HERO DOSSIER: MISSION DIRECTIVE -->
+      <!-- HERO DOSSIER: PROJECT DECISION -->
       <div class="hud-panel rounded-2xl p-6 glow-cyan space-y-5">
         <div class="flex flex-wrap items-center justify-between pb-3 border-b border-cyan-950/80 gap-3">
           <div>
             <div class="flex items-center gap-2 text-[10px] font-mono-tech text-cyan-400 uppercase tracking-widest">
-              <span>// OPERATIONAL DIRECTIVE 2026-OMEGA</span>
+              <span>// IMPLEMENTATION OVERVIEW</span>
               <span class="text-slate-600">|</span>
-              <span class="text-emerald-400 font-bold">REAL-TIME TELEMETRY ENGAGED</span>
+              <span class="text-emerald-400 font-bold">SIMULATED OPERATIONS DATA</span>
             </div>
-            <h2 class="text-lg font-black text-white tracking-wide mt-1">Autonomous Warehouse Launch & Echelon Synergy Architecture</h2>
+            <h2 class="text-lg font-black text-white tracking-wide mt-1">Warehouse Launch & Stakeholder Coordination</h2>
             <p class="text-xs text-slate-400 mt-0.5">
-              Eliminating multi-million euro go-live slippage by synchronizing consulting engineers, robotic assets, and executive authorities.
+              Connect engineers, floor teams and decision-makers around one implementation plan.
             </p>
           </div>
           <span class="px-3 py-1 rounded bg-[#030814] border border-cyan-700/60 text-[11px] text-cyan-300 font-mono-tech">
@@ -279,70 +282,70 @@
           </span>
         </div>
 
-        <!-- PLAIN ENGLISH TACTICAL EXPLANATION -->
+        <!-- PLAIN ENGLISH OPERATIONS EXPLANATION -->
         <div class="p-4 rounded-xl bg-black/60 border border-slate-800 text-xs leading-relaxed text-slate-300 space-y-2">
           <div class="font-bold text-cyan-300 flex items-center gap-2 font-mono-tech text-[11px] uppercase">
             <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
-            Why Traditional Warehouse Launches Bleed €85,000/Day:
+            Why implementation coordination matters:
           </div>
           <p>
-            When installing automated facilities, industrial teams rely on disjointed spreadsheets, static 200-page weekly PDF status binders, and delayed emails. When an optical scanner breaks or WMS packets fail, it takes <strong>4 to 7 business days</strong> to notify executive decision-makers. 
-            <strong>OVERLORD creates a single, zero-friction command link</strong> across all three operational tiers:
+            Warehouse implementation spans equipment, software, people and client decisions. When those teams use separate updates, issues can lose their location, owner or next action.
+            <strong>OVERLORD connects the project context</strong> across all three operational tiers:
           </p>
         </div>
 
         <!-- 3 OPERATIONAL TIERS (INTERACTIVE COMMAND TILES) -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1 font-mono-tech">
-          
+
           <!-- TIER 1: DESKTOP -->
           <div onclick="switchView('desktop')" class="cursor-pointer bg-[#030712] border border-slate-800 hover:border-cyan-500/70 rounded-xl p-4 transition group relative overflow-hidden">
             <div class="flex justify-between items-center text-xs pb-2 border-b border-slate-900">
-              <span class="font-bold text-white group-hover:text-cyan-300 transition">ECHELON 01 // DESKTOP</span>
+              <span class="font-bold text-white group-hover:text-cyan-300 transition">WORKSPACE 01 // DESKTOP</span>
               <span class="text-cyan-400 text-[10px]">MIEBACH SYSTEMS</span>
             </div>
             <p class="text-[11px] text-slate-400 leading-relaxed mt-2.5 font-sans">
-              Lead Engineer <strong>Javier</strong> ingests WMS CAD schemas, runs 3D physics simulations, and dynamically re-routes conveyor flows when bottlenecks emerge.
+              Lead Engineer <strong>Javier</strong> explores the facility blueprint, reviews sector issues and tests a conveyor re-route in the demo.
             </p>
             <div class="pt-3 flex items-center justify-between text-[11px] text-cyan-400 font-bold">
-              <span>Engage Engineering HUD</span>
-              <span class="group-hover:translate-x-1 transition">&rarr;</span>
+              <span>Open engineering workspace</span>
+              <span class="group-hover:translate-x-1 transition"></span>
             </div>
           </div>
 
           <!-- TIER 2: TABLET -->
           <div onclick="switchView('tablet')" class="cursor-pointer bg-[#030712] border border-slate-800 hover:border-emerald-500/70 rounded-xl p-4 transition group relative overflow-hidden">
             <div class="flex justify-between items-center text-xs pb-2 border-b border-slate-900">
-              <span class="font-bold text-white group-hover:text-emerald-300 transition">ECHELON 02 // TABLET</span>
-              <span class="text-emerald-400 text-[10px]">FLOOR BRIGADE</span>
+              <span class="font-bold text-white group-hover:text-emerald-300 transition">WORKSPACE 02 // TABLET</span>
+              <span class="text-emerald-400 text-[10px]">FLOOR OPERATIONS</span>
             </div>
             <p class="text-[11px] text-slate-400 leading-relaxed mt-2.5 font-sans">
-              Floor supervisors verify daily punch-lists on ruggedized handhelds. When optical scanners drop packets, they capture geotagged photo evidence in seconds.
+              Floor supervisors record incidents by sector, precise location, priority and responsible team. Each report becomes a shared project record.
             </p>
             <div class="pt-3 flex items-center justify-between text-[11px] text-emerald-400 font-bold">
-              <span>Inspect Floor Faults (3)</span>
-              <span class="group-hover:translate-x-1 transition">&rarr;</span>
+              <span>Review floor incidents</span>
+              <span class="group-hover:translate-x-1 transition"></span>
             </div>
           </div>
 
           <!-- TIER 3: MOBILE -->
           <div onclick="switchView('mobile')" class="cursor-pointer bg-[#030712] border border-slate-800 hover:border-amber-500/70 rounded-xl p-4 transition group relative overflow-hidden">
             <div class="flex justify-between items-center text-xs pb-2 border-b border-slate-900">
-              <span class="font-bold text-white group-hover:text-amber-300 transition">ECHELON 03 // MOBILE</span>
-              <span class="text-amber-400 text-[10px]">EXECUTIVE DIRECTIVE</span>
+              <span class="font-bold text-white group-hover:text-amber-300 transition">WORKSPACE 03 // MOBILE</span>
+              <span class="text-amber-400 text-[10px]">EXECUTIVE DECISION</span>
             </div>
             <p class="text-[11px] text-slate-400 leading-relaxed mt-2.5 font-sans">
-              Client C-Suite monitors launch trajectory via traffic-light status, receives 30-second encrypted SITREPs, and executes one-tap budget approvals or vetoes.
+              Client leaders review open issues, listen to the current operational briefing and record budget decisions.
             </p>
             <div class="pt-3 flex items-center justify-between text-[11px] text-amber-400 font-bold">
-              <span>Review Directive Card</span>
-              <span class="group-hover:translate-x-1 transition">&rarr;</span>
+              <span>Review Decision Card</span>
+              <span class="group-hover:translate-x-1 transition"></span>
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- SECTION 2: 5-STAGE MISSION BLUEPRINT (LLAMA AI ENGINE + 250 REPORTS) -->
+      <!-- SECTION 2: 5-STAGE PROJECT BLUEPRINT (LLAMA AI ENGINE + 250 REPORTS) -->
       <div class="hud-panel rounded-2xl p-6 space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
           <div>
@@ -355,18 +358,18 @@
             </p>
           </div>
           <span class="px-2.5 py-0.5 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-800 font-mono-tech text-[10px]">
-            AI ENGINE: LLAMA-3.3 ARCHITECTURE
+            PROPOSED AI WORKFLOW · NOT CONNECTED
           </span>
         </div>
 
         <div class="space-y-2.5 text-xs font-mono-tech">
-          
+
           <div class="bg-[#030712] border border-slate-800 rounded-xl p-3.5 flex items-start gap-3.5">
             <span class="w-6 h-6 rounded bg-cyan-950 text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs border border-cyan-800">01</span>
             <div>
               <strong class="text-white text-xs">CLIENT INGESTION (ERP/WMS DATA):</strong>
               <p class="text-[11px] text-slate-400 mt-0.5 font-sans">
-                Secure API connector ingests SKU velocities, pallet geometry limits, dock turnaround thresholds, and warehouse dispatch parameters.
+                Future connectors could ingest SKU flows, pallet limits, dock turnaround times and dispatch requirements. Current values are illustrative.
               </p>
             </div>
           </div>
@@ -374,9 +377,9 @@
           <div class="bg-[#030712] border border-slate-800 rounded-xl p-3.5 flex items-start gap-3.5">
             <span class="w-6 h-6 rounded bg-cyan-950 text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs border border-cyan-800">02</span>
             <div>
-              <strong class="text-white text-xs">CROSS-MISSION ARCHIVE SYNTHESIS (250 HISTORICAL REPORTS):</strong>
+              <strong class="text-white text-xs">HISTORICAL PROJECT REVIEW (PROPOSED):</strong>
               <p class="text-[11px] text-slate-400 mt-0.5 font-sans">
-                Vector embeddings query 250+ past Miebach industrial launch databases to identify historical failure patterns, supplier lead-time buffers, and integration risks.
+                Future integration could search approved historical reports for failure patterns, supplier lead times and integration risks. No Miebach archive is connected.
               </p>
             </div>
           </div>
@@ -386,7 +389,7 @@
             <div>
               <strong class="text-white text-xs">LLAMA-AI DRAFTS THE MASTER TESTING TRAJECTORY:</strong>
               <p class="text-[11px] text-slate-400 mt-0.5 font-sans">
-                Large language and planning models auto-generate the preliminary critical-path schedule, sequence testing gates, and compute buffer margins.
+                A future planning assistant could propose schedules and testing gates for expert review. This prototype does not run a Llama model.
               </p>
             </div>
           </div>
@@ -406,7 +409,7 @@
             <div>
               <strong class="text-white text-xs">REAL-TIME MULTI-STAKEHOLDER GOVERNANCE:</strong>
               <p class="text-[11px] text-slate-400 mt-0.5 font-sans">
-                The validated live model operates across all displays, automatically routing anomalies before they breach critical timeline thresholds.
+                The prototype shares incident and decision state across its role views and same-browser tabs. Live multi-user integration is future work.
               </p>
             </div>
           </div>
@@ -414,26 +417,26 @@
         </div>
       </div>
 
-      <!-- SECTION 3: MULTI-VENDOR DEFENSE CONTAINMENT MATRIX (INSPIRED BY PRICINGPAGES & SOCIALPROOF) -->
+      <!-- SECTION 3: MULTI-VENDOR COORDINATION CONTAINMENT MATRIX (INSPIRED BY PRICINGPAGES & SOCIALPROOF) -->
       <div class="hud-panel rounded-2xl p-6 space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
           <div>
             <h3 class="text-sm font-bold text-white font-mono-tech uppercase tracking-wider flex items-center gap-2">
               <span class="w-2 h-2 rounded bg-amber-400"></span>
-              Multi-Agency Containment Matrix (Zero-Finger-Pointing Governance)
+              Stakeholder Readiness & Responsibilities
             </h3>
             <p class="text-xs text-slate-400 mt-0.5">
-              Live contractual readiness tracking across hardware, software, engineering, and workforce units.
+              Illustrative readiness across hardware, software, engineering and workforce teams.
             </p>
           </div>
-          <span class="text-[10px] text-slate-400 font-mono-tech">SLA COMPLIANCE HASH: 0x89B4..E1</span>
+          <span class="text-[10px] text-slate-400 font-mono-tech">PROJECT READINESS SNAPSHOT</span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs font-mono-tech">
-          
+
           <div class="bg-[#030712] border border-slate-800 rounded-xl p-4">
             <div class="flex justify-between items-center">
-              <span class="font-bold text-white text-xs">AGENCY 01 // AUTOSTORE (ROBOTICS)</span>
+              <span class="font-bold text-white text-xs">TEAM 01 // AUTOSTORE (ROBOTICS)</span>
               <span class="text-emerald-400 font-bold text-[11px] bg-emerald-950/60 border border-emerald-800/80 px-2 py-0.5 rounded">98.5% NOMINAL</span>
             </div>
             <p class="text-[11px] text-slate-400 mt-1.5 font-sans">
@@ -443,27 +446,27 @@
 
           <div class="bg-[#030712] border border-rose-500/60 rounded-xl p-4 bg-rose-950/10">
             <div class="flex justify-between items-center">
-              <span class="font-bold text-white text-xs">AGENCY 02 // CLIENT IT (SAP BACKBONE)</span>
-              <span class="text-rose-400 font-bold text-[11px] bg-rose-950/60 border border-rose-800/80 px-2 py-0.5 rounded animate-pulse">RETEST REQ (IF-03)</span>
+              <span class="font-bold text-white text-xs">TEAM 02 // CLIENT IT (SAP BACKBONE)</span>
+              <span class="text-rose-400 font-bold text-[11px] bg-rose-950/60 border border-rose-800/80 px-2 py-0.5 rounded animate-pulse" id="wms-readiness">RETEST REQ (IF-03)</span>
             </div>
             <p class="text-[11px] text-slate-300 mt-1.5 font-sans">
-              7% packet rejection rate in stock-adjustment messaging. Joint remediation retest mandated for 18 Feb with ERP squad.
+              7% packet rejection rate in stock-adjustment messaging. Joint remediation retest mandated for 18 Feb with ERP team.
             </p>
           </div>
 
           <div class="bg-[#030712] border border-slate-800 rounded-xl p-4">
             <div class="flex justify-between items-center">
-              <span class="font-bold text-white text-xs">AGENCY 03 // MIEBACH CONSULTING</span>
-              <span class="text-cyan-400 font-bold text-[11px] bg-cyan-950/60 border border-cyan-800/80 px-2 py-0.5 rounded">100% BUFFER ACTIVE</span>
+              <span class="font-bold text-white text-xs">TEAM 03 // MIEBACH CONSULTING</span>
+              <span class="text-cyan-400 font-bold text-[11px] bg-cyan-950/60 border border-cyan-800/80 px-2 py-0.5 rounded">ENGINEERING REVIEW</span>
             </div>
             <p class="text-[11px] text-slate-400 mt-1.5 font-sans">
-              Overall integration authority. Dynamic buffer absorbs minor floor discrepancies without slipping 15 March deadline.
+              Coordinates integration, reviews floor issues and validates changes before operational acceptance.
             </p>
           </div>
 
           <div class="bg-[#030712] border border-amber-500/60 rounded-xl p-4 bg-amber-950/10">
             <div class="flex justify-between items-center">
-              <span class="font-bold text-white text-xs">AGENCY 04 // CLIENT OPERATIONS (STAFF)</span>
+              <span class="font-bold text-white text-xs">TEAM 04 // CLIENT OPERATIONS (STAFF)</span>
               <span id="ops-sla-val" class="text-amber-400 font-bold text-[11px] bg-amber-950/60 border border-amber-800/80 px-2 py-0.5 rounded">76% READY</span>
             </div>
             <p id="ops-sla-status" class="text-[11px] text-amber-300 mt-1.5 font-sans">
@@ -481,78 +484,30 @@
     <!-- ======================================================== -->
     <div id="view-desktop" class="view-panel hidden space-y-8">
       <div class="hud-panel rounded-2xl p-6 space-y-6">
-        
+
         <div class="flex flex-wrap items-center justify-between pb-3 border-b border-cyan-950/80 gap-3">
           <div>
             <div class="flex items-center gap-2 text-[10px] font-mono-tech text-cyan-400 uppercase tracking-widest">
-              <span>// ENGINEERING TACTICAL TERMINAL</span>
+              <span>// ENGINEERING WORKSPACE</span>
               <span class="text-slate-600">|</span>
-              <span class="text-slate-400">CLEARANCE: TS//SI-TK</span>
+              <span class="text-slate-400">PROJECT ROLE: IMPLEMENTATION LEAD</span>
             </div>
             <h2 class="text-lg font-black text-white font-mono-tech tracking-wide mt-1">Miebach Engineering Workstation</h2>
-            <p class="text-xs text-slate-400">Layout Telemetry, Bottleneck Re-routing & Buffer Defense</p>
+            <p class="text-xs text-slate-400">Facility map, sector telemetry & implementation decisions</p>
           </div>
           <span class="px-3 py-1 rounded bg-blue-950/80 text-cyan-300 font-mono-tech text-xs border border-blue-700">
-            CHIEF SYSTEMS ARCHITECT: JAVIER
+            IMPLEMENTATION LEAD: JAVIER
           </span>
         </div>
 
-        <!-- SECTORS RADAR GRID -->
-        <div class="space-y-3 font-mono-tech">
-          <div class="flex justify-between items-center text-xs text-slate-300 uppercase tracking-wider">
-            <span class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-              Facility Sectors Telemetry (SCADA Link)
-            </span>
-            <span class="text-[10px] text-slate-500">REFRESH RATE: 250ms</span>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs">
-            <div class="bg-[#030712] border border-slate-800 rounded-xl p-4">
-              <div class="flex justify-between items-center">
-                <span class="font-bold text-white text-xs">SECTOR 01: INBOUND DOCKS (A1-A18)</span>
-                <span class="text-emerald-400 font-semibold text-[11px]">✓ 100% NOMINAL</span>
-              </div>
-              <p class="text-[11px] text-slate-400 mt-1 font-sans">
-                18 automated vehicle dock doors calibrated with infrared safety interlocks.
-              </p>
-            </div>
-
-            <div class="bg-[#030712] border border-slate-800 rounded-xl p-4">
-              <div class="flex justify-between items-center">
-                <span class="font-bold text-white text-xs">SECTOR 02: AUTOSTORE ROBOTIC CUBE</span>
-                <span class="text-cyan-400 font-semibold text-[11px]">94% VELOCITY</span>
-              </div>
-              <p class="text-[11px] text-slate-400 mt-1 font-sans">
-                16 grid robots active. Achieved sustained 650 bins/hour pick rate.
-              </p>
-            </div>
-          </div>
-
-          <!-- BOTTLENECK INTERVENTION ALERT -->
-          <div id="conveyor-alert-box" class="hud-panel rounded-xl p-5 border-rose-500/60 bg-rose-950/20 glow-crimson space-y-3">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-rose-300 text-xs flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>
-                SECTOR 03: PICKING CONVEYOR LOOP (BOTTLENECK INTERCEPTION)
-              </span>
-              <span class="px-2 py-0.5 rounded bg-rose-900/80 text-rose-200 text-[10px] font-bold">DEFCON 2 CRITICAL</span>
-            </div>
-            <p class="text-xs text-slate-300 font-sans leading-relaxed">
-              Floor supervisor telemetry: Optical barcode scanners in Picking Zone miscalibrated. 7% packet transmission failures observed during high-velocity test batches.
-            </p>
-            <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-rose-900/60 text-xs">
-              <span class="text-slate-400 font-mono-tech text-[11px]">ACTION: Lead Engineer Javier can dynamically re-route testing flow to Secondary Induction Loop B.</span>
-              <button onclick="resolveConveyorIssue()" class="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs transition shadow-[0_0_15px_rgba(0,240,255,0.4)]">
-                Absorb Delay & Protect 15 March Launch &rarr;
-              </button>
-            </div>
-          </div>
-        </div>
+        <section class="facility-panel">
+          <div class="facility-heading"><div><h3>Facility intelligence map</h3><p>10 connected sectors · Select a zone or dock door</p></div><span class="map-chip">SIMULATED TELEMETRY</span></div>
+          <div class="facility-layout"><div><svg id="warehouse-map" viewBox="0 0 920 590" role="img" aria-labelledby="warehouse-title"><title id="warehouse-title">Interactive warehouse blueprint with 18 dock doors, AutoStore robots and a conveyor bottleneck</title></svg><div class="map-legend"><span>● Selected sector</span><span class="rose">● Open incident</span><span>Animated robots are illustrative</span></div></div><section id="sector-detail" aria-label="Selected sector details"></section></div>
+        </section>
 
         <!-- MASTER TIMELINE GATES -->
         <div class="space-y-3 pt-3 border-t border-slate-800 font-mono-tech">
-          <h3 class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Mission Milestones & Gate Verification</h3>
+          <h3 class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Implementation Milestones & Gate Verification</h3>
           <div class="space-y-2 text-xs">
             <div class="p-3 rounded-xl bg-[#030712] border border-slate-800 flex justify-between items-center">
               <span class="text-slate-300">GATE 01 // MECHANICAL HARDWARE INSTALLATION</span>
@@ -560,15 +515,15 @@
             </div>
             <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/50 flex justify-between items-center">
               <span class="text-rose-300">GATE 02 // SOFTWARE INTERFACE RETEST (WMS/ERP IF-03)</span>
-              <span class="text-rose-400 font-semibold">SCHEDULED: 18 FEB 09:00 UTC</span>
+              <span class="text-rose-400 font-semibold" id="wms-gate">SCHEDULED: 18 FEB 09:00 UTC</span>
             </div>
             <div id="desktop-milestone-training" class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/50 flex justify-between items-center">
               <span class="text-amber-300">GATE 03 // WORKFORCE PICKING CERTIFICATION (38/64 CERTIFIED)</span>
-              <span id="desktop-training-status" class="text-amber-400 font-semibold">AWAITING EXECUTIVE DIRECTIVE</span>
+              <span id="desktop-training-status" class="text-amber-400 font-semibold">AWAITING EXECUTIVE DECISION</span>
             </div>
             <div class="p-3.5 rounded-xl bg-cyan-950/40 border border-cyan-500/60 flex justify-between items-center font-bold">
               <span class="text-cyan-300 text-xs">GATE 04 // OFFICIAL FACILITY GO-LIVE (15 MAR 2026)</span>
-              <span class="text-white text-xs">TRAJECTORY PROTECTED (96.2%)</span>
+              <span class="text-white text-xs" id="launch-gate">OPEN ITEMS REQUIRE REVIEW</span>
             </div>
           </div>
         </div>
@@ -581,79 +536,34 @@
     <!-- ======================================================== -->
     <div id="view-tablet" class="view-panel hidden space-y-6">
       <div class="hud-panel rounded-2xl p-6 space-y-5">
-        
+
         <div class="flex flex-wrap items-center justify-between pb-3 border-b border-cyan-950/80 gap-3">
           <div>
             <div class="flex items-center gap-2 text-[10px] font-mono-tech text-emerald-400 uppercase tracking-widest">
-              <span>// RUGGEDIZED FIELD OPERATING HUD</span>
+              <span>// FLOOR OPERATIONS</span>
               <span class="text-slate-600">|</span>
               <span class="text-slate-400">TABLET TERMINAL #04</span>
             </div>
             <h2 class="text-lg font-black text-white font-mono-tech tracking-wide mt-1">Warehouse Floor — Active Field Incidents</h2>
-            <p class="text-xs text-slate-400 font-sans">Used by site managers to log real-time mechanical or software faults directly from the picking aisles.</p>
+            <p class="text-xs text-slate-400 font-sans">Used by site managers to log real-time mechanical or software issues directly from the picking aisles.</p>
           </div>
           <button onclick="openReportModal()" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs transition flex items-center gap-1.5 shadow-[0_0_15px_rgba(0,255,136,0.3)] font-mono-tech">
             <span>+</span> LOG FIELD INCIDENT
           </button>
         </div>
 
-        <div class="space-y-3 text-xs font-mono-tech">
-          
-          <!-- INCIDENT 1: WMS IF-03 -->
-          <div id="card-wms-issue" class="bg-[#030712] border-l-4 border-l-rose-500 border border-slate-800 rounded-xl p-4 space-y-2">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-white text-xs">FAULT #WMS-03: STOCK-ADJUSTMENT INTERFACE FAILURE</span>
-              <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-bold text-[10px] uppercase border border-rose-800">Critical Priority</span>
-            </div>
-            <p class="text-[11px] text-slate-300 font-sans leading-relaxed">
-              7% of stock-adjustment messages rejected during picking induction. Retest scheduled for 18 Feb with ERP engineering team.
-            </p>
-            <div class="flex justify-end pt-2 border-t border-slate-900">
-              <button onclick="resolveIssue('card-wms-issue', 'WMS Interface Test')" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition">
-                Mark Retest Passed
-              </button>
-            </div>
-          </div>
-
-          <!-- INCIDENT 2: STAFF TRAINING -->
-          <div id="card-training-issue" class="bg-[#030712] border-l-4 border-l-amber-500 border border-slate-800 rounded-xl p-4 space-y-2">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-white text-xs">FAULT #TRN-09: WORKFORCE CERTIFICATION BEHIND (38/64)</span>
-              <span id="training-badge" class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-[10px] uppercase border border-amber-800">Awaiting Executive Directive</span>
-            </div>
-            <p id="training-desc-tablet" class="text-[11px] text-slate-300 font-sans leading-relaxed">
-              Picking teams need certification before launch dry-run. Overtime budget proposal sent to Client Director on Mobile.
-            </p>
-            <div class="flex justify-end pt-2 border-t border-slate-900">
-              <button onclick="switchView('mobile')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 font-semibold text-xs transition">
-                Open Executive Directive on Mobile &rarr;
-              </button>
-            </div>
-          </div>
-
-          <!-- INCIDENT 3: SKU MASTER DATA -->
-          <div id="card-sku-issue" class="bg-[#030712] border-l-4 border-l-slate-600 border border-slate-800 rounded-xl p-4 space-y-2">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-white text-xs">FAULT #DAT-01: SKU MASTER DATA 4% DUPLICATES</span>
-              <span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 font-bold text-[10px] uppercase">Non-Urgent</span>
-            </div>
-            <p class="text-[11px] text-slate-400 font-sans leading-relaxed">
-              1,180 SKUs contain conflicting unit of measure tags. Miebach auto-cleansing script running in background.
-            </p>
-          </div>
-
-        </div>
+        <div id="incident-list" class="incident-list"></div>
       </div>
     </div>
 
     <!-- ======================================================== -->
-    <!-- VIEW 4: MOBILE (EXECUTIVE DIRECTIVE WITH DUAL APPROVAL/VETO) -->
+    <!-- VIEW 4: MOBILE (EXECUTIVE DECISION WITH DUAL APPROVAL/DECLINE) -->
     <!-- ======================================================== -->
     <div id="view-mobile" class="view-panel hidden space-y-6">
-      
+
       <!-- PHONE CONTAINER SIMULATOR -->
       <div class="max-w-md mx-auto hud-panel rounded-[40px] p-6 shadow-2xl space-y-5 border-2 border-slate-700 glow-cyan">
-        
+
         <!-- PHONE SPEAKER NOTCH -->
         <div class="w-24 h-2.5 bg-slate-800 rounded-full mx-auto"></div>
 
@@ -661,39 +571,21 @@
           <span class="font-bold text-white">OVERLORD // EXECUTIVE MOBILE</span>
           <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 font-bold text-[10px] border border-emerald-800 flex items-center gap-1">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
-            LIVE UPLINK
+            DEMO WORKSPACE
           </span>
         </div>
 
         <!-- TRAFFIC-LIGHT STATUS CARD -->
         <div class="bg-gradient-to-br from-emerald-950/80 to-[#050b18] border border-emerald-500/50 rounded-2xl p-5 text-center space-y-1 font-mono-tech">
-          <span class="text-[10px] text-emerald-300 uppercase tracking-widest font-bold">// GO-LIVE MISSION STATUS</span>
+          <span class="text-[10px] text-emerald-300 uppercase tracking-widest font-bold">// TARGET GO-LIVE</span>
           <div class="text-3xl font-black text-white mt-1">15 MAR 2026</div>
-          <div class="text-xs font-bold text-emerald-400 uppercase tracking-wide">✓ GO-LIVE TRAJECTORY SECURE</div>
-          <p class="text-[11px] text-slate-400 pt-1 font-sans">System Confidence: <strong class="text-cyan-400 font-mono-tech">96.2%</strong> (21 Days Remaining)</p>
+          <div class="text-xs font-bold text-emerald-400 uppercase tracking-wide" id="executive-readiness">READINESS REVIEW IN PROGRESS</div>
+          <p class="text-[11px] text-slate-400 pt-1 font-sans">Illustrative confidence: <strong class="text-cyan-400 font-mono-tech">96.2%</strong> (demo scenario)</p>
         </div>
 
-        <!-- 30-SEC ENCRYPTED SITREP AUDIO COMMS -->
-        <div class="bg-[#030712] border border-cyan-500/40 rounded-2xl p-4 space-y-2.5 text-xs font-mono-tech">
-          <div class="flex justify-between items-center">
-            <span class="font-bold text-white flex items-center gap-2">
-              <span class="audio-wave">
-                <span class="audio-bar"></span>
-                <span class="audio-bar"></span>
-                <span class="audio-bar"></span>
-                <span class="audio-bar"></span>
-                <span class="audio-bar"></span>
-              </span>
-              <span>ENCRYPTED SITREP DISPATCH</span>
-            </span>
-            <span class="text-cyan-400 text-[10px] bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800">0:32</span>
-          </div>
-          <div class="text-[11px] text-slate-300 italic bg-black/60 p-3 rounded-xl border border-slate-800/80 leading-relaxed font-sans">
-            "Good morning Director. 16 AutoStore robots achieved 650 bins/hr. Conveyor scanner latency is being absorbed by Javier on secondary loops. One budget decision requires your authorization or veto below."
-          </div>
-        </div>
+        <section class="audio-briefing"><div class="facility-heading"><strong>OPERATIONS BRIEFING</strong><span class="map-chip">BROWSER VOICE</span></div><p id="briefing-transcript"></p><button id="play-briefing" class="command-btn" onclick="toggleBriefing()">▶ Play briefing</button><span id="audio-status" role="status">Ready</span></section>
 
-        <!-- EXECUTIVE DIRECTIVE: DUAL BUTTONS (APPROVE & DISAPPROVE) -->
+        <!-- EXECUTIVE DECISION: DUAL BUTTONS (APPROVE & DISAPPROVE) -->
         <div id="director-approval-card" class="bg-amber-950/30 border border-amber-500/60 rounded-2xl p-4 space-y-3 text-xs font-mono-tech">
           <div class="flex justify-between items-center">
             <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-[10px] uppercase border border-amber-800">
@@ -702,7 +594,7 @@
             <span class="text-[10px] text-slate-400">SIGN-OFF ID: #DIR-881</span>
           </div>
           <div>
-            <h4 class="font-bold text-white text-sm">Authorize €12,800 Overtime Budget?</h4>
+            <h4 class="font-bold text-white text-sm">Approve €12,800 Training Budget?</h4>
             <p class="text-[11px] text-slate-300 mt-1 leading-relaxed font-sans">
               Authorizes 2 weekend shifts for 26 warehouse pickers to complete safety & system certification before launch day.
             </p>
@@ -719,9 +611,9 @@
 
         <!-- DOWNTIME LOSS INDEX -->
         <div class="bg-[#030712] border border-slate-800 rounded-2xl p-4 text-center text-xs font-mono-tech">
-          <div class="text-[11px] text-slate-400">Total Downtime Loss Avoided:</div>
+          <div class="text-[11px] text-slate-400">Illustrative Delay Exposure:</div>
           <div class="text-2xl font-bold text-emerald-400 mt-0.5">€1,232,500</div>
-          <p class="text-[10px] text-slate-500 mt-0.5">14.5 Launch Delay Days Neutralized</p>
+          <p class="text-[10px] text-slate-500 mt-0.5">Scenario only · not measured savings</p>
         </div>
 
         <!-- HOME INDICATOR -->
@@ -732,10 +624,10 @@
   </main>
 
   <!-- ======================================================== -->
-  <!-- "OVY" TACTICAL AI CO-PILOT HUD (FLOATING BOTTOM RIGHT) -->
+  <!-- "OVY" OPERATIONS AI CO-PILOT HUD (FLOATING BOTTOM RIGHT) -->
   <!-- ======================================================== -->
-  <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
-    
+  <div id="ovy-widget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+
     <!-- CHAT POPUP WINDOW -->
     <div id="ovy-chat-window" class="hidden w-80 sm:w-96 hud-panel rounded-2xl shadow-2xl mb-3 overflow-hidden flex flex-col chat-slide-up border-2 border-cyan-500/70 glow-cyan">
       <div class="bg-[#030712] px-4 py-3 border-b border-cyan-950 flex items-center justify-between font-mono-tech">
@@ -746,8 +638,8 @@
             <circle cx="20" cy="20" r="3.5" fill="#00f0ff"/>
           </svg>
           <div>
-            <h4 class="font-bold text-white text-xs">OVY-01 // TACTICAL ADVISOR</h4>
-            <span class="text-[10px] text-emerald-400">Declassified plain-English briefing</span>
+            <h4 class="font-bold text-white text-xs">OVY-01 // OPERATIONS GUIDE</h4>
+            <span class="text-[10px] text-emerald-400">Current workspace briefing</span>
           </div>
         </div>
         <button onclick="toggleOvyChat()" class="text-slate-400 hover:text-white text-sm font-bold">✕</button>
@@ -756,7 +648,7 @@
       <!-- MESSAGES LOG -->
       <div id="ovy-messages" class="p-3.5 h-64 overflow-y-auto custom-scroll space-y-2.5 text-xs font-sans">
         <div class="bg-black/80 border border-cyan-900/40 p-2.5 rounded-xl text-slate-200">
-          Greetings Commander. I am <strong>Ovy</strong>, your autonomous launch co-pilot. Inquire on any telemetry metric, or execute a query below:
+          I am <strong>Ovy</strong>, your demo operations guide. Ask about current incidents, the conveyor route or the budget decision.
         </div>
 
         <div class="flex flex-wrap gap-1.5 pt-1 font-mono-tech">
@@ -788,12 +680,12 @@
   <!-- ======================================================== -->
   <!-- REPORT A PROBLEM MODAL -->
   <!-- ======================================================== -->
-  <div id="report-modal" class="hidden fixed inset-0 bg-black/85 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+  <div id="report-modal" role="dialog" aria-modal="true" aria-label="Log field incident" class="hidden fixed inset-0 bg-black/85 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="hud-panel rounded-2xl max-w-sm w-full p-4 space-y-3 text-xs shadow-2xl border-cyan-500/60 font-mono-tech">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
         <h3 class="font-bold text-white uppercase tracking-wider flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-rose-500"></span>
-          Log Floor Incident // Telemetry Uplink
+          Log incident // Floor operations
         </h3>
         <button onclick="closeReportModal()" class="text-slate-400 hover:text-white">✕</button>
       </div>
@@ -802,288 +694,82 @@
       </button>
       <div>
         <label class="block text-slate-300 font-medium mb-1">Incident Description:</label>
-        <input id="input-wrong" type="text" placeholder="e.g. Optical scanners not configured" class="w-full bg-black border border-slate-700 rounded px-2.5 py-1.5 text-white text-xs focus:border-cyan-400 focus:outline-none">
+        <input id="input-wrong" type="text" maxlength="240" placeholder="e.g. Optical scanners not configured" class="w-full bg-black border border-slate-700 rounded px-2.5 py-1.5 text-white text-xs focus:border-cyan-400 focus:outline-none">
       </div>
       <div>
         <label class="block text-slate-300 font-medium mb-1">Facility Sector:</label>
-        <select id="select-where" class="w-full bg-black border border-slate-700 rounded px-2 py-1.5 text-white text-xs focus:border-cyan-400 focus:outline-none">
-          <option value="Picking Zone">Sector 03: Picking Zone</option>
-          <option value="Conveyor Loop">Sector 03: Conveyor Loop</option>
-          <option value="Inbound Docks">Sector 01: Inbound Docks</option>
+        <select onchange="updateIncidentLocation()" id="select-where" class="w-full bg-black border border-slate-700 rounded px-2 py-1.5 text-white text-xs focus:border-cyan-400 focus:outline-none">
         </select>
       </div>
+      <div class="incident-extra"><label for="incident-location">Location / asset</label><input id="incident-location" maxlength="100" placeholder="e.g. Dock A12 / scanner SC-04"><label for="incident-priority">Priority</label><select id="incident-priority"><option>Medium</option><option>High</option><option>Low</option></select><label for="incident-owner">Responsible team</label><select id="incident-owner"><option>Site operations</option><option>Miebach engineering</option><option>Automation supplier</option><option>Client IT / WMS</option><option>Facilities & safety</option></select><p id="incident-error" role="alert"></p></div>
       <div class="pt-2 border-t border-slate-800 flex justify-end gap-2">
         <button onclick="closeReportModal()" class="px-3 py-1.5 rounded bg-slate-800 text-slate-300 text-xs">Cancel</button>
-        <button onclick="submitFloorIssue()" class="px-3.5 py-1.5 rounded bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs transition">Transmit Incident &rarr;</button>
+        <button onclick="submitFloorIssue()" class="px-3.5 py-1.5 rounded bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs transition">Save incident</button>
       </div>
     </div>
   </div>
 
-  <!-- ======================================================== -->
-  <!-- JAVASCRIPT STATE ENGINE & OVY AI LOGIC -->
-  <!-- ======================================================== -->
-  <script>
-    let openIssuesCount = 3;
-
-    // LIVE UTC CLOCK
-    function updateClock() {
-      const now = new Date();
-      const h = String(now.getUTCHours()).padStart(2, '0');
-      const m = String(now.getUTCMinutes()).padStart(2, '0');
-      const s = String(now.getUTCSeconds()).padStart(2, '0');
-      const el = document.getElementById('utc-clock');
-      if (el) el.innerText = `${h}:${m}:${s} UTC`;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    function switchView(viewName) {
-      document.querySelectorAll('.view-panel').forEach(p => p.classList.add('hidden'));
-      document.querySelectorAll('.tab-btn').forEach(b => {
-        b.classList.remove('bg-cyan-400', 'text-black', 'font-bold', 'shadow-[0_0_15px_rgba(0,240,255,0.4)]');
-        b.classList.add('text-slate-400');
-      });
-
-      const target = document.getElementById('view-' + viewName);
-      if (target) target.classList.remove('hidden');
-
-      const btn = document.getElementById('tab-' + viewName);
-      if (btn) {
-        btn.classList.remove('text-slate-400');
-        btn.classList.add('bg-cyan-400', 'text-black', 'font-bold', 'shadow-[0_0_15px_rgba(0,240,255,0.4)]');
-      }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function openReportModal() { document.getElementById('report-modal').classList.remove('hidden'); }
-    function closeReportModal() { document.getElementById('report-modal').classList.add('hidden'); }
-    function prefillDemoExample() {
-      document.getElementById('input-wrong').value = 'Optical scanners not configured';
-      document.getElementById('select-where').value = 'Picking Zone';
-    }
-
-    function submitFloorIssue() {
-      const issueText = document.getElementById('input-wrong').value || 'Optical scanners not configured';
-      const where = document.getElementById('select-where').value;
-      openIssuesCount++;
-      document.getElementById('kpi-issues').innerText = openIssuesCount;
-      document.getElementById('badge-open-issues').innerText = openIssuesCount;
-      closeReportModal();
-      alert(`[INCIDENT TRANSMITTED TO OVERLORD]\n\n"${issueText}" in ${where}.\n• Systems Engineer Javier notified on Desktop.\n• Launch trajectory protected.`);
-      switchView('desktop');
-    }
-
-    function resolveIssue(cardId, title) {
-      const card = document.getElementById(cardId);
-      if (card) {
-        card.style.opacity = '0.35';
-        card.style.pointerEvents = 'none';
-        openIssuesCount = Math.max(0, openIssuesCount - 1);
-        document.getElementById('kpi-issues').innerText = openIssuesCount;
-        document.getElementById('badge-open-issues').innerText = openIssuesCount;
-        alert(`[INCIDENT RESOLVED]: ${title}.\nTelemetry link normalized.`);
-      }
-    }
-
-    function resolveConveyorIssue() {
-      const alertBox = document.getElementById('conveyor-alert-box');
-      if (alertBox) {
-        alertBox.className = "hud-panel rounded-xl p-5 border-emerald-500/50 bg-emerald-950/20 space-y-2";
-        alertBox.innerHTML = `
-          <div class="flex justify-between items-center font-mono-tech">
-            <span class="font-bold text-emerald-300 text-xs flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-              SECTOR 03: CONVEYOR LOOP RE-ROUTED TO INDUCTION B (NORMALIZED)
-            </span>
-            <span class="px-2 py-0.5 rounded bg-emerald-900/80 text-emerald-200 text-[10px] font-bold">SOLVED BY JAVIER</span>
-          </div>
-          <p class="text-xs text-slate-300 font-sans">Testing throughput restored to 100%. Delay completely absorbed by engineering buffer. 15 March Launch secure.</p>
-        `;
-      }
-      alert("[DIRECTIVE EXECUTED]\n\nMiebach Systems Engineer Javier re-routed testing flow to Loop B.\n• Bottleneck absorbed.\n• 15 March Launch protected.");
-    }
-
-    // DIRECTOR APPROVE ACTION
-    function approveDirectorOvertime() {
-      const card = document.getElementById('director-approval-card');
-      card.className = "bg-emerald-950/40 border border-emerald-500/60 rounded-2xl p-4 space-y-2 font-mono-tech";
-      card.innerHTML = `
-        <div class="flex justify-between items-center">
-          <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-bold text-[10px] uppercase border border-emerald-700">✓ BUDGET AUTHORIZED (CRYPTO-SIGNED)</span>
-          <button onclick="resetDirectorDecision()" class="text-[10px] text-slate-400 hover:text-white underline">Change Directive</button>
-        </div>
-        <h4 class="font-bold text-white text-xs">€12,800 Overtime Budget Allocated</h4>
-        <p class="text-[11px] text-slate-300 font-sans">2 weekend shifts activated. 26 pickers scheduled for Feb 22-23. Staff Training milestone restored to 100% on schedule.</p>
-      `;
-
-      // Update Tablet
-      const badge = document.getElementById('training-badge');
-      if (badge) {
-        badge.className = "px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-bold text-[10px] uppercase border border-emerald-700";
-        badge.innerText = "✓ Overtime Authorized";
-      }
-      const desc = document.getElementById('training-desc-tablet');
-      if (desc) desc.innerText = "Executive Director authorized €12.8k overtime. 2 weekend shifts scheduled for 26 pickers.";
-
-      // Update Desktop
-      const desktopMilestone = document.getElementById('desktop-milestone-training');
-      if (desktopMilestone) {
-        desktopMilestone.className = "p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/50 flex justify-between";
-        desktopMilestone.innerHTML = `<span class="text-emerald-300">GATE 03 // WORKFORCE CERTIFICATION (38/64 CERTIFIED)</span><span class="text-emerald-400 font-mono text-xs font-semibold">RECOVERED (28 FEB)</span>`;
-      }
-
-      // Update SLA
-      const opsSla = document.getElementById('ops-sla-val');
-      if (opsSla) opsSla.innerText = "96% READY";
-      const opsStatus = document.getElementById('ops-sla-status');
-      if (opsStatus) {
-        opsStatus.className = "text-[11px] text-emerald-400 mt-1.5 font-sans";
-        opsStatus.innerText = "✓ Overtime authorized. 2 weekend training shifts locked.";
-      }
-
-      alert("[EXECUTIVE DIRECTIVE LOGGED]\n\n• €12,800 overtime AUTHORIZED by Client Director.\n• Workforce certification restored to Green.\n• 15 March Go-Live remains firm.");
-    }
-
-    // DIRECTOR DISAPPROVE ACTION
-    function disapproveDirectorOvertime() {
-      const card = document.getElementById('director-approval-card');
-      card.className = "bg-rose-950/40 border border-rose-500/60 rounded-2xl p-4 space-y-2 font-mono-tech";
-      card.innerHTML = `
-        <div class="flex justify-between items-center">
-          <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-bold text-[10px] uppercase border border-rose-700">✕ BUDGET VETOED BY DIRECTOR</span>
-          <button onclick="resetDirectorDecision()" class="text-[10px] text-slate-400 hover:text-white underline">Change Directive</button>
-        </div>
-        <h4 class="font-bold text-white text-xs">€12,800 Budget Rejected</h4>
-        <p class="text-[11px] text-slate-300 font-sans">Miebach Lead Engineer Javier notified to stagger weekday training hours without additional budget expenditure.</p>
-      `;
-
-      // Update Tablet
-      const badge = document.getElementById('training-badge');
-      if (badge) {
-        badge.className = "px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-bold text-[10px] uppercase border border-rose-700";
-        badge.innerText = "Overtime Vetoed";
-      }
-      const desc = document.getElementById('training-desc-tablet');
-      if (desc) desc.innerText = "Director declined overtime budget. Miebach will stagger weekday training sessions instead.";
-
-      // Update Desktop
-      const desktopMilestone = document.getElementById('desktop-milestone-training');
-      if (desktopMilestone) {
-        desktopMilestone.className = "p-3 rounded-xl bg-slate-900 border border-slate-700 flex justify-between";
-        desktopMilestone.innerHTML = `<span class="text-slate-300">GATE 03 // WORKFORCE CERTIFICATION (38/64 CERTIFIED)</span><span class="text-slate-400 font-mono text-xs">WEEKDAY STAGGER ACTIVE</span>`;
-      }
-
-      // Update SLA
-      const opsSla = document.getElementById('ops-sla-val');
-      if (opsSla) opsSla.innerText = "82% ADJUSTED";
-      const opsStatus = document.getElementById('ops-sla-status');
-      if (opsStatus) {
-        opsStatus.className = "text-[11px] text-slate-400 mt-1.5 font-sans";
-        opsStatus.innerText = "Overtime declined. Weekday training stagger active (Zero extra spend).";
-      }
-
-      alert("[EXECUTIVE DIRECTIVE LOGGED]\n\n• Overtime budget VETOED by Client Director.\n• Lead Engineer Javier notified.\n• Switched to weekday stagger shifts (Zero extra spend).");
-    }
-
-    function resetDirectorDecision() {
-      const card = document.getElementById('director-approval-card');
-      card.className = "bg-amber-950/30 border border-amber-500/60 rounded-2xl p-4 space-y-3 text-xs font-mono-tech";
-      card.innerHTML = `
-        <div class="flex justify-between items-center">
-          <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-[10px] uppercase border border-amber-800">ACTION REQUIRED // PRIORITY ALPHA</span>
-          <span class="text-[10px] text-slate-400">SIGN-OFF ID: #DIR-881</span>
-        </div>
-        <div>
-          <h4 class="font-bold text-white text-sm">Authorize €12,800 Overtime Budget?</h4>
-          <p class="text-[11px] text-slate-300 mt-1 leading-relaxed font-sans">Authorizes 2 weekend shifts for 26 warehouse pickers to complete safety & system certification before launch day.</p>
-        </div>
-        <div class="pt-2 border-t border-amber-900/60 flex gap-2">
-          <button onclick="approveDirectorOvertime()" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-bold text-xs transition shadow-lg flex items-center justify-center gap-1"><span>✓</span> Approve €12.8k</button>
-          <button onclick="disapproveDirectorOvertime()" class="flex-1 py-2.5 rounded-xl bg-rose-950/90 hover:bg-rose-900 border border-rose-600 text-rose-200 font-bold text-xs transition flex items-center justify-center gap-1"><span>✕</span> Disapprove / Reject</button>
-        </div>
-      `;
-    }
-
-    // ==========================================
-    // "OVY" AI HELPER CHATBOT LOGIC
-    // ==========================================
-    function toggleOvyChat() {
-      document.getElementById('ovy-chat-window').classList.toggle('hidden');
-    }
-
-    function addOvyMessage(sender, text) {
-      const msgContainer = document.getElementById('ovy-messages');
-      const div = document.createElement('div');
-      if (sender === 'user') {
-        div.className = "bg-cyan-950/80 border border-cyan-700/60 text-cyan-200 p-2.5 rounded-xl ml-6 text-xs font-mono-tech";
-        div.innerText = text;
-      } else {
-        div.className = "bg-black/80 border border-slate-800 text-slate-200 p-2.5 rounded-xl mr-6 text-xs space-y-1 font-sans";
-        div.innerHTML = `<span class="text-cyan-400 font-bold font-mono-tech text-[9px]">OVY-01 // DEBRIEF:</span><div>${text}</div>`;
-      }
-      msgContainer.appendChild(div);
-      msgContainer.scrollTop = msgContainer.scrollHeight;
-    }
-
-    function askOvyPredefined(topic) {
-      if (topic === 'loss') {
-        addOvyMessage('user', 'What does "Loss Avoided" mean?');
-        setTimeout(() => {
-          addOvyMessage('ovy', '<strong>"Downtime Loss Avoided"</strong> is the capital protected by resolving launch bottlenecks before go-live. Every single day an automated warehouse launch is delayed costs approximately <strong>€85,000/day</strong> in unfulfilled orders, contractor stand-by overhead, and idle facility carry costs. By preempting 14.5 days of delay, OVERLORD has protected <strong>€1,232,500</strong> to date.');
-        }, 250);
-      } else if (topic === 'golive') {
-        addOvyMessage('user', 'What is "Go-Live"?');
-        setTimeout(() => {
-          addOvyMessage('ovy', '<strong>Go-Live Day (15 March 2026)</strong> is the target operational date when the facility begins fulfilling live customer orders. All hardware commissioning, WMS software interface verification, and operator certifications must achieve 100% readiness prior to this date.');
-        }, 250);
-      } else if (topic === 'training') {
-        addOvyMessage('user', 'Why is staff training behind?');
-        setTimeout(() => {
-          addOvyMessage('ovy', 'Currently 38 out of 64 picking operators are certified. To prevent timeline slippage, Miebach requested €12,800 to fund 2 weekend overtime training shifts. The Client Director on Mobile holds the authority to <strong>Approve</strong> or <strong>Disapprove</strong> this spend.');
-        }, 250);
-      } else if (topic === 'disapprove') {
-        addOvyMessage('user', 'Can the Director reject overtime?');
-        setTimeout(() => {
-          addOvyMessage('ovy', 'Affirmative. On the <strong>Executive Mobile</strong> console, the Director can execute <strong>"✕ Disapprove / Reject"</strong>. This commands Miebach Systems Architect Javier to stagger weekday training shifts instead, conserving €12,800 with zero additional capital expense.');
-        }, 250);
-      }
-    }
-
-    function handleOvyKey(e) { if (e.key === 'Enter') sendOvyMessage(); }
-
-    function sendOvyMessage() {
-      const input = document.getElementById('ovy-input');
-      const q = input.value.trim();
-      if (!q) return;
-
-      addOvyMessage('user', q);
-      input.value = '';
-
-      const lower = q.toLowerCase();
-      setTimeout(() => {
-        if (lower.includes('loss') || lower.includes('avoid') || lower.includes('money') || lower.includes('save') || lower.includes('cost')) {
-          addOvyMessage('ovy', '<strong>"Loss Avoided"</strong> calculates capital preserved by eliminating delay days. In automated facilities, delay exposure runs at ~€85,000 every single day. OVERLORD has pre-empted 14.5 days of slippage—locking in <strong>€1,232,500</strong> in direct savings.');
-        } else if (lower.includes('disapprove') || lower.includes('reject') || lower.includes('decline') || lower.includes('veto')) {
-          addOvyMessage('ovy', 'On the <strong>Executive Mobile</strong> tab, you can tap <strong>"✕ Disapprove / Reject"</strong>. Rejecting forces Miebach systems engineering to re-schedule training during standard weekday hours, incurring €0 in overtime expenses.');
-        } else if (lower.includes('approve') || lower.includes('overtime') || lower.includes('budget') || lower.includes('12')) {
-          addOvyMessage('ovy', 'Tapping <strong>"✓ Approve €12.8k"</strong> executes a crypto-stamped directive allocating 2 weekend shifts for 26 operators, instantly turning the training milestone green across Desktop and Tablet.');
-        } else if (lower.includes('golive') || lower.includes('go-live') || lower.includes('launch') || lower.includes('15')) {
-          addOvyMessage('ovy', '<strong>Go-Live Day (15 March 2026)</strong> is our non-negotiable operational deadline. The launch trajectory is currently holding at <strong>96.2% on-time confidence</strong>.');
-        } else if (lower.includes('wms') || lower.includes('erp') || lower.includes('software')) {
-          addOvyMessage('ovy', '<strong>WMS (Warehouse Management System)</strong> is the core software nervous system. Interface test IF-03 recorded a 7% message rejection anomaly; a joint remediation retest is locked for 18 Feb.');
-        } else if (lower.includes('autostore') || lower.includes('robot')) {
-          addOvyMessage('ovy', '<strong>AutoStore Robotics</strong>: 16 grid robots are operating at 94% speed and delivering 650 bins/hour, exceeding our contractual target of 600.');
-        } else if (lower.includes('javier') || lower.includes('engineer') || lower.includes('miebach')) {
-          addOvyMessage('ovy', '<strong>Miebach Consulting</strong> is the chief systems integrator. <strong>Javier</strong> is the lead systems architect who absorbs floor delays by dynamically rerouting testing lines around bottlenecks.');
-        } else if (lower.includes('director') || lower.includes('mobile')) {
-          addOvyMessage('ovy', 'The <strong>Executive Mobile HUD</strong> provides C-level visibility, an encrypted 30-second audio SITREP, and instant one-tap authority to approve or veto capital items.');
-        } else if (lower.includes('tablet') || lower.includes('floor') || lower.includes('site')) {
-          addOvyMessage('ovy', 'The <strong>Field Tablet HUD</strong> equips on-site floor supervisors to log optical or mechanical faults in real time with photo geotagging.');
-        } else {
-          addOvyMessage('ovy', `Telemetry status confirmed: OVERLORD is synchronizing operations toward the 15 March launch target. You can test approving/vetoing overtime on Mobile, re-routing Sector 03 on Desktop, or logging field faults on Tablet.`);
-        }
-      }, 300);
-    }
-  </script>
-</body>
-</html>
+<section class="event-console" aria-label="Project activity feed"><div class="facility-heading"><div><strong>OPERATIONS EVENT STREAM</strong><span class="console-context">Desktop · Field · Executive</span></div><button class="quiet-btn" id="feed-toggle" onclick="toggleFeed()" aria-expanded="true">Collapse</button></div><div id="event-feed" role="log" aria-live="polite" aria-relevant="additions"></div></section><div id="app-status" role="status"></div><script>'use strict';
+const SECTORS=[
+{id:'inbound',n:'01',name:'Inbound docks',owner:'Site operations',location:'Dock A1–A18',metric:'Dock doors',value:'18 commissioned',x:25,y:28,w:870,h:92},
+{id:'autostore',n:'02',name:'AutoStore grid',owner:'Automation supplier',location:'Grid G01 / robot R01–R16',metric:'Demo throughput',value:'650 bins/hour',x:25,y:155,w:275,h:183},
+{id:'conveyor',n:'03',name:'Conveyor loop',owner:'Miebach engineering',location:'Induction A / scanner SC-04',metric:'Scanner rejection',value:'7% · sample reading',x:325,y:155,w:285,h:183},
+{id:'picking',n:'04',name:'Picking stations',owner:'Site operations',location:'Station P01–P12',metric:'Workstations',value:'12 in commissioning',x:640,y:155,w:255,h:85},
+{id:'packing',n:'05',name:'Packing & labelling',owner:'Site operations',location:'Bench PK01–PK08',metric:'Packing benches',value:'8 configured',x:640,y:260,w:255,h:78},
+{id:'storage',n:'06',name:'Pallet storage',owner:'Site operations',location:'Aisle R01–R24',metric:'Storage aisles',value:'24 mapped',x:25,y:370,w:260,h:90},
+{id:'returns',n:'07',name:'Returns & quality',owner:'Site operations',location:'Inspection Q01 / quarantine',metric:'Inspection stations',value:'4 prepared',x:310,y:370,w:270,h:90},
+{id:'outbound',n:'08',name:'Outbound staging',owner:'Site operations',location:'Lane B01–B12',metric:'Dispatch lanes',value:'12 marked',x:610,y:370,w:285,h:90},
+{id:'systems',n:'09',name:'IT / WMS integration',owner:'Client IT / WMS',location:'Interface IF-03 / network cabinet',metric:'Interface test',value:'IF-03 retest required',x:25,y:488,w:420,h:75},
+{id:'safety',n:'10',name:'Safety & utilities',owner:'Facilities & safety',location:'Exit E01 / charging bay C01',metric:'Acceptance',value:'Floor checks pending',x:475,y:488,w:420,h:75}
+];
+const seed={version:2,route:'A',budget:'pending',issues:[
+{id:'SC-04',sector:'conveyor',location:'Induction A / SC-04',title:'Optical scanner rejects 7% of test packets',priority:'High',owner:'Automation supplier',status:'Open'},
+{id:'WMS-03',sector:'systems',location:'Interface IF-03',title:'Stock-adjustment interface needs a verified retest',priority:'High',owner:'Client IT / WMS',status:'Open'},
+{id:'TRN-09',sector:'picking',location:'Picking team / 38 of 64 certified',title:'26 operators still require training and certification',priority:'Medium',owner:'Site operations',status:'Open'},
+{id:'DAT-01',sector:'systems',location:'SKU master data',title:'1,180 SKU records have conflicting units of measure',priority:'Low',owner:'Client IT / WMS',status:'Open'}],events:[]};
+const STORE='overlord-operations-v2';let state;try{state=JSON.parse(localStorage.getItem(STORE));if(!state||state.version!==2||!Array.isArray(state.issues)||!Array.isArray(state.events))throw Error()}catch{state=structuredClone(seed)}
+let activeSector='conveyor',selectedDock='',currentView='synergy',feedOpen=true,lastFocus=null,speaking=false,audioContext=null,speechRun=0;
+const el=id=>document.getElementById(id),escapeHtml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function notify(message){el('app-status').textContent=message;el('app-status').style.display='block';clearTimeout(notify.timer);notify.timer=setTimeout(()=>el('app-status').style.display='none',4500)}
+function persist(){try{localStorage.setItem(STORE,JSON.stringify(state))}catch{notify('Browser storage unavailable. Changes will last for this session only.')}}
+function eventLog(actor,message){state.events.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random(),at:new Date().toISOString(),actor,message});state.events=state.events.slice(-150);persist();renderAll()}
+function openIssues(){return state.issues.filter(i=>i.status!=='Resolved')}
+function sectorIssues(id){return openIssues().filter(i=>i.sector===id)}
+function updateClock(){el('utc-clock').textContent=new Date().toISOString().slice(11,19)+' UTC'}setInterval(updateClock,1000);updateClock();
+function switchView(name){if(!['synergy','desktop','tablet','mobile'].includes(name))return;currentView=name;document.querySelectorAll('.view-panel').forEach(p=>p.classList.toggle('hidden',p.id!=='view-'+name));document.querySelectorAll('.tab-btn').forEach(b=>{const on=b.id==='tab-'+name;['bg-cyan-400','text-black','font-bold'].forEach(c=>b.classList.toggle(c,on));b.classList.toggle('text-slate-400',!on)});window.scrollTo({top:0,behavior:'smooth'})}
+function renderMap(){const dock=Array.from({length:18},(_,i)=>{const x=38+i*47;return `<g role="button" tabindex="0" aria-label="Dock A${i+1}" onclick="selectSector('inbound','A${i+1}')" onkeydown="mapKey(event,'inbound','A${i+1}')"><rect x="${x}" y="66" width="36" height="26" rx="3" fill="${selectedDock==='A'+(i+1)?'#0891b2':'#102e43'}" stroke="#3c7790"/><text class="dock-label" x="${x+6}" y="84">A${i+1}</text></g>`}).join('');el('warehouse-map').innerHTML=`<title id="warehouse-title">Warehouse sector blueprint. Select a sector or a dock. Animated robots are simulated.</title><defs><pattern id="grid" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0H0V18" fill="none" stroke="#15304a" stroke-width=".7"/></pattern></defs><rect width="920" height="590" fill="url(#grid)"/>${SECTORS.map(s=>`<g class="${s.id===activeSector?'selected-zone':''}" role="button" tabindex="0" aria-label="Sector ${s.n} ${s.name}${sectorIssues(s.id).length?', open incidents':''}" onclick="selectSector('${s.id}')" onkeydown="mapKey(event,'${s.id}')"><rect class="zone-fill" x="${s.x}" y="${s.y}" width="${s.w}" height="${s.h}" rx="7"/><text class="zone-name" x="${s.x+12}" y="${s.y+23}">${s.n} / ${s.name}</text>${sectorIssues(s.id).length?`<circle cx="${s.x+s.w-14}" cy="${s.y+14}" r="5" fill="#fb7185"/>`:''}</g>`).join('')}${dock}<g pointer-events="none"><path d="M56 220L220 220L257 200L93 200Z" fill="#143b51" stroke="#38bdf8"/><path d="M56 220V305H220V220M220 305L257 283V200" fill="#09283e" stroke="#287089"/><path d="M88 220V305M121 220V305M154 220V305M187 220V305M56 247H220M56 275H220" stroke="#21526b"/>${[0,1,2,3].map((n)=>`<rect class="robot" x="0" y="0" width="11" height="8" rx="2" fill="#67e8f9"><animateMotion dur="${5+n}s" begin="-${n}s" repeatCount="indefinite" path="M70 213L205 213L240 202L105 202Z"/></rect>`).join('')}<text x="48" y="327">16 robots · demo animation</text><path d="M355 215H575V300H355Z" fill="none" stroke="${state.route==='A'?'#49819d':'#34d399'}" stroke-width="8"/><path d="M575 215H624V310H575" fill="none" stroke="${state.route==='B'?'#34d399':'#25445b'}" stroke-dasharray="7 5" stroke-width="6"/><text x="373" y="262">LOOP ${state.route}</text><text x="651" y="217">P01 – P12</text><text x="651" y="318">PK01 – PK08</text></g><g role="button" tabindex="0" aria-label="Conveyor bottleneck telemetry" onclick="selectSector('conveyor')" onkeydown="mapKey(event,'conveyor')"><circle class="${state.route==='A'?'node-pulse':''}" cx="624" cy="272" r="17" fill="${state.route==='A'?'#fb7185':'#34d399'}" opacity=".25"/><circle cx="624" cy="272" r="8" fill="${state.route==='A'?'#fb7185':'#34d399'}"/></g>`;renderSector()}
+function mapKey(e,id,dock=''){if(e.key==='Enter'||e.key===' '){e.preventDefault();selectSector(id,dock)}}
+function selectSector(id,dock=''){activeSector=id;selectedDock=dock;renderMap()}
+function renderSector(){const s=SECTORS.find(s=>s.id===activeSector);el('sector-detail').innerHTML=`<span class="map-chip">SECTOR ${s.n}</span><h4>${escapeHtml(s.name)}${selectedDock?' / '+selectedDock:''}</h4><p>${escapeHtml(s.location)}</p><div class="telemetry-row"><span>Responsible team</span><strong>${s.owner}</strong></div><div class="telemetry-row"><span>${s.metric}</span><strong>${s.id==='systems'&&state.issues.find(i=>i.id==='WMS-03').status==='Resolved'?'Retest recorded':s.value}</strong></div><div class="telemetry-row"><span>Open incidents</span><strong>${sectorIssues(s.id).length}</strong></div>${s.id==='conveyor'?`<p>SC-04 · sample reading: 7% rejected packets. ${state.route==='B'?'Loop B is active in the demo. Scanner repair and acceptance testing remain separate.':'Review the bypass before changing the test route.'}</p><div class="telemetry-row"><span>Test route</span><strong>Loop ${state.route}</strong></div><button class="command-btn" onclick="resolveConveyorIssue()" ${state.route==='B'?'disabled':''}>${state.route==='B'?'Loop B active':'Re-route test flow to Loop B'}</button>`:''}<div class="zone-actions"><button class="command-btn" onclick="openReportModal('${s.id}')">Log incident in this sector</button><button class="quiet-btn" onclick="switchView('tablet')">Review incident records</button></div>`}
+function renderIssues(){el('incident-list').innerHTML=state.issues.map(i=>`<article class="incident-card ${i.status==='Resolved'?'resolved':''}" data-priority="${i.priority}"><div class="incident-meta"><span>${escapeHtml(i.id)}</span><span>SECTOR ${SECTORS.find(s=>s.id===i.sector).n}</span><span>${i.priority} priority · ${i.status}</span></div><h3>${escapeHtml(i.title)}</h3><p>${escapeHtml(i.location)} · ${escapeHtml(i.owner)}</p>${i.id==='TRN-09'?`<p>Budget: ${state.budget}. Funding approval does not certify operators.</p>`:''}${i.status==='Resolved'?`<p>Resolution: ${escapeHtml(i.note)} · ${escapeHtml(i.reviewer)}</p>`:`<details><summary>Record resolution</summary><form onsubmit="resolveIssue(event,'${i.id}')"><label>Reviewer<input name="reviewer" required maxlength="80" autocomplete="name"></label><label>Evidence / resolution note<input name="note" required maxlength="400" placeholder="What was tested, corrected or verified?"></label><button class="command-btn">Save resolution</button></form></details>`}</article>`).join('')}
+function openReportModal(sector=activeSector){lastFocus=document.activeElement;el('select-where').innerHTML=SECTORS.map(s=>`<option value="${s.id}">Sector ${s.n}: ${s.name}</option>`).join('');el('select-where').value=sector;el('input-wrong').value='';el('incident-error').textContent='';el('incident-priority').value='Medium';updateIncidentLocation();el('report-modal').classList.remove('hidden');el('input-wrong').focus()}
+function closeReportModal(){el('report-modal').classList.add('hidden');lastFocus?.focus()}
+function updateIncidentLocation(){const s=SECTORS.find(s=>s.id===el('select-where').value);el('incident-location').value=s.id==='inbound'&&selectedDock?'Dock '+selectedDock:s.location;el('incident-owner').value=s.owner}
+function prefillDemoExample(){el('select-where').value='conveyor';updateIncidentLocation();el('input-wrong').value='Optical scanner SC-04 not configured';el('incident-priority').value='High'}
+function submitFloorIssue(){const title=el('input-wrong').value.trim(),location=el('incident-location').value.trim();if(!title||!location){el('incident-error').textContent='Enter an incident description and a location.';return}const id='INC-'+Date.now().toString(36).toUpperCase();state.issues.unshift({id,sector:el('select-where').value,location,title,priority:el('incident-priority').value,owner:el('incident-owner').value,status:'Open'});closeReportModal();eventLog('FIELD',`${id} · ${title} · ${location}`);switchView('tablet');notify('Incident saved. Engineering and executive views updated.')}
+function resolveIssue(e,id){e.preventDefault();const data=new FormData(e.target),reviewer=data.get('reviewer').trim(),note=data.get('note').trim();if(!reviewer||!note){notify('Add a reviewer and resolution evidence.');return}const i=state.issues.find(i=>i.id===id);if(!i||i.status==='Resolved')return;i.status='Resolved';i.reviewer=reviewer;i.note=note;eventLog('REVIEW',`${id} resolved by ${reviewer}: ${note}`);notify('Resolution recorded across all views.')}
+function resolveConveyorIssue(){if(state.route==='B')return;state.route='B';eventLog('MIEBACH-JAVIER','Test induction flow diverted to Loop B. Scanner acceptance still requires verification.');notify('Demo route changed to Loop B.')}
+function budgetDecision(decision){if(state.budget===decision)return;state.budget=decision;eventLog('EXECUTIVE',decision==='approved'?'EUR 12,800 training budget approved. Certification remains pending.':decision==='declined'?'Training overtime declined. Weekday plan requires engineering review.':'Training budget decision reopened.');notify('Budget decision recorded.')}
+function approveDirectorOvertime(){budgetDecision('approved')}function disapproveDirectorOvertime(){budgetDecision('declined')}function resetDirectorDecision(){budgetDecision('pending')}
+function renderBudget(){el('director-approval-card').innerHTML=`<div class="incident-meta"><span>BUDGET REVIEW / DIR-881</span></div><h4 class="text-white font-bold mt-2">€12,800 operator training budget</h4><p class="text-slate-300 text-xs mt-2">Two proposed shifts for 26 operators. Approval funds training; completion requires recorded evidence.</p><p class="text-cyan-300 text-xs mt-3">Decision: <strong>${state.budget.toUpperCase()}</strong></p><div class="flex gap-2 mt-3">${state.budget==='pending'?'<button class="command-btn" onclick="approveDirectorOvertime()">Approve €12.8k</button><button class="quiet-btn" onclick="disapproveDirectorOvertime()">Decline</button>':'<button class="quiet-btn" onclick="resetDirectorDecision()">Reopen decision</button>'}</div>`;const training=state.issues.find(i=>i.id==='TRN-09');el('desktop-milestone-training').innerHTML=`<span>GATE 03 // OPERATOR CERTIFICATION</span><span>${training.status==='Resolved'?'COMPLETION RECORDED':'38/64 · BUDGET '+state.budget.toUpperCase()}</span>`;el('ops-sla-val').textContent=training.status==='Resolved'?'REVIEW RECORDED':'38/64 CERTIFIED';el('ops-sla-status').textContent='Training budget '+state.budget+'. '+(training.status==='Resolved'?'Completion evidence recorded.':'26 operators still require completion evidence.')}
+function briefingText(){return `Operations briefing for the demonstration facility. ${openIssues().length} incidents remain open, including ${openIssues().filter(i=>i.priority==='High').length} high priority. Sample AutoStore throughput is 650 bins per hour. Conveyor test flow is on Loop ${state.route}. The 12,800 euro training budget is ${state.budget}. ${state.issues.find(i=>i.id==='TRN-09').status==='Resolved'?'Training completion evidence is recorded.':'26 operators still require certification evidence.'} Review outstanding acceptance checks before confirming go-live.`}
+function renderFeed(){const feed=el('event-feed'),nearBottom=feed.scrollHeight-feed.scrollTop-feed.clientHeight<35;feed.innerHTML=state.events.slice(-50).map(e=>`<p><time>[${new Date(e.at).toISOString().slice(11,19)} UTC]</time> <b>[${escapeHtml(e.actor)}]</b> ${escapeHtml(e.message)}</p>`).join('');if(nearBottom)feed.scrollTop=feed.scrollHeight}
+function renderAll(){el('kpi-issues').textContent=openIssues().length;el('badge-open-issues').textContent=openIssues().length;const wmsDone=state.issues.find(i=>i.id==='WMS-03').status==='Resolved';el('wms-readiness').textContent=wmsDone?'RETEST RECORDED':'RETEST REQUIRED';el('wms-gate').textContent=wmsDone?'EVIDENCE RECORDED':'RETEST REQUIRED';const readiness=openIssues().length?openIssues().length+' OPEN ITEMS · REVIEW REQUIRED':'INCIDENTS CLOSED · FINAL ACCEPTANCE REQUIRED';el('launch-gate').textContent=readiness;el('executive-readiness').textContent=readiness;renderMap();renderIssues();renderBudget();renderFeed();el('briefing-transcript').textContent=briefingText()}
+function toggleFeed(){feedOpen=!feedOpen;el('event-feed').hidden=!feedOpen;el('feed-toggle').textContent=feedOpen?'Collapse':'Expand';el('feed-toggle').setAttribute('aria-expanded',String(feedOpen))}
+function radioTone(){try{const Context=window.AudioContext||window.webkitAudioContext;if(!Context)return;audioContext??=new Context();audioContext.resume().catch(()=>{});const osc=audioContext.createOscillator(),gain=audioContext.createGain(),now=audioContext.currentTime;osc.type='triangle';osc.frequency.setValueAtTime(900,now);osc.frequency.linearRampToValueAtTime(1200,now+.08);gain.gain.setValueAtTime(.015,now);gain.gain.exponentialRampToValueAtTime(.0001,now+.16);osc.connect(gain);gain.connect(audioContext.destination);osc.start();osc.stop(now+.17)}catch{}}
+function resetAudio(message){speaking=false;el('play-briefing').textContent='▶ Play briefing';el('audio-status').textContent=message}
+function toggleBriefing(){if(!('speechSynthesis'in window)){el('audio-status').textContent='Voice playback is unavailable in this browser. Read the briefing above.';return}if(speaking){speechRun++;speechSynthesis.cancel();resetAudio('Stopped');return}const run=++speechRun;speaking=true;el('play-briefing').textContent='■ Stop briefing';el('audio-status').textContent='Preparing voice…';radioTone();const utterance=new SpeechSynthesisUtterance(briefingText());utterance.lang='en-GB';utterance.rate=1;utterance.pitch=.95;utterance.volume=.9;utterance.onstart=()=>{if(run===speechRun)el('audio-status').textContent='Playing current workspace briefing'};utterance.onend=()=>{if(run===speechRun){resetAudio('Briefing complete');radioTone()}};utterance.onerror=()=>{if(run===speechRun)resetAudio('Voice unavailable. The full briefing is shown above.')};speechSynthesis.speak(utterance)}
+function toggleOvyChat(){el('ovy-chat-window').classList.toggle('hidden')}
+function addOvyMessage(sender,text){const div=document.createElement('div');div.className='p-3 rounded-xl text-xs '+(sender==='user'?'bg-cyan-950 text-cyan-200 ml-6':'bg-slate-900 text-slate-200 mr-6');div.textContent=text;el('ovy-messages').appendChild(div);el('ovy-messages').scrollTop=el('ovy-messages').scrollHeight}
+function replyOvy(q){const l=q.toLowerCase();if(/loss|cost|money|save/.test(l))return 'EUR 1,232,500 is an illustrative exposure scenario: 14.5 assumed days × EUR 85,000/day. It is not measured savings.';if(/budget|approve|reject|decline|training/.test(l))return `Training budget: ${state.budget}. Certification status: ${state.issues.find(i=>i.id==='TRN-09').status}. Funding does not automatically complete training.`;if(/conveyor|route|scanner/.test(l))return `Current test route: Loop ${state.route}. Open conveyor issues: ${sectorIssues('conveyor').length}. Select the map node to review telemetry and bypass controls.`;return briefingText()}
+function askOvyPredefined(topic){const q={loss:'Explain the exposure scenario',golive:'Summarize go-live readiness',training:'Training and budget status',disapprove:'Can the budget be declined?'}[topic]||topic;addOvyMessage('user',q);addOvyMessage('ovy',replyOvy(q))}
+function handleOvyKey(e){if(e.key==='Enter')sendOvyMessage()}
+function sendOvyMessage(){const q=el('ovy-input').value.trim();if(!q)return;el('ovy-input').value='';addOvyMessage('user',q);addOvyMessage('ovy',replyOvy(q))}
+// Render a one-page, Unicode-capable report to a JPEG-backed PDF without an external library.
+function exportSitrep(){try{const c=document.createElement('canvas');c.width=1400;c.height=1980;const ctx=c.getContext('2d');ctx.fillStyle='#ffffff';ctx.fillRect(0,0,c.width,c.height);let y=82;function line(text,size=23,color='#263b4e'){ctx.font=`${size>=30?'bold ':''}${size}px Arial`;ctx.fillStyle=color;ctx.fillText(text,80,y);y+=size+13}function heading(text){y+=14;ctx.fillStyle='#e7f1f6';ctx.fillRect(65,y-25,1270,42);line(text,25,'#07536b');y+=5}function cut(text,n=104){return Array.from(text).length>n?Array.from(text).slice(0,n-1).join('')+'…':text}
+line('OVERLORD / OPERATIONS SITREP',42,'#083344');line('WAREHOUSE IMPLEMENTATION · BER-04',22);line(new Date().toISOString().replace('T',' ').slice(0,19)+' UTC · Demo project',20,'#64748b');heading('EXECUTIVE SNAPSHOT');line(`Open incidents: ${openIssues().length}   |   High priority: ${openIssues().filter(i=>i.priority==='High').length}   |   Route: Loop ${state.route}`);line(`Training budget: EUR 12,800 / ${state.budget.toUpperCase()}   |   Certification: ${state.issues.find(i=>i.id==='TRN-09').status==='Resolved'?'Evidence recorded':'38/64'}`);line('Target: 15 March 2026 (sample timeline) · Readiness requires acceptance checks',21);line('Exposure scenario: EUR 1,232,500 = 14.5 assumed days × EUR 85,000/day',21);heading('FACILITY SECTORS');for(const s of SECTORS)line(`${s.n}  ${s.name.padEnd(24,' ')}  |  ${sectorIssues(s.id).length} open  |  ${s.owner}`,21);heading('INCIDENT REGISTER');const shown=state.issues.slice(0,12);for(const i of shown){line(cut(`${i.id} · ${i.priority} · ${i.status} · ${i.title}`,104),20);line(cut(`Sector ${SECTORS.find(s=>s.id===i.sector).n} / ${i.location} / ${i.owner}`,115),17,'#64748b')}if(state.issues.length>shown.length)line(`+ ${state.issues.length-shown.length} additional records in the dashboard. Counts above include all records.`,18);heading('RECENT PROJECT ACTIVITY');const room=Math.max(0,Math.min(4,Math.floor((1840-y)/34)));for(const e of state.events.slice(-room))line(cut(`${e.at.slice(11,19)} UTC [${e.actor}] ${e.message}`,116),18);ctx.fillStyle='#64748b';ctx.font='18px Arial';ctx.fillText('Local prototype snapshot · Simulated telemetry · No live equipment commands or digital signatures',80,1915);const jpeg=Uint8Array.from(atob(c.toDataURL('image/jpeg',.94).split(',')[1]),x=>x.charCodeAt(0));const encoder=new TextEncoder(),parts=[],offsets=[0];let length=0;function add(t){const bytes=typeof t==='string'?encoder.encode(t):t;parts.push(bytes);length+=bytes.length}function obj(id,body){offsets[id]=length;add(`${id} 0 obj\n${body}\nendobj\n`)}add('%PDF-1.4\n');obj(1,'<< /Type /Catalog /Pages 2 0 R >>');obj(2,'<< /Type /Pages /Kids [3 0 R] /Count 1 >>');obj(3,'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>');offsets[4]=length;add(`4 0 obj\n<< /Type /XObject /Subtype /Image /Width 1400 /Height 1980 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${jpeg.length} >>\nstream\n`);add(jpeg);add('\nendstream\nendobj\n');const stream='q 595 0 0 842 0 0 cm /Im0 Do Q\n';obj(5,`<< /Length ${encoder.encode(stream).length} >>\nstream\n${stream}endstream`);const start=length;add('xref\n0 6\n0000000000 65535 f \n');for(let i=1;i<=5;i++)add(String(offsets[i]).padStart(10,'0')+' 00000 n \n');add(`trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${start}\n%%EOF`);const url=URL.createObjectURL(new Blob(parts,{type:'application/pdf'})),a=document.createElement('a');a.href=url;a.download='OVERLORD-Operations-SITREP.pdf';a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);notify('One-page SITREP exported. Includes current state and recent activity.')}catch(err){notify('PDF export unavailable in this browser. Try a current desktop browser.');console.error(err)}}
+window.addEventListener('storage',e=>{if(e.key!==STORE||!e.newValue)return;try{const next=JSON.parse(e.newValue);if(next.version===2&&Array.isArray(next.issues)&&Array.isArray(next.events)){state=next;renderAll()}}catch{}});
+document.addEventListener('keydown',e=>{if(el('report-modal').classList.contains('hidden'))return;if(e.key==='Escape'){closeReportModal();return}if(e.key==='Tab'){const items=[...el('report-modal').querySelectorAll('button,input,select')].filter(e=>!e.disabled);if(e.shiftKey&&document.activeElement===items[0]){e.preventDefault();items.at(-1).focus()}else if(!e.shiftKey&&document.activeElement===items.at(-1)){e.preventDefault();items[0].focus()}}});
+window.addEventListener('pagehide',()=>{if('speechSynthesis'in window)speechSynthesis.cancel()});
+if(!state.events.length)eventLog('SYSTEM','Demo facility loaded. Sample SC-04 optical packet loss: 7%.');else renderAll();
+</script></body></html>
