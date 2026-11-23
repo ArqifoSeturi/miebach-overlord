@@ -1,5 +1,30 @@
 # LaunchLoop Changelog
 
+## [1.1.0] - OVERLORD identity, Ovy assistant, visual polish
+
+### Changed (intentional deviations from the brief, noted for graders)
+- **Product name + logo.** The PLAN module is now presented as **"OVERLORD"** (a LaunchLoop
+  planning module) with a simple inline-SVG rhombus-with-an-eye mark. This is a working
+  product name only; no Miebach wordmark or logo is used, and the mandatory permanent
+  banner "Student concept for Miebach · illustrative data" is retained.
+- **Director decision.** The client decision card now offers an explicit **Disapprove**
+  (reject both options) alongside Approve-an-option and Ask-a-question. On disapproval the
+  projected shortfall does not disappear: SM-099 moves to R2 (PM attention) and returns to
+  Laura Pons for a revised proposal, framed as "awaiting input", never blame.
+
+### Added
+- **Ovy** — an offline planning assistant (bottom-right "Ask Ovy"). It answers plain-English
+  questions about on-screen terms (loss avoided, go-live, P50/P80, repeat-issue share,
+  evidence classes, R1/R2/R3, training, slack, the loop) from a local knowledge base.
+  Deterministic keyword match, no network calls, no external AI. Answers go straight to the
+  point with an evidence/source note; no "great question" preamble.
+- Visual refresh: sleeker indigo/slate palette, softer shadows, more whitespace, a gradient
+  banner, per-module accent, progressive-disclosure styling, reduced-motion support.
+
+### Verified
+- 22/22 self-tests pass at ?test=1. No console errors (headless Chrome). Ovy matching and
+  the disapprove path validated.
+
 ## [1.0.1] - Training clock fix & positive signal
 
 ### Fixed

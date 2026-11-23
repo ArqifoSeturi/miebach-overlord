@@ -3,23 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LaunchLoop · Multi-Site Warehouse Go-Live Decision Support</title>
+  <title>OVERLORD · LaunchLoop PLAN · Go-Live Decision Support</title>
   <style>
     /* RESET & SYSTEM TYPOGRAPHY - NO CDN OR EXTERNAL NETWORK CALLS */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #f8fafc;
+      --bg: #f6f7fb;
       --surface: #ffffff;
-      --surface-subtle: #f1f5f9;
-      --border: #cbd5e1;
-      --border-subtle: #e2e8f0;
-      --text: #0f172a;
-      --text-muted: #475569;
-      --text-subtle: #64748b;
-      --primary: #1e3a8a;
-      --primary-light: #eff6ff;
-      --primary-border: #93c5fd;
-      --accent: #0284c7;
+      --surface-subtle: #f3f4f9;
+      --border: #e2e4ee;
+      --border-subtle: #edeef5;
+      --text: #15172b;
+      --text-muted: #565b78;
+      --text-subtle: #8a8fab;
+      --primary: #4338ca;
+      --primary-light: #eef0ff;
+      --primary-border: #c7cbff;
+      --accent: #6366f1;
+      --ink: #1a1d33;
       --success: #15803d;
       --success-bg: #f0fdf4;
       --success-border: #bbf7d0;
@@ -31,23 +32,35 @@
       --danger-border: #fecaca;
       --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --radius-sm: 4px;
-      --radius-md: 8px;
-      --radius-lg: 12px;
-      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 2px 0 rgba(26, 29, 51, 0.04), 0 1px 3px 0 rgba(26, 29, 51, 0.04);
+      --shadow-md: 0 4px 12px -2px rgba(26, 29, 51, 0.08), 0 2px 6px -3px rgba(26, 29, 51, 0.05);
+      --shadow-lg: 0 20px 40px -12px rgba(26, 29, 51, 0.16), 0 8px 16px -8px rgba(26, 29, 51, 0.06);
     }
 
     body {
       font-family: var(--font-sans);
       background-color: var(--bg);
+      background-image:
+        radial-gradient(1200px 500px at 85% -5%, rgba(99, 102, 241, 0.06), transparent 60%),
+        radial-gradient(900px 400px at 0% 0%, rgba(67, 56, 202, 0.045), transparent 55%);
+      background-attachment: fixed;
       color: var(--text);
-      line-height: 1.5;
+      line-height: 1.55;
       font-size: 14px;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* MOTION (respect reduced-motion) */
+    @keyframes ovyRise { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: none; } }
+    @keyframes softFade { from { opacity: 0; } to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
     }
 
     /* ACCESSIBILITY & FOCUS */
@@ -63,27 +76,40 @@
 
     /* PERMANENT TOP BANNER */
     .top-student-banner {
-      background-color: #0f172a;
-      color: #94a3b8;
+      background: linear-gradient(90deg, #15172b 0%, #1e2140 55%, #15172b 100%);
+      color: #a7acce;
       font-size: 11px;
-      padding: 6px 16px;
+      padding: 7px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid #1e293b;
+      border-bottom: 1px solid rgba(99,102,241,0.18);
+      letter-spacing: 0.01em;
     }
-    .top-student-banner strong { color: #f8fafc; }
+    .top-student-banner strong { color: #f3f4ff; }
     .sim-clock-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       font-family: var(--font-mono);
-      background: #1e293b;
-      padding: 2px 8px;
+      background: rgba(99,102,241,0.14);
+      border: 1px solid rgba(99,102,241,0.28);
+      padding: 3px 9px;
       border-radius: var(--radius-sm);
-      color: #38bdf8;
+      color: #c7cbff;
       font-weight: 600;
     }
+    .banner-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #818cf8; display: inline-block;
+      box-shadow: 0 0 0 3px rgba(129,140,248,0.22);
+    }
+    .btn-ghost-dark {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #c7cbff;
+    }
+    .btn-ghost-dark:hover { background: rgba(255,255,255,0.1); }
 
     /* HEADER & NAV */
     header {
@@ -110,12 +136,19 @@
       gap: 12px;
     }
     .brand-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--primary);
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--ink);
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 9px;
+      letter-spacing: 0.08em;
+    }
+    .brand-title .wordmark { background: linear-gradient(90deg, #4338ca, #6366f1); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    /* OVERLORD rhombus-eye mark */
+    .overlord-mark {
+      width: 30px; height: 30px; flex: none;
+      filter: drop-shadow(0 2px 6px rgba(99,102,241,0.35));
     }
     .brand-subtitle {
       font-size: 11px;
@@ -229,8 +262,24 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 18px;
+      padding: 22px;
       box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s ease;
+    }
+    .card:hover { box-shadow: var(--shadow-md); }
+    /* section intro: one headline per screen */
+    .screen-headline {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+    .screen-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+    .module-accent-bar {
+      height: 3px; width: 44px; border-radius: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      margin-bottom: 14px;
     }
     .card-header {
       display: flex;
@@ -391,10 +440,125 @@
       transition: height 0.3s ease;
     }
 
+    /* PROGRESSIVE DISCLOSURE */
+    details.disclose {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      background: var(--surface-subtle);
+      margin-top: 10px;
+      overflow: hidden;
+    }
+    details.disclose > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+    }
+    details.disclose > summary::-webkit-details-marker { display: none; }
+    details.disclose > summary .chevron { transition: transform 0.2s ease; }
+    details.disclose[open] > summary .chevron { transform: rotate(90deg); }
+    details.disclose > summary:hover { color: var(--text); }
+    details.disclose .disclose-body { padding: 0 14px 14px; animation: softFade 0.2s ease; }
+
+    /* OVY ASSISTANT (offline helper) */
+    .ovy-launch {
+      position: fixed;
+      bottom: 22px; right: 22px;
+      z-index: 60;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 16px 10px 12px;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, #1e2140, #4338ca);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      box-shadow: 0 10px 30px -8px rgba(67,56,202,0.6);
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+    .ovy-launch:hover { transform: translateY(-1px); box-shadow: 0 14px 34px -8px rgba(67,56,202,0.7); }
+    .ovy-launch svg { filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3)); }
+    .ovy-panel {
+      position: fixed;
+      bottom: 22px; right: 22px;
+      z-index: 61;
+      width: 360px;
+      max-width: calc(100vw - 32px);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      animation: ovyRise 0.22s cubic-bezier(0.16,1,0.3,1);
+    }
+    .ovy-panel.open { display: flex; }
+    .ovy-head {
+      background: linear-gradient(135deg, #15172b, #2a2d55);
+      color: #fff;
+      padding: 13px 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .ovy-head .ovy-name { font-weight: 800; font-size: 14px; letter-spacing: 0.04em; }
+    .ovy-head .ovy-tag { font-size: 10px; color: #b9bdee; }
+    .ovy-close { margin-left: auto; color: #b9bdee; font-size: 16px; line-height: 1; }
+    .ovy-close:hover { color: #fff; }
+    .ovy-log {
+      padding: 14px;
+      height: 300px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: var(--surface-subtle);
+    }
+    .ovy-msg {
+      font-size: 12.5px;
+      line-height: 1.5;
+      padding: 9px 12px;
+      border-radius: 12px;
+      max-width: 88%;
+    }
+    .ovy-msg.bot { background: var(--surface); border: 1px solid var(--border-subtle); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; }
+    .ovy-msg.user { background: var(--primary); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .ovy-msg .src { display: block; margin-top: 6px; font-size: 10px; color: var(--text-subtle); }
+    .ovy-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 14px; border-top: 1px solid var(--border-subtle); background: var(--surface); }
+    .ovy-chip {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      border: 1px solid var(--primary-border);
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .ovy-chip:hover { background: #e4e7ff; }
+    .ovy-inputrow { display: flex; gap: 8px; padding: 10px 14px; border-top: 1px solid var(--border-subtle); background: var(--surface); }
+    .ovy-inputrow input {
+      flex: 1;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 7px 10px;
+      font-size: 12.5px;
+      outline: none;
+    }
+    .ovy-inputrow input:focus { border-color: var(--accent); }
+    .ovy-send { background: var(--primary); color: #fff; border-radius: var(--radius-md); padding: 7px 12px; font-weight: 700; font-size: 12px; }
+
     /* PRINT STYLES */
     @media print {
       body { background: #fff; color: #000; font-size: 11pt; }
-      header, .top-student-banner, .demo-bar, .tab-group, .role-select-group, .btn, .no-print { display: none !important; }
+      header, .top-student-banner, .demo-bar, .tab-group, .role-select-group, .btn, .no-print, .ovy-launch, .ovy-panel { display: none !important; }
       .card { border: 1px solid #999; box-shadow: none; break-inside: avoid; }
       .kickoff-pack-container { display: block !important; }
     }
@@ -406,20 +570,21 @@
   <!-- PERMANENT TOP BANNER (MANDATORY REQUIREMENTS) -->
   <!-- ======================================================== -->
   <div class="top-student-banner">
-    <div>
+    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+      <span class="banner-dot"></span>
       <strong>Student concept for Miebach · illustrative data</strong>
-      <span style="margin: 0 8px; opacity: 0.5;">|</span>
-      <span>ESADE Digital Transformation Course</span>
-      <span style="margin: 0 8px; opacity: 0.5;">|</span>
-      <span>Lead Module: <strong style="color: #60a5fa;">PLAN</strong></span>
+      <span style="margin: 0 6px; opacity: 0.4;">|</span>
+      <span>ESADE Digital Transformation</span>
+      <span style="margin: 0 6px; opacity: 0.4;">|</span>
+      <span>Lead Module: <strong style="color: #a5b4fc;">PLAN</strong></span>
     </div>
     <div style="display: flex; align-items: center; gap: 10px;">
       <span class="sim-clock-badge">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         <span id="sim-clock-display">Mon 15 Feb 2027 09:00</span>
       </span>
-      <button class="btn btn-sm btn-outline" onclick="advanceSimClock(1)" title="Advance simulated clock by 1 day">+1 Day</button>
-      <button class="btn btn-sm btn-outline" onclick="resetPrototype()" title="Restore seed clock and initial state">Reset</button>
+      <button class="btn btn-sm btn-ghost-dark" onclick="advanceSimClock(1)" title="Advance simulated clock by 1 day">+1 Day</button>
+      <button class="btn btn-sm btn-ghost-dark" onclick="resetPrototype()" title="Restore seed clock and initial state">Reset</button>
     </div>
   </div>
 
@@ -429,15 +594,25 @@
   <header>
     <div class="header-inner">
       <div class="brand-group">
+        <!-- OVERLORD rhombus-with-eye mark -->
+        <svg class="overlord-mark" viewBox="0 0 40 40" fill="none" aria-label="OVERLORD logo" role="img">
+          <defs>
+            <linearGradient id="ovl-g" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6366f1"/><stop offset="1" stop-color="#4338ca"/>
+            </linearGradient>
+          </defs>
+          <polygon points="20,2 38,20 20,38 2,20" fill="url(#ovl-g)"/>
+          <polygon points="20,2 38,20 20,38 2,20" fill="none" stroke="#c7cbff" stroke-width="1.1" opacity="0.5"/>
+          <path d="M9 20 Q 20 11 31 20 Q 20 29 9 20 Z" fill="#fff" opacity="0.95"/>
+          <circle cx="20" cy="20" r="4.1" fill="#1e2140"/>
+          <circle cx="20" cy="20" r="1.6" fill="#fff"/>
+        </svg>
         <div>
           <div class="brand-title">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
-              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
-            </svg>
-            LaunchLoop
-            <span class="tag-pill">v1.0-PLAN</span>
+            <span class="wordmark">OVERLORD</span>
+            <span class="tag-pill">PLAN</span>
           </div>
-          <div class="brand-subtitle">Collaborative Go-Live Decision Support for Multi-Site Automation</div>
+          <div class="brand-subtitle">A LaunchLoop planning module · collaborative go-live decision support</div>
         </div>
       </div>
 
@@ -1309,6 +1484,7 @@
                   </div>
 
                   <div style="display: flex; gap: 6px;">
+                    <button class="btn btn-sm btn-danger" style="flex: 1;" onclick="rejectClientDecision()" title="Decline both options; no intervention">Disapprove</button>
                     <button class="btn btn-sm btn-outline" style="flex: 1;" onclick="askClientQuestion()">Ask Question</button>
                   </div>
                 </div>
@@ -1753,6 +1929,41 @@
     <div style="display: flex; justify-content: space-between; align-items: center;">
       <button class="btn btn-sm btn-outline" style="color: #fff; border-color: #475569;" onclick="prevDemoStep()">Previous</button>
       <button class="btn btn-sm btn-primary" onclick="nextDemoStep()">Next &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- OVY · OFFLINE PLANNING ASSISTANT (no network, canned answers) -->
+  <!-- ======================================================== -->
+  <button class="ovy-launch" id="ovy-launch" onclick="toggleOvy()" aria-label="Open Ovy assistant">
+    <svg width="22" height="22" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+      <polygon points="20,3 37,20 20,37 3,20" fill="#fff" opacity="0.14"/>
+      <polygon points="20,3 37,20 20,37 3,20" fill="none" stroke="#fff" stroke-width="1.6"/>
+      <path d="M10 20 Q 20 12 30 20 Q 20 28 10 20 Z" fill="none" stroke="#fff" stroke-width="1.8"/>
+      <circle cx="20" cy="20" r="3.2" fill="#fff"/>
+    </svg>
+    <span>Ask Ovy</span>
+  </button>
+
+  <div class="ovy-panel" id="ovy-panel" role="dialog" aria-label="Ovy assistant">
+    <div class="ovy-head">
+      <svg width="26" height="26" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <polygon points="20,3 37,20 20,37 3,20" fill="#6366f1"/>
+        <path d="M10 20 Q 20 12 30 20 Q 20 28 10 20 Z" fill="#fff"/>
+        <circle cx="20" cy="20" r="3.4" fill="#1e2140"/>
+        <circle cx="20" cy="20" r="1.3" fill="#fff"/>
+      </svg>
+      <div>
+        <div class="ovy-name">OVY</div>
+        <div class="ovy-tag">OVERLORD planning assistant · offline, illustrative</div>
+      </div>
+      <button class="ovy-close" onclick="toggleOvy()" aria-label="Close">&times;</button>
+    </div>
+    <div class="ovy-log" id="ovy-log"></div>
+    <div class="ovy-chips" id="ovy-chips"></div>
+    <div class="ovy-inputrow">
+      <input id="ovy-input" type="text" placeholder="Ask what a term means…" onkeydown="if(event.key==='Enter'){ovySend();}" aria-label="Ask Ovy a question">
+      <button class="ovy-send" onclick="ovySend()">Send</button>
     </div>
   </div>
 
@@ -2278,10 +2489,14 @@
       let sm099Reason = `Projected ${tp.projectedAtDeadline}/${TRAIN_TOTAL} certified by 28 Feb (target ${TRAIN_TARGET}) at ${tp.pace}/wk. Team handles within normal shift schedule.`;
 
       // R1 fires when a projected shortfall exists at the 28 Feb cutoff on this
-      // go-live-critical item, unless the client has already authorized an option.
+      // go-live-critical item, unless the client has already decided.
       if (tp.shortfall > 0 && !clientDecisionState) {
         sm099Rule = "R1";
         sm099Reason = `Projected shortfall of ${tp.shortfall} certified staff at 28 Feb cutoff (projected ${tp.projectedAtDeadline}/${TRAIN_TOTAL} at ${tp.pace}/wk, target ${TRAIN_TARGET}) on go-live-critical item. Client decision required by 22 Feb.`;
+      } else if (clientDecisionState === 'R') {
+        // Client disapproved both options: shortfall persists, so it returns to the PM (R2).
+        sm099Rule = "R2";
+        sm099Reason = `Client Elena disapproved both options. Projected shortfall of ${tp.shortfall} at 28 Feb remains open and awaits a revised PM proposal.`;
       } else if (clientDecisionState) {
         sm099Rule = "R3";
         sm099Reason = `Client Elena authorized Option ${clientDecisionState}. Mitigated on schedule.`;
@@ -2432,6 +2647,15 @@
       renderRunModule();
       renderValueLedger();
       alert(`[CLIENT DIRECTIVE LOGGED]\n\nElena approved: ${optDesc}.\n• Training milestone turns Green.\n• Time-to-decision recorded on simulated clock.`);
+    }
+
+    function rejectClientDecision() {
+      clientDecisionState = 'R';
+      clientDecisionLoggedTime = new Date(simClock.getTime());
+      logAudit("Client Decision", "Client Elena DISAPPROVED both options. No overtime or extra sessions authorised; shortfall risk remains open and returns to the PM.");
+      renderRunModule();
+      renderValueLedger();
+      alert("[CLIENT DIRECTIVE LOGGED]\n\nElena disapproved both options.\n\u2022 No intervention authorised.\n\u2022 Projected shortfall at 28 Feb stays on the risk register.\n\u2022 Item returns to PM Laura Pons for a revised proposal.");
     }
 
     function resetClientDecision() {
@@ -2807,10 +3031,28 @@
       if (clientDecisionState) {
         card.style.display = 'none';
         loggedCard.style.display = 'block';
-        document.getElementById('client-logged-text').innerText = `✓ Directive Logged: Option ${clientDecisionState}`;
-        document.getElementById('client-logged-subtext').innerText = clientDecisionState === 'A' ? "Option A authorized: 2 weekend training sessions (Zero cash cost)." : "Option B authorized: €12,800 overtime budget allocated.";
-        bcnStatus.innerText = "✓ On Track · Training certification schedule recovered";
-        document.getElementById('client-bcn-status-card').style.background = "#f0fdf4";
+        const logged = document.getElementById('client-decision-logged');
+        const textEl = document.getElementById('client-logged-text');
+        const subEl = document.getElementById('client-logged-subtext');
+        if (clientDecisionState === 'R') {
+          logged.style.background = '#fef2f2';
+          logged.style.borderColor = '#fecaca';
+          textEl.style.color = '#b91c1c';
+          subEl.style.color = '#dc2626';
+          textEl.innerText = 'Directive Logged: Disapproved';
+          subEl.innerText = 'Both options declined. Shortfall remains open and returns to PM Laura Pons.';
+          bcnStatus.innerText = 'Attention Needed · Training shortfall unresolved, awaiting revised proposal';
+          document.getElementById('client-bcn-status-card').style.background = '#fef2f2';
+        } else {
+          logged.style.background = '#f0fdf4';
+          logged.style.borderColor = '#bbf7d0';
+          textEl.style.color = '#166534';
+          subEl.style.color = '#15803d';
+          textEl.innerText = `Directive Logged: Option ${clientDecisionState}`;
+          subEl.innerText = clientDecisionState === 'A' ? "Option A authorised: 2 weekend training sessions (zero cash cost)." : "Option B authorised: €12,800 overtime budget allocated.";
+          bcnStatus.innerText = "On Track · Training certification schedule recovered";
+          document.getElementById('client-bcn-status-card').style.background = "#f0fdf4";
+        }
       } else if (isTrainingSlowed) {
         card.style.display = 'block';
         loggedCard.style.display = 'none';
@@ -3201,6 +3443,133 @@
 
       const passCount = results.filter(r => r.pass).length;
       alert(`[LAUNCHLOOP SELF-TEST RESULTS]\n\nPassed: ${passCount} / ${results.length} tests.\nAll algorithmic and scenario requirements verified!`);
+    }
+
+    /* ============================================================
+       SECTION 10: OVY · OFFLINE PLANNING ASSISTANT
+       Deterministic, no network. Matches a question against a small
+       knowledge base of plain-English term explanations. Answers go
+       straight to the point (no "great question" preamble).
+       ============================================================ */
+    const OVY_KB = [
+      { keys: ["loss avoided","cost of delay","loss","money saved","downtime"],
+        title: "Cost of delay / loss avoided",
+        answer: "Each day a go-live slips has a cost (lost throughput, idle people and kit, penalties). OVERLORD shows this as a range, not one number: Low €8,000, Base €25,000, High €85,000 per day. These are assumptions your group will agree, so they are always shown as a range and never added across evidence classes.",
+        src: "Evidence class: Assumed · measure in a pilot" },
+      { keys: ["go-live","golive","go live","cutover"],
+        title: "Go-live",
+        answer: "Go-live is the day a distribution centre switches to running on the new automated systems and processes for real. Before it, the four readiness branches (data, interface tests, hardware, training) must finish, then a cutover rehearsal. For Milan that date is Mon 7 Jun 2027.",
+        src: "Scenario: Northstar Logistics" },
+      { keys: ["p80","p50","percentile","probability","monte carlo","montecarlo","probability of hitting"],
+        title: "P50 / P80 and the probability",
+        answer: "OVERLORD runs 10,000 simulated Milan go-lives using the min, median and max durations from the four completed sites. P50 is the date you hit half the time; P80 is the more cautious date you hit 80% of the time. The probability is the share of runs that land on or before 7 Jun. It is shown with n = 4 units and a low-evidence flag because the history is small and fictional.",
+        src: "Evidence class: Modelled · n = 4 units, low evidence" },
+      { keys: ["repeat issue","repeat-issue","repeat share","recurring","learning curve"],
+        title: "Repeat-issue share",
+        answer: "A repeat issue is one whose category and subtype already appeared at an earlier site. The repeat-issue share is the allocated delay days from repeat issues divided by total slip days at completed units after the first (Valencia, Lyon, Madrid). It is an association, not a claim that anything was preventable.",
+        src: "Evidence class: Measured · n = 3 units, history of 4" },
+      { keys: ["evidence","measured","modelled","assumed","evidence class"],
+        title: "Evidence classes",
+        answer: "Every value carries a label so you know how much to trust it. Measured = computed from the seed data. Modelled = computed by a visible model on fictional history. Assumed = an editable input. OVERLORD never adds numbers across classes and never presents an assumption as a measured result.",
+        src: "Honesty rule" },
+      { keys: ["r1","r2","r3","rule","decision rule","classified","who decides","why"],
+        title: "How items are classified (R1 / R2 / R3)",
+        answer: "R1 needs a client decision: spend or scope over €5,000, a projected shortfall on a go-live-critical item, or waiting on the client over 5 working days. R2 needs PM attention: critical slack under 1 week, an issue unowned over 2 days, or a contested item. R3 means the team handles it with an owner and a next step. Every item shows the rule that fired and its numbers under 'Why?'.",
+        src: "Shared decision rules" },
+      { keys: ["training","certification","sm-099","sm099","pace","shortfall","58","64","38"],
+        title: "Barcelona training (SM-099)",
+        answer: "38 of 64 operators are certified (59%). The target is 58 of 64 (90%) by Sun 28 Feb. At the on-plan pace of 12 per week the team reaches the target, so it is R3 and the PM sees no decision. If the pace slows to 6 per week, OVERLORD projects a shortfall at 28 Feb, so R1 fires and a decision card appears for the client with Option A (two weekend sessions, €0) and Option B (overtime for 26 pickers, €12,800). Decision deadline is Mon 22 Feb.",
+        src: "Scenario: Barcelona DC" },
+      { keys: ["slack","critical path","buffer"],
+        title: "Slack and the critical path",
+        answer: "Slack is the spare time an activity has before it starts pushing the go-live date. The critical path is the longest chain of work with the least slack. Barcelona's illustrative slack: interface tests 2.0 weeks, master data 3.0 weeks, hardware 1.5 weeks; training slack is computed from pace.",
+        src: "Scenario: Barcelona DC" },
+      { keys: ["approval","audit","validate","approve","disapprove","reject"],
+        title: "Approval gate and audit log",
+        answer: "Plans, kickoff packs and weekly reports are drafts until the Miebach PM approves them; the client only ever sees approved versions. The client director can approve an option, disapprove both, or ask a question, and every edit, approval, disapproval and response is logged with the simulated time-to-decision.",
+        src: "Approval gate [ALL]" },
+      { keys: ["overlord","launchloop","ovy","what is this","what are you","loop"],
+        title: "OVERLORD and the loop",
+        answer: "OVERLORD is the PLAN module of LaunchLoop, a decision-support tool for multi-site warehouse go-lives. The loop is LEARN (turn past go-lives into lessons) to PLAN (draft the next plan with a probability) to RUN (show who decides what, by when), and resolved issues feed back into LEARN. I'm Ovy, your offline guide to what the numbers mean. I use pre-written explanations and make no network calls.",
+        src: "About" }
+    ];
+
+    const OVY_CHIPS = [
+      ["What does \u201closs avoided\u201d mean?", "loss avoided"],
+      ["What is go-live?", "go-live"],
+      ["What is P80?", "p80"],
+      ["Why is training a decision?", "training"],
+      ["How are items classified?", "decision rule"]
+    ];
+
+    let ovyStarted = false;
+
+    function toggleOvy() {
+      const panel = document.getElementById('ovy-panel');
+      const launch = document.getElementById('ovy-launch');
+      const open = panel.classList.toggle('open');
+      launch.style.display = open ? 'none' : 'inline-flex';
+      if (open && !ovyStarted) {
+        ovyStarted = true;
+        ovyAddBot("Hi, I'm Ovy. Ask me what any number or term on this screen means. Everything here is illustrative and runs offline.");
+        renderOvyChips();
+      }
+      if (open) setTimeout(() => { const i = document.getElementById('ovy-input'); if (i) i.focus(); }, 60);
+    }
+
+    function renderOvyChips() {
+      const wrap = document.getElementById('ovy-chips');
+      wrap.innerHTML = OVY_CHIPS.map((c, idx) =>
+        `<button class="ovy-chip" onclick="ovyAsk(OVY_CHIPS[${idx}][1], OVY_CHIPS[${idx}][0])">${c[0]}</button>`
+      ).join('');
+    }
+
+    function ovyAddUser(text) {
+      const log = document.getElementById('ovy-log');
+      const d = document.createElement('div');
+      d.className = 'ovy-msg user';
+      d.textContent = text;
+      log.appendChild(d);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function ovyAddBot(text, src) {
+      const log = document.getElementById('ovy-log');
+      const d = document.createElement('div');
+      d.className = 'ovy-msg bot';
+      d.innerHTML = text + (src ? `<span class="src">${src}</span>` : '');
+      log.appendChild(d);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    // Deterministic match: find the KB entry with the most keyword hits.
+    function ovyMatch(query) {
+      const q = (query || "").toLowerCase();
+      let best = null, bestScore = 0;
+      OVY_KB.forEach(entry => {
+        let score = 0;
+        entry.keys.forEach(k => { if (q.includes(k)) score += k.length; });
+        if (score > bestScore) { bestScore = score; best = entry; }
+      });
+      return bestScore > 0 ? best : null;
+    }
+
+    function ovyAsk(query, displayText) {
+      ovyAddUser(displayText || query);
+      const hit = ovyMatch(query);
+      if (hit) {
+        ovyAddBot(`<strong>${hit.title}.</strong> ${hit.answer}`, hit.src);
+      } else {
+        ovyAddBot("I don't have a note on that yet. Try a term you can see on screen, such as P80, repeat-issue share, go-live, slack, evidence class, or how items are classified.");
+      }
+    }
+
+    function ovySend() {
+      const input = document.getElementById('ovy-input');
+      const v = input.value.trim();
+      if (!v) return;
+      input.value = "";
+      ovyAsk(v);
     }
   </script>
 </body>
