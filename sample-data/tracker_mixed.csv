@@ -1,0 +1,6 @@
+Issue_ID,Site,Milestone,Issue_Type,Subcategory,Details,Week_Reported,Week_Closed,Impact_Days,Responsible,Assigned_To
+LYN-01,Lyon DC,Interface tests passed,Integration and testing,interface test failure,Interface test failure between WMS and regional ERP,10,7,15,Client IT,Etienne Blanc
+LYN-02,Lyon DC,Hardware on site,Site and infrastructure,hardware delivery late,Late delivery of sorting lane scanners,8,6,7,Robotic storage supplier,Peter Kraus
+LYN-03,Lyon DC,Master data validated,Master data,duplicate SKUs,Duplicate SKU entries across product categories,11,9,6,Client IT,Etienne Blanc
+LYN-04,Lyon DC,Training certified,Training and change management,low shift coverage,Low attendance in morning shift certification,6,4,8,Client Operations,Claire Monet
+LYN-05,Lyon DC,Cutover rehearsal,Cutover and hypercare,rehearsal gaps,Dry run sequence discrepancy during shift handover,3,2,3,Miebach,Laura Pons

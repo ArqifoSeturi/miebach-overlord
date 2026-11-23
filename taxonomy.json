@@ -1,0 +1,39 @@
+{
+  "Master data": [
+    "duplicate SKUs",
+    "unit-of-measure conflicts",
+    "missing dimensions or weights"
+  ],
+  "Integration and testing": [
+    "interface test failure",
+    "incomplete test coverage",
+    "environment instability"
+  ],
+  "Training and change management": [
+    "certification behind plan",
+    "low shift coverage",
+    "process resistance"
+  ],
+  "Process adaptation": [
+    "customisation request",
+    "undocumented workaround"
+  ],
+  "Site and infrastructure": [
+    "hardware delivery late",
+    "network or Wi-Fi gaps",
+    "building not ready"
+  ],
+  "Vendor and integrator": [
+    "delivery slip",
+    "resourcing shortfall"
+  ],
+  "Client decisions and approvals": [
+    "late sign-off",
+    "scope change",
+    "data not provided"
+  ],
+  "Cutover and hypercare": [
+    "rehearsal gaps",
+    "stabilisation capacity"
+  ]
+}

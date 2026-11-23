@@ -1,0 +1,6 @@
+id,unit,milestone,category,subtype,description,reported_wk,resolved_wk,delay_days,owner_party,owner_person
+LSB-01,Lisbon DC,Interface tests passed,Integration and testing,interface test failure,Stock message rejection on picking lines,10,8,14,Client IT,Marta Silva
+LSB-02,Lisbon DC,Master data validated,Master data,duplicate SKUs,Duplicate EAN barcode references in legacy ERP,11,9,7,Client IT,Joao Pinto
+LSB-03,Lisbon DC,Training certified,Training and change management,certification behind plan,Weekend scanner certification gap,6,4,10,Client Operations,Carlos Dias
+LSB-04,Lisbon DC,Hardware on site,Site and infrastructure,hardware delivery late,Late arrival of handheld radio terminals,9,8,5,Robotic storage supplier,Peter Kraus
+LSB-05,Lisbon DC,Cutover rehearsal,Cutover and hypercare,rehearsal gaps,Discrepancy in staging zone cutover run,3,2,4,Miebach,Laura Pons

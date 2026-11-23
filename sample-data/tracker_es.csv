@@ -1,0 +1,6 @@
+id;unidad;hito;categoria;subtipo;descripcion;sem_reportada;sem_resuelta;dias_retraso;parte_responsable;persona_responsable
+VLC-01;Valencia DC;Interface tests passed;Integration and testing;interface test failure;Rechazo mensajes stock en integracion ERP;9;7;12;Client IT;Nuria Gomez
+VLC-02;Valencia DC;Master data validated;Master data;unit-of-measure conflicts;Conflictos unidades de medida pallets y cajas;10;8;8;Client IT;Nuria Gomez
+VLC-03;Valencia DC;Training certified;Training and change management;certification behind plan;Retraso formacion turnos de tarde carretilleros;7;5;9;Client Operations;Pau Serra
+VLC-04;Valencia DC;Hardware on site;Site and infrastructure;network or Wi-Fi gaps;Gaps cobertura wifi en pasillos estrechos;8;6;6;Client IT;Nuria Gomez
+VLC-05;Valencia DC;Cutover rehearsal;Cutover and hypercare;rehearsal gaps;Fallo simulacion corte de inventario en vivo;3;1;5;Miebach;Javier
