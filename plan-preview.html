@@ -342,24 +342,32 @@ details.why ul{margin:6px 0 0;padding-left:18px}
 @media (max-width: 900px){ .sim-grid{grid-template-columns:1fr} .desktop-only{display:none} }
 @media (max-width: 640px){ .counts-hero{grid-template-columns:1fr} .opts-grid{grid-template-columns:1fr} .clockbox{width:100%;justify-content:space-between} }
 
-/* OVERLORD scenario + sensitivity (PLAN P3) */
-.ovl-mark{vertical-align:-3px;margin-right:4px}
-.ovl-section{border-left:3px solid #5136b3;padding-left:14px}
-.ovl-section h2{color:#5136b3}
-.scn-control{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0}
-.scn-control label{font-weight:600;font-size:.9rem}
-.scn-control input[type=range]{flex:1;min-width:200px;accent-color:#5136b3}
-.scn-control output{font-weight:700;font-variant-numeric:tabular-nums;color:#5136b3;min-width:44px;text-align:right}
-.scn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:12px 0}
-.scn-grid .card{padding:12px}
-.scn-grid .big{font-family:var(--serif);font-size:1.7rem;font-weight:700;line-height:1.1}
+/* OVERLORD scenario + sensitivity (PLAN P3) — uses the shared paper/ink/teal palette, not a bolt-on colour. */
+.ovl-mark{vertical-align:-3px;margin-right:5px}
+.ovl-section{border-top:2px solid var(--accent);padding-top:16px;margin-top:4px}
+.ovl-section>h2{color:var(--ink);letter-spacing:.01em;display:flex;align-items:center}
+.scn-control{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:12px 0;padding:10px 12px;background:var(--surface-2);border:1px solid var(--rule);border-radius:8px}
+.scn-control label{font-weight:600;font-size:.9rem;color:var(--ink)}
+.scn-control input[type=range]{flex:1;min-width:200px;accent-color:var(--accent)}
+.scn-control output{font-weight:700;font-variant-numeric:tabular-nums;color:var(--accent);min-width:46px;text-align:right;font-size:1.05rem}
+.scn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0}
+.scn-grid .card{padding:14px}
+.scn-grid .card p.small{text-transform:uppercase;letter-spacing:.04em;font-size:.68rem;color:var(--muted);margin:0 0 4px}
+.scn-grid .big{font-family:var(--serif);font-size:1.8rem;font-weight:600;line-height:1.05;color:var(--ink)}
 .big.good,#scn-delta.good,#v2-delta.good{color:var(--good)}
-.big.bad,#scn-delta.bad,#v2-delta.bad{color:var(--repeat)}
-.scn-summary{background:#f1edfd;border:1px solid #d7ccf7;border-radius:8px;padding:10px 12px;font-size:.92rem;line-height:1.5;margin:6px 0 10px}
-.scn-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,1.1fr);gap:16px;align-items:start}
-.scn-chartcard{padding:12px}
-.rebase{border-left:3px solid #c0362c;background:#fff8f3;border-radius:0 8px 8px 0;padding:10px 12px;font-size:.9rem;line-height:1.5;margin:12px 0}
-.sen-layout{display:grid;grid-template-columns:minmax(300px,1.2fr) minmax(0,1fr);gap:16px;align-items:start;margin-top:8px}
+.big.bad,#scn-delta.bad,#v2-delta.bad{color:var(--bad)}
+.scn-summary{background:var(--accent-2);border:1px solid #cfe3e1;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 14px;font-size:.95rem;line-height:1.55;margin:4px 0 12px;color:var(--ink)}
+.scn-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,1.05fr);gap:16px;align-items:start}
+.scn-chartcard{padding:14px}
+.scn-chartcard p.small{text-transform:uppercase;letter-spacing:.04em;font-size:.68rem;color:var(--muted);margin:0 0 6px}
+.rebase{border:1px solid var(--rule);border-left:3px solid var(--first);background:var(--surface);border-radius:0 8px 8px 0;padding:11px 14px;font-size:.9rem;line-height:1.55;margin:14px 0;color:var(--ink-2)}
+.rebase strong{color:var(--ink)}
+.scn-commit{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0}
+.scn-dateq{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0;font-size:.9rem}
+.scn-dateq label{font-weight:600;color:var(--ink)}
+.scn-dateq input[type=date]{border:1px solid var(--rule-2);border-radius:6px;padding:5px 8px;font:inherit}
+.scn-dateq-out{color:var(--ink-2)}
+.sen-layout{display:grid;grid-template-columns:minmax(300px,1.15fr) minmax(0,1fr);gap:16px;align-items:start;margin-top:10px}
 @media (max-width:900px){ .scn-layout,.sen-layout{grid-template-columns:1fr} }
 @media (max-width:640px){ .scn-grid{grid-template-columns:1fr} }
 /* @@CSS-MORE */
@@ -1515,7 +1523,20 @@ function buildPlan(state) {
   sim.sorted.forEach(v => { const b = hist[Math.min(hist.length - 1, Math.floor((v - lo) / 7))]; if (b) b.n++; });
   return { kickoff: mil.kickoff, target: mil.planned_go_live, inputs: inputs.map(i => ({ id: i.id, label: i.label, party: i.party, planned: i.planned, parallel: i.parallel, actuals: i.actuals, min: i.min, mode: i.mode, max: i.max, edited: i.edited, uniform: i.max - i.min <= 0.5 })),
     runs: sim.runs, seed: sim.seed, uniform, probOnTime: uniform.length ? null : sim.probOnTime, p50Date: addDays(mil.kickoff, sim.p50Days), p80Date: addDays(mil.kickoff, sim.p80Days), p50Days: sim.p50Days, p80Days: sim.p80Days,
-    p80SlipDays: Math.max(0, Math.round(sim.p80Days - PLANNED_DAYS)), top3: sim.top3.map(x => ({ id: x.id, label: x.label, party: x.party, criticality: x.criticality, expectedDays: x.expectedDays })), hist, n: completedUnits(state.units).length };
+    p80SlipDays: Math.max(0, Math.round(sim.p80Days - PLANNED_DAYS)), top3: sim.top3.map(x => ({ id: x.id, label: x.label, party: x.party, criticality: x.criticality, expectedDays: x.expectedDays })), hist, n: completedUnits(state.units).length,
+    committedScenario: committedScenarioSummary(state) };
+}
+/* When the PM has recorded a scenario assumption, summarise its effect so it travels into the
+   approved plan (and the client view). null when nothing is committed. */
+function committedScenarioSummary(state) {
+  const share = state.planShareCommitted;
+  if (share == null) return null;
+  const mil = unitById(state.units, 'MIL');
+  const baseSim = simulatePlan(planInputs(state));
+  const scenSim = simulatePlan(scenarioInputs(state, share));
+  const baseSlip = Math.max(0, Math.round(baseSim.p80Days - PLANNED_DAYS));
+  const scenSlip = Math.max(0, Math.round(scenSim.p80Days - PLANNED_DAYS));
+  return { share, daysEarlier: Math.max(0, baseSlip - scenSlip), p80Date: addDays(mil.kickoff, scenSim.p80Days), baseP80Date: addDays(mil.kickoff, baseSim.p80Days) };
 }
 /* ---------- PLAN P3: scenario control (item 15) and sensitivity (item 16) ---------- */
 /* Repeat-issue overrun per completed unit: allocated slip days that came from repeat issues,
@@ -1625,6 +1646,30 @@ function rebaselineDate(state, confidence) {
   }
   return { confidence, date: addDays(mil.kickoff, days), days, weeks: Math.round(days / 7), slipDays: Math.max(0, Math.round(days - PLANNED_DAYS)), atTargetProb: atTarget, target: mil.planned_go_live };
 }
+/* Modelled chance of going live within `days` of kickoff (share of the seeded runs on or before it). */
+function planChanceBy(state, days) {
+  const sim = simulatePlan(planInputs(state));
+  if (!(days >= 0)) return null;
+  return sim.sorted.filter(v => v <= days + 1e-9).length / sim.runs;
+}
+/* PM records (or clears) the scenario assumption on the plan; logged, and it re-draws the draft so it needs re-validation. */
+function commitPlanShare(state, role, sharePct) {
+  if (role !== 'pm') return DENIED();
+  const v = Math.max(0, Math.min(100, Math.round(Number(sharePct) || 0)));
+  const before = state.planShareCommitted;
+  if (before === v) return { ok: false, reason: '' };
+  state.planShareCommitted = v;
+  logEvent(state, role, 'Recorded kickoff-pack scenario assumption on the Milan plan (% of repeat-issue overrun removed)', before == null ? 'none' : before + '%', v + '%');
+  return { ok: true };
+}
+function clearPlanShare(state, role) {
+  if (role !== 'pm') return DENIED();
+  if (state.planShareCommitted == null) return { ok: false, reason: '' };
+  const before = state.planShareCommitted;
+  state.planShareCommitted = null;
+  logEvent(state, role, 'Cleared the recorded scenario assumption from the Milan plan', before + '%', 'none');
+  return { ok: true };
+}
 /* Sensitivity (item 16): how much does each milestone duration (±1 week on min/median/max together)
    and each cost-of-delay level move the outcome. Ranked by absolute change in P80 slip days. */
 function planSensitivity(state) {
@@ -1664,7 +1709,12 @@ function planHeadline(p) {
   return name + ' is more likely to go live around ' + fmtDayMonth(p.p50Date) + ' than on ' + fmtDayMonth(p.target) + '.';
 }
 function planActionLine(p) { return p.probOnTime != null && p.probOnTime < 0.5 ? 'The P80 date is ' + fmtDate(p.p80Date) + '. Either re-baseline the go-live or act on the kickoff pack.' : ''; }
-function planClientLine(p) { return 'Likely go-live between ' + fmtDate(p.p50Date) + ' and ' + fmtDate(p.p80Date) + ', based on ' + numberWord(p.n) + ' earlier go-lives, low confidence.'; }
+function planClientLine(p) {
+  let s = 'Likely go-live between ' + fmtDate(p.p50Date) + ' and ' + fmtDate(p.p80Date) + ', based on ' + numberWord(p.n) + ' earlier go-lives, low confidence.';
+  const cs = p.committedScenario;
+  if (cs && cs.daysEarlier > 0) s += ' Acting on the kickoff pack could bring the P80 date about ' + cs.daysEarlier + ' days earlier (scenario, low evidence).';
+  return s;
+}
 function setPlanInput(state, role, id, key, value) {
   if (role !== 'pm') return DENIED();
   const h = planInputs(state).find(i => i.id === id); if (!h || ['min', 'mode', 'max'].indexOf(key) < 0) return { ok: false, reason: 'Unknown input.' };
@@ -2117,7 +2167,7 @@ function createState() {
   const seed = generateSeed();
   return { units: seed.units, issues: seed.issues, thresholds: thresholdsFromSeed(seed.units), bufferWeeks: 2, kickoffEdits: {},
     clock: CLOCK_START, tick: 0, slowPace: false, trainingBase: null, decisions: {}, contests: {}, questions: [], dueOverrides: {}, unownedSince: {},
-    planEdits: {}, approvals: { kickoff: null, plan: null }, acks: {}, audit: [], uncategorised: [], imports: [],
+    planEdits: {}, planShareCommitted: null, approvals: { kickoff: null, plan: null }, acks: {}, audit: [], uncategorised: [], imports: [],
     assumptions: { manualReportHours: 6, pmReviewHours: 0.5, minutesPerIssue: 30, rate: 120, coordinationBudget: 10, projectWeeks: 16, codLow: 8000, codBase: 25000, codHigh: 85000, avoidLow: 20, avoidBase: 35, avoidHigh: 50 } };
 }
 function now(state) { return state.clock + state.tick * 3 * 60000; }
@@ -2196,7 +2246,7 @@ G.LL = {
   ACK_LABEL, kickoffActionStatus, acceptAction, askAction, recordAction, replyQuestion, resetChangedAcks, ackActor,
   trendText, IMPORT_FILE_LIMIT, importGuide, templateCSV, EXPORT_HEADERS, exportHistoryCSV,
   RESOLUTION_NOTES, pastExamples, ruleChoiceText, RANK_RULES, slackCounts, issueSlipMap, ISSUE_STATUS, filterIssues, issuesLink, parseIssuesLink, filterLabel, riskStats, topRisks, BACKTEST_SEED, sampleN, backtestPack, compareRules, rankRule, backtestText,
-  unitRepeatOverrun, scenarioInputs, buildScenario, planSensitivity, scenarioNote, scenarioReducedTypes, rebaselineDate,
+  unitRepeatOverrun, scenarioInputs, buildScenario, planSensitivity, scenarioNote, scenarioReducedTypes, rebaselineDate, committedScenarioSummary, commitPlanShare, clearPlanShare, planChanceBy,
   /* @@EXPORTS */
 };
 })(typeof globalThis !== 'undefined' ? globalThis : window);
@@ -2248,7 +2298,7 @@ G.LL = {
 'use strict';
 const L = window.LL;
 let state = L.createState();
-const ui = { role: 'pm', screen: 'today', learnTab: 'history', why: null, editIssues: false, showAllIssues: false, unit: 'VLC', paUnit: 'LIS', files: [], demo: null, filters: { unit: '', category: '', subtype: '', status: '' }, filterOrigin: null, planShare: 50 };
+const ui = { role: 'pm', screen: 'today', learnTab: 'history', why: null, editIssues: false, showAllIssues: false, unit: 'VLC', paUnit: 'LIS', files: [], demo: null, filters: { unit: '', category: '', subtype: '', status: '' }, filterOrigin: null, planShare: 50, planAskDate: null };
 let tipSeq = 0;
 const $ = s => document.querySelector(s);
 function metaParts(parts) { return parts.filter(Boolean).map(esc).join(' · '); }
@@ -2572,7 +2622,7 @@ function renderPlan(role, pfx) {
   return h;
 }
 /* OVERLORD rhombus-with-eye mark, inline SVG, no network. */
-function overlordMark(size) { size = size || 20; return '<svg class="ovl-mark" width="' + size + '" height="' + size + '" viewBox="0 0 40 40" role="img" aria-label="OVERLORD"><polygon points="20,2 38,20 20,38 2,20" fill="#5136b3"/><path d="M9 20 Q 20 11 31 20 Q 20 29 9 20 Z" fill="#fff"/><circle cx="20" cy="20" r="4" fill="#2a1a63"/><circle cx="20" cy="20" r="1.5" fill="#fff"/></svg>'; }
+function overlordMark(size) { size = size || 20; return '<svg class="ovl-mark" width="' + size + '" height="' + size + '" viewBox="0 0 40 40" role="img" aria-label="OVERLORD"><polygon points="20,2 38,20 20,38 2,20" fill="#0d5a62"/><path d="M9 20 Q 20 11 31 20 Q 20 29 9 20 Z" fill="#fffdf7"/><circle cx="20" cy="20" r="4" fill="#0d5a62"/><circle cx="20" cy="20" r="1.4" fill="#fffdf7"/></svg>'; }
 /* Small histogram that overlays the baseline and scenario distributions and both P80 markers. */
 function scenarioHistSVG(sc) {
   const b = sc.base, s = sc.scenario;
@@ -2583,8 +2633,8 @@ function scenarioHistSVG(sc) {
   const top = Math.max(...allShares) || 0.05;
   const bars = (hist, runs, fill, opacity) => hist.map(x => { const hgt = (x.n / runs) / top * ih; const bw = Math.max(1, (X(x.to) - X(x.from)) - 2); return '<rect x="' + (X(x.from) + 1) + '" y="' + (m.t + ih - hgt) + '" width="' + bw + '" height="' + hgt + '" fill="' + fill + '" opacity="' + opacity + '"/>'; }).join('');
   let g = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Baseline and scenario go-live distributions. Baseline P80 week ' + L.round1(b.p80Days / 7) + ', scenario P80 week ' + L.round1(s.p80Days / 7) + '.">';
-  g += bars(b.hist, b.runs, '#c3cede', 0.9) + bars(s.hist, s.runs, '#5136b3', 0.55);
-  [[L.PLANNED_DAYS, '#c0362c', 'Plan'], [b.p80Days, '#8a93a6', 'P80 base'], [s.p80Days, '#5136b3', 'P80 now']].forEach((z, k) => { const x = X(z[0]); g += '<line x1="' + x + '" x2="' + x + '" y1="' + m.t + '" y2="' + (m.t + ih) + '" stroke="' + z[1] + '" stroke-width="1.5" stroke-dasharray="' + (k === 0 ? '2 2' : '4 3') + '"/><text x="' + Math.min(W - 44, x + 3) + '" y="' + (m.t + 10 + k * 11) + '" font-size="9" style="fill:' + z[1] + '">' + z[2] + '</text>'; });
+  g += bars(b.hist, b.runs, '#cdc6b5', 0.85) + bars(s.hist, s.runs, '#0d5a62', 0.5);
+  [[L.PLANNED_DAYS, '#a3261b', 'Plan'], [b.p80Days, '#8a8373', 'P80 base'], [s.p80Days, '#0d5a62', 'P80 now']].forEach((z, k) => { const x = X(z[0]); g += '<line x1="' + x + '" x2="' + x + '" y1="' + m.t + '" y2="' + (m.t + ih) + '" stroke="' + z[1] + '" stroke-width="1.5" stroke-dasharray="' + (k === 0 ? '2 2' : '4 3') + '"/><text x="' + Math.min(W - 44, x + 3) + '" y="' + (m.t + 10 + k * 11) + '" font-size="9" style="fill:' + z[1] + '">' + z[2] + '</text>'; });
   for (let w = Math.ceil(lo / 7); w * 7 <= hi; w += 2) { const x = X(w * 7); g += '<text x="' + x + '" y="' + (H - 8) + '" text-anchor="middle" font-size="9">' + w + '</text>'; }
   g += '<text x="' + (m.l + iw / 2) + '" y="' + (H - 0) + '" text-anchor="middle" font-size="9">weeks after kickoff</text>';
   return g + '</svg>';
@@ -2609,11 +2659,29 @@ function scenarioSection() {
   h += '<div class="card"><p class="small muted">Scenario P80 slip (' + sc.scenario.sharePct + '%)</p><div class="big">' + sc.scenario.p80SlipDays + ' days</div><p class="small muted">at ' + L.fmtDate(sc.scenario.p80Date) + '</p></div>';
   h += '<div class="card"><p class="small muted">Change in P80 slip</p><div class="big ' + (slip < 0 ? 'good' : slip > 0 ? 'bad' : '') + '" id="scn-delta">' + sign(slip) + ' days</div><p class="small muted">chance of 7 Jun ' + esc(probTxt) + '</p></div></div>';
   h += '<div class="card scn-chartcard"><p class="small muted">Go-live distribution: grey is the baseline, purple is this scenario</p>' + scenarioHistSVG(sc) + '</div></div>';
-  // Re-baseline helper.
+  // Record / clear the scenario assumption on the plan (logged; flows into the client view once validated).
+  const committed = state.planShareCommitted;
+  h += '<div class="scn-commit">';
+  if (committed == null) h += '<button type="button" class="btn small" data-act="commit-share" id="commit-share">Record ' + sc.scenario.sharePct + '% as the plan assumption</button><span class="small muted">Recording it logs the assumption and lets the client see the effect once you validate the plan.</span>';
+  else h += '<span class="chip ok">Recorded: ' + committed + '% assumed</span><button type="button" class="btn small" data-act="commit-share" id="commit-share">Update to ' + sc.scenario.sharePct + '%</button><button type="button" class="btn small" data-act="clear-share" id="clear-share">Clear</button>';
+  h += '</div>';
+  // Re-baseline helper, both directions.
   const rb = L.rebaselineDate(state, 0.8);
   h += '<div class="rebase"><strong>Re-baseline helper.</strong> The current target ' + L.fmtDate(rb.target) + ' has a modelled chance of about ' + Math.round(rb.atTargetProb * 100) + '%. For an 80% chance the go-live would need to move to about <strong>' + L.fmtDate(rb.date) + '</strong> (' + rb.slipDays + ' days later than plan). Modelled, low evidence.</div>';
+  // Item 5: pick a date, get the modelled chance.
+  const mil = L.unitById(state.units, 'MIL');
+  h += '<div class="scn-dateq"><label for="plan-askdate">Chance of hitting a date</label><input type="date" id="plan-askdate" data-change="plan-askdate" value="' + (ui.planAskDate || L.isoDate(mil.planned_go_live)) + '" min="' + L.isoDate(mil.kickoff) + '"><span id="plan-askdate-out" class="scn-dateq-out">' + planDateChance(ui.planAskDate) + '</span></div>';
   h += '<p class="small muted">This drives value-ledger line V2. The history is small and fictional (n = ' + L.completedUnits(state.units).length + ' units).</p></section>';
   return h;
+}
+/* Item 5: modelled chance of going live by a chosen date (same seeded run as the plan). */
+function planDateChance(iso) {
+  const mil = L.unitById(state.units, 'MIL');
+  const date = iso ? L.d(iso) : mil.planned_go_live;
+  const days = Math.round((date - mil.kickoff) / L.DAY);
+  if (days < 0) return 'Pick a date on or after kickoff.';
+  const share = L.planChanceBy(state, days);
+  return 'About ' + Math.round(share * 100) + '% by ' + L.fmtDate(date) + ' (modelled, low evidence).';
 }
 /* PLAN P3 item 16: sensitivity view, as a tornado chart plus the numbers. */
 function tornadoSVG(rows) {
@@ -2628,10 +2696,10 @@ function tornadoSVG(rows) {
     const y = 10 + i * rowH;
     g += '<text x="6" y="' + (y + 13) + '" text-anchor="start" font-size="10" style="fill:var(--ink)">' + esc(r.label) + '</text>';
     const dn = X(r.minusWeek), up = X(r.plusWeek);
-    g += '<rect x="' + Math.min(cx, dn) + '" y="' + (y + 1) + '" width="' + Math.abs(dn - cx) + '" height="9" fill="#0e6a63"/>';
-    g += '<text x="' + (dn <= cx ? dn - 3 : dn + 3) + '" y="' + (y + 9) + '" text-anchor="' + (dn <= cx ? 'end' : 'start') + '" font-size="9" style="fill:#0e6a63">' + (r.minusWeek > 0 ? '+' : '') + r.minusWeek + '</text>';
-    g += '<rect x="' + Math.min(cx, up) + '" y="' + (y + 12) + '" width="' + Math.abs(up - cx) + '" height="9" fill="#c0362c"/>';
-    g += '<text x="' + (up >= cx ? up + 3 : up - 3) + '" y="' + (y + 20) + '" text-anchor="' + (up >= cx ? 'start' : 'end') + '" font-size="9" style="fill:#c0362c">' + (r.plusWeek > 0 ? '+' : '') + r.plusWeek + '</text>';
+    g += '<rect x="' + Math.min(cx, dn) + '" y="' + (y + 1) + '" width="' + Math.abs(dn - cx) + '" height="9" fill="#1d6b3a"/>';
+    g += '<text x="' + (dn <= cx ? dn - 3 : dn + 3) + '" y="' + (y + 9) + '" text-anchor="' + (dn <= cx ? 'end' : 'start') + '" font-size="9" style="fill:#1d6b3a">' + (r.minusWeek > 0 ? '+' : '') + r.minusWeek + '</text>';
+    g += '<rect x="' + Math.min(cx, up) + '" y="' + (y + 12) + '" width="' + Math.abs(up - cx) + '" height="9" fill="#a3261b"/>';
+    g += '<text x="' + (up >= cx ? up + 3 : up - 3) + '" y="' + (y + 20) + '" text-anchor="' + (up >= cx ? 'start' : 'end') + '" font-size="9" style="fill:#a3261b">' + (r.plusWeek > 0 ? '+' : '') + r.plusWeek + '</text>';
   });
   g += '<text x="' + cx + '" y="' + (H - 4) + '" text-anchor="middle" font-size="9">← a week earlier · P80 slip days · a week later →</text>';
   return g + '</svg>';
@@ -2804,13 +2872,14 @@ const DEMO = [
   { role: 'pm', screen: 'learn', tab: 'history', target: '.chartcard', title: '1. What four go-lives teach', body: () => { const rs = L.repeatShare(state.units, state.issues); return L.headlineText(rs, state.units) + ' ' + L.backtestText(L.backtestPack(state.units, state.issues)) + ' (' + L.nLabel(rs) + '; measured. Seen before does not mean it could have been avoided.)'; } },
   { role: 'pm', screen: 'learn', tab: 'kickoff', target: '.packbar', title: '2. The Milan kickoff pack', body: () => L.kickoffHeadline(L.buildKickoffPack(state)) + ' Each action has an owner, the evidence behind it and an act-by date. Change the buffer to move the dates.' },
   { role: 'pm', screen: 'plan', target: '.sim-grid', title: '3. Milan plan and probability', body: () => L.planHeadline(L.buildPlan(state)) + ' Modelled from 4 fictional units: low evidence, and every earlier unit overran.' },
-  { role: 'pm', screen: 'plan', target: '#approve-plan', title: '4. The PM validates', body: () => 'Nothing reaches the client until Laura Pons validates it. Validate the plan here (and approve the kickoff pack on its screen).', action: { label: 'Validate plan and approve pack', run: () => { if (L.draftChanged(state, 'plan')) L.approve(state, 'pm', 'plan'); if (L.draftChanged(state, 'kickoff')) L.approve(state, 'pm', 'kickoff'); } } },
-  { role: () => demoAcked() ? 'pm' : 'client', screen: 'learn', tab: 'kickoff', target: () => demoAcked() ? '#ack-summary' : '#ack-' + demoAckSub(), title: '5. The owner accepts an action', body: () => { const sub = demoAckSub(), row = sub && L.kickoffActionStatus(state).rows.find(r => r.subtype === sub); if (!row) return 'Approve the kickoff pack first (step 4), then the client can accept the actions their teams own.'; return demoAcked() ? 'Elena accepted "' + row.label + '" and the step is logged. Back on the PM view the pack now reads: ' + L.kickoffActionStatus(state).text + '.' : 'Elena, viewing as the client, sees the approved pack. Actions owned by Client IT or Client Operations wait for her team to accept them or ask a question.'; }, action: { label: 'Accept the first client-owned action as Elena', run: () => { if (!state.approvals.kickoff) L.approve(state, 'pm', 'kickoff'); const sub = demoAckSub(); if (sub) L.acceptAction(state, 'client', sub); } } },
-  { role: 'pm', screen: 'today', target: '.strip', title: '6. Barcelona: exception-based PM view', body: () => { const e = L.evaluateAll(state); return e.r1.length + ' client decisions and ' + e.r2.length + ' items need PM attention today; ' + e.r3.length + ' are handled by the team, each with an owner, next step and "Why?".'; } },
-  { role: 'pm', screen: 'today', target: '#slow-toggle', title: '7. What if training pace slows?', body: () => 'At 6 certifications a week instead of 12, the projection at the 28 Feb cutoff falls short of 58. Rule R1 fires and a decision card goes to the client.', action: { label: 'Slow the training pace', run: () => L.setSlowPace(state, 'pm', true) } },
-  { role: 'client', screen: 'today', target: '.dcard', title: '8. The client chooses an option', body: () => 'Elena sees options A and B with cost, days at risk and the 22 Feb deadline. Her choice is logged with time-to-decision on the simulated clock.', action: { label: 'Choose option A as Elena', run: () => { if (!state.decisions['SM-099'] || state.decisions['SM-099'].status !== 'open') L.setSlowPace(state, 'pm', true); L.respondDecision(state, 'client', 'SM-099', 'A', 'Weekend sessions agreed with the site team'); } } },
-  { role: 'pm', screen: 'value', target: '.ledger', title: '9. The value ledger', body: () => L.valueHeadline(L.valueLedger(state)) },
-  { role: 'pm', screen: 'learn', tab: 'history', target: '.chartcard', title: '10. Barcelona goes live and the history updates', body: () => L.unitById(state.units, 'BCN').status === 'done' ? 'Barcelona is now the fifth completed go-live. ' + L.headlineText(L.repeatShare(state.units, state.issues), state.units) + ' The kickoff pack and the Milan plan now use five go-lives.' : 'The clock moves to Tue 16 March, the day after Barcelona goes live. The PM adds it to the history and every Learn figure recalculates.', action: { label: 'Move to 16 March and add Barcelona', run: () => { if (L.unitById(state.units, 'BCN').status !== 'done') { L.jumpTo(state, 'pm', '2027-03-16'); L.syncDecisions(state); L.addToHistory(state, 'pm'); } } } }
+  { role: 'pm', screen: 'plan', target: '.ovl-section', title: '4. OVERLORD scenario: what if we act on the kickoff pack?', body: () => { const sc = L.buildScenario(state, 50); const rb = L.rebaselineDate(state, 0.8); return 'Removing 50% of the repeat-issue overrun moves the P80 go-live about ' + sc.daysSaved + ' days earlier, worth roughly ' + L.euro(sc.valueSaved.low) + ' to ' + L.euro(sc.valueSaved.high) + ' (assumed). For an 80% chance of the current target the date would need to move to about ' + L.fmtDate(rb.date) + '. Scenario, not a forecast.'; }, action: { label: 'Record 50% as the plan assumption', run: () => { ui.planShare = 50; L.commitPlanShare(state, 'pm', 50); } } },
+  { role: 'pm', screen: 'plan', target: '#approve-plan', title: '5. The PM validates', body: () => 'Nothing reaches the client until Laura Pons validates it. Validate the plan here (and approve the kickoff pack on its screen). Once validated, the client sees the date range and any recorded scenario note.', action: { label: 'Validate plan and approve pack', run: () => { if (L.draftChanged(state, 'plan')) L.approve(state, 'pm', 'plan'); if (L.draftChanged(state, 'kickoff')) L.approve(state, 'pm', 'kickoff'); } } },
+  { role: () => demoAcked() ? 'pm' : 'client', screen: 'learn', tab: 'kickoff', target: () => demoAcked() ? '#ack-summary' : '#ack-' + demoAckSub(), title: '6. The owner accepts an action', body: () => { const sub = demoAckSub(), row = sub && L.kickoffActionStatus(state).rows.find(r => r.subtype === sub); if (!row) return 'Approve the kickoff pack first (step 4), then the client can accept the actions their teams own.'; return demoAcked() ? 'Elena accepted "' + row.label + '" and the step is logged. Back on the PM view the pack now reads: ' + L.kickoffActionStatus(state).text + '.' : 'Elena, viewing as the client, sees the approved pack. Actions owned by Client IT or Client Operations wait for her team to accept them or ask a question.'; }, action: { label: 'Accept the first client-owned action as Elena', run: () => { if (!state.approvals.kickoff) L.approve(state, 'pm', 'kickoff'); const sub = demoAckSub(); if (sub) L.acceptAction(state, 'client', sub); } } },
+  { role: 'pm', screen: 'today', target: '.strip', title: '7. Barcelona: exception-based PM view', body: () => { const e = L.evaluateAll(state); return e.r1.length + ' client decisions and ' + e.r2.length + ' items need PM attention today; ' + e.r3.length + ' are handled by the team, each with an owner, next step and "Why?".'; } },
+  { role: 'pm', screen: 'today', target: '#slow-toggle', title: '8. What if training pace slows?', body: () => 'At 6 certifications a week instead of 12, the projection at the 28 Feb cutoff falls short of 58. Rule R1 fires and a decision card goes to the client.', action: { label: 'Slow the training pace', run: () => L.setSlowPace(state, 'pm', true) } },
+  { role: 'client', screen: 'today', target: '.dcard', title: '9. The client chooses an option', body: () => 'Elena sees options A and B with cost, days at risk and the 22 Feb deadline. Her choice is logged with time-to-decision on the simulated clock.', action: { label: 'Choose option A as Elena', run: () => { if (!state.decisions['SM-099'] || state.decisions['SM-099'].status !== 'open') L.setSlowPace(state, 'pm', true); L.respondDecision(state, 'client', 'SM-099', 'A', 'Weekend sessions agreed with the site team'); } } },
+  { role: 'pm', screen: 'value', target: '.ledger', title: '10. The value ledger', body: () => L.valueHeadline(L.valueLedger(state)) },
+  { role: 'pm', screen: 'learn', tab: 'history', target: '.chartcard', title: '11. Barcelona goes live and the history updates', body: () => L.unitById(state.units, 'BCN').status === 'done' ? 'Barcelona is now the fifth completed go-live. ' + L.headlineText(L.repeatShare(state.units, state.issues), state.units) + ' The kickoff pack and the Milan plan now use five go-lives.' : 'The clock moves to Tue 16 March, the day after Barcelona goes live. The PM adds it to the history and every Learn figure recalculates.', action: { label: 'Move to 16 March and add Barcelona', run: () => { if (L.unitById(state.units, 'BCN').status !== 'done') { L.jumpTo(state, 'pm', '2027-03-16'); L.syncDecisions(state); L.addToHistory(state, 'pm'); } } } }
 ];
 function demoHighlight() {
   document.querySelectorAll('.demo-focus').forEach(el => el.classList.remove('demo-focus'));
@@ -3055,6 +3124,8 @@ const ACTIONS = {
   'add-issue': () => { const rr = L.addIssue(state, ui.role, ui.unit); if (!rr.ok) { say(rr.reason); return; } const x = rr.issue; render(); const el = document.getElementById('is-' + x.id + '-sub'); if (el) el.focus(); say('Added ' + x.id + '.'); },
   approve: el => { const r = L.approve(state, ui.role, el.dataset.kind); render(); say(r.ok ? (el.dataset.kind === 'plan' ? 'Plan validated' : 'Approved') + ' as version ' + r.version + '. The client now sees it.' : r.reason); },
   'plan-reset': el => { if (L.resetPlanInput(state, ui.role, el.dataset.ms).ok) { render(); say('Input reset to history; simulation re-run.'); } },
+  'commit-share': () => { const r = L.commitPlanShare(state, ui.role, ui.planShare); render(); const b = document.getElementById('commit-share'); if (b) b.focus(); say(r.ok ? 'Recorded ' + ui.planShare + '% as the plan assumption and logged it. Re-validate the plan to share it with the client.' : (r.reason || 'Already recorded at this share.')); },
+  'clear-share': () => { const r = L.clearPlanShare(state, ui.role); render(); say(r.ok ? 'Cleared the recorded scenario assumption and logged it.' : (r.reason || 'Nothing recorded.')); },
   'resolve-item': el => { const r = L.resolveItem(state, el.dataset.role || ui.role, el.dataset.id, (document.getElementById(el.dataset.note) || {}).value, (document.getElementById(el.dataset.days) || {}).value); if (r.ok) L.syncDecisions(state); render(); say(r.ok ? el.dataset.id + ' marked resolved and logged.' : r.reason); },
   'add-history': () => { const r = L.addToHistory(state, ui.role); render(); say(r.ok ? 'Barcelona added to the history with ' + r.slipDays + ' days of slip. Every Learn and Plan figure was recalculated.' : r.reason); },
   decide: el => { const inp = el.dataset.input ? document.getElementById(el.dataset.input) : null; const r = L.respondDecision(state, el.dataset.role || ui.role, el.dataset.id, el.dataset.choice, inp ? inp.value : ''); render(); say(r.ok ? (el.dataset.choice === 'question' ? 'Question sent to the Miebach PM and logged.' : 'Decision recorded and logged. Time to decision: ' + L.fmtDuration(r.timeToDecisionMs) + '.') : r.reason); },
@@ -3106,6 +3177,7 @@ const CHANGES = {
   buffer: el => { const rr = L.setBuffer(state, ui.role, el.value); if (rr.ok) { render(); say('Buffer set to ' + el.value + ' weeks. Act-by dates recalculated.'); } else { el.value = state.bufferWeeks; if (rr.reason) say(rr.reason); } },
   'plan-input': el => { const r = L.setPlanInput(state, ui.role, el.dataset.ms, el.dataset.key, el.value); render(); if (r.ok) say('Input updated; 10,000 runs re-simulated.'); else if (r.reason) say(r.reason); },
   'plan-share': el => { ui.planShare = Math.max(0, Math.min(100, +el.value)); render(); const s = document.getElementById('plan-share'); if (s) { s.focus(); } say('Scenario: ' + ui.planShare + '% of repeat-issue overrun removed; 10,000 runs re-simulated.'); },
+  'plan-askdate': el => { ui.planAskDate = el.value || null; const out = document.getElementById('plan-askdate-out'); if (out) out.textContent = planDateChance(ui.planAskDate); },
   slow: el => { if (L.setSlowPace(state, 'pm', el.checked)) { render(); say(el.checked ? 'Training pace slowed: rule R1 fired and a decision card went to the client.' : 'Training pace back on plan.'); } },
   assumption: el => { const rr = L.setAssumption(state, ui.role, el.dataset.key, el.value); if (!rr.ok && rr.reason) say(rr.reason); if (rr.ok) { render(); say('Assumption updated and logged.'); } },
   'file-unit': el => { const x = ui.files[+el.dataset.i]; x.unitId = el.value || null; x.applied = null; remap(x); render(); },
@@ -3122,7 +3194,7 @@ document.addEventListener('click', e => { const el = e.target.closest('[data-act
 document.addEventListener('change', e => { const el = e.target.closest('[data-change]'); if (el && CHANGES[el.dataset.change]) CHANGES[el.dataset.change](el, e); });
 $('#role').addEventListener('change', e => { ui.role = e.target.value; ui.screen = HOME[ui.role]; ui.why = null; render(); say('Now viewing as ' + ROLE_TEXT[ui.role] + '.'); });
 $('#btn-advance').addEventListener('click', () => { L.advanceDay(state, ui.role === 'all' ? 'pm' : ui.role); L.syncDecisions(state); render(); say('Clock advanced to ' + L.fmtDay(state.clock) + '. Projections and rules updated.'); });
-$('#btn-reset').addEventListener('click', () => { setMore(false); state = L.createState(); ui.unit = 'VLC'; ui.files = []; ui.why = null; ui.editIssues = false; ui.showAllIssues = false; ui.planShare = 50; if (typeof onReset === 'function') onReset(); render(); say('Reset: seed data and clock (Mon 15 Feb 2027 09:00) restored.'); });
+$('#btn-reset').addEventListener('click', () => { setMore(false); state = L.createState(); ui.unit = 'VLC'; ui.files = []; ui.why = null; ui.editIssues = false; ui.showAllIssues = false; ui.planShare = 50; ui.planAskDate = null; if (typeof onReset === 'function') onReset(); render(); say('Reset: seed data and clock (Mon 15 Feb 2027 09:00) restored.'); });
 document.addEventListener('change', e => {
   if (e.target.id !== 'file-input') return;
   const files = [...e.target.files]; if (!files.length) return;
@@ -3171,7 +3243,7 @@ window.LL_UI = { get state() { return state; }, ui, render,
   openLink: search => { const q = new URLSearchParams(search); resetUi(); if (!setScreen(q.get('screen'), q.get('tab'), true)) { render(); return false; } applyIssuesLink(search); render(); return true; }, tab: t => { setScreen('learn', t, true); render(); },
   reset: () => { state = L.createState(); ui.role = 'pm'; $('#role').value = 'pm'; ui.screen = HOME.pm; resetUi(); $('#demo').hidden = true; render(); },
   allTargets: () => { const out = []; ['pm', 'client', 'site', 'all'].forEach(r => { ['today', 'plan', 'value', 'approvals', 'about', 'three'].forEach(k => { if (L.allowed(r, areaOf(k))) out.push(r + ':' + k); }); TABS.forEach(t => { if (L.allowed(r, 'learn:' + t[0])) out.push(r + ':' + (t[0] === 'import' ? 'importer' : t[0])); }); }); return out; } };
-(function () { const q = new URLSearchParams(location.search); const r = q.get('role'), sc = q.get('screen'), tb = q.get('tab'); if (r && HOME[r]) { ui.role = r; $('#role').value = r; ui.screen = HOME[r]; } if (sc) { if (!setScreen(sc, tb, true)) { render(); say('That screen is not available when viewing as ' + ROLE_TEXT[ui.role] + '. Showing your home screen.'); return; } } applyIssuesLink(location.search); render(); })();
+(function () { const q = new URLSearchParams(location.search); const r = q.get('role'), sc = q.get('screen'), tb = q.get('tab'), sh = q.get('share'); if (r && HOME[r]) { ui.role = r; $('#role').value = r; ui.screen = HOME[r]; } if (sh != null && !isNaN(+sh)) ui.planShare = Math.max(0, Math.min(100, +sh)); if (sc) { if (!setScreen(sc, tb, true)) { render(); say('That screen is not available when viewing as ' + ROLE_TEXT[ui.role] + '. Showing your home screen.'); return; } } applyIssuesLink(location.search); render(); })();
 
 })();
 </script>
@@ -3260,6 +3332,10 @@ function LL_SELFTEST(L) {
   t('Plan scenario: days saved valued as a low–base–high money range, never a single figure', () => { const s = S(); const sc = L.buildScenario(s, 50); return sc.daysSaved === Math.max(0, -sc.slipDelta) && sc.valueSaved.low === sc.daysSaved * sc.perDay.low && sc.valueSaved.high === sc.daysSaved * sc.perDay.high && sc.valueSaved.low <= sc.valueSaved.high; });
   t('Plan scenario: reduced repeat types are listed, ranked by allocated days, each a real taxonomy subtype', () => { const s = S(); const r = L.scenarioReducedTypes(s); return r.length > 0 && r.every((x, i, a) => i === 0 || a[i - 1].days >= x.days) && r.every(x => L.subtypeLabel(x.subtype) === x.label); });
   t('Plan re-baseline: an 80% go-live date is on or after the P80 date and gives the current target chance', () => { const s = S(); const p = L.buildPlan(s), rb = L.rebaselineDate(s, 0.8); return rb.date >= p.p80Date - L.DAY && Math.abs(rb.atTargetProb - p.probOnTime) < 1e-9 && rb.weeks >= 12; });
+  t('Plan date-chance: probability of hitting a later date is never lower than an earlier one; at 12 weeks it equals the on-time chance', () => { const s = S(); const p = L.buildPlan(s); const at12 = L.planChanceBy(s, L.PLANNED_DAYS); return Math.abs(at12 - p.probOnTime) < 1e-9 && L.planChanceBy(s, L.PLANNED_DAYS + 70) >= at12 && L.planChanceBy(s, -1) === null; });
+  t('Plan commit: PM records a scenario share, it is logged, appears in the plan, and clears again', () => { const s = S(); const before = L.buildPlan(s).committedScenario; const r = L.commitPlanShare(s, 'pm', 50); const after = L.buildPlan(s).committedScenario; const logged = /Recorded kickoff-pack scenario assumption/.test(s.audit[0].action); const cl = L.clearPlanShare(s, 'pm'); return before === null && r.ok && after && after.share === 50 && logged && cl.ok && L.buildPlan(s).committedScenario === null; });
+  t('Plan commit: only the PM can record a scenario assumption', () => { const s = S(); return !L.commitPlanShare(s, 'client', 50).ok && !L.commitPlanShare(s, 'site', 50).ok && s.planShareCommitted == null; });
+  t('Plan client line: gains a scenario sentence only after the PM records a share, still no percentage', () => { const s = S(); const plain = L.planClientLine(L.buildPlan(s)); L.commitPlanShare(s, 'pm', 50); const withScen = L.planClientLine(L.buildPlan(s)); return /low confidence\.$/.test(plain) && !/%/.test(withScen) && /scenario, low evidence/.test(withScen) && withScen.length > plain.length; });
   t('Gate: the plan is a draft until the PM validates; client sees the validated snapshot only', () => { const s = S(); const a = L.clientView(s, 'plan'); const no = L.approve(s, 'client', 'plan'); L.approve(s, 'pm', 'plan'); const snap = JSON.stringify(L.clientView(s, 'plan').content); L.setPlanInput(s, 'pm', 'HW', 'max', 20); return a === null && !no.ok && JSON.stringify(L.clientView(s, 'plan').content) === snap && L.draftChanged(s, 'plan'); });
 
   /* --- M3: RUN views, approval gate, log --- */
@@ -3476,7 +3552,7 @@ function LL_UITEST(UI, L) {
   t('Role gating: a client deep link to the importer redirects home and cannot import', () => { UI.reset(); UI.setRole('client'); UI.go('importer'); const home = UI.ui.screen === 'today' && !q('#load-samples'); return home; });
   t('Evidence drawer opens with focus, highlights a category, closes with Escape', () => { UI.setRole('pm'); UI.go('kickoff'); const b = q('.risk .evlink .linkbtn'); b.click(); const open = !q('#drawer').hidden && document.activeElement === q('#drawer-h') && !!q('#drawer tr.hl'); document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })); return open && q('#drawer').hidden && document.activeElement === b; });
   t('Blind-spots panel on the Programme view', () => { UI.go('programme'); return !!q('#bs-no-tracker') && /Milan DC/.test(q('#bs-no-tracker').textContent); });
-  t('Guided demo: 10 steps; actions validate, client accepts an action (PM sees 1 of 5 accepted), slow training, record the client choice and add Barcelona', () => { UI.reset(); q('#btn-demo').click(); const seen = []; let sum = ''; const n = q('#demo .eyebrow').textContent.match(/of (\d+)/)[1]; const step1 = q('#demo p:not(.eyebrow)').textContent; for (let i = 0; i < 10; i++) { const d = q('#demo-do'); if (d) d.click(); seen.push(UI.ui.role + '/' + UI.ui.screen + (UI.ui.screen === 'learn' ? ':' + UI.ui.learnTab : '')); if (i === 4) sum = (q('#ack-summary') || {}).textContent || ''; if (i < 9) q('#demo-next').click(); } const st = UI.state; const ok = st.approvals.plan && st.approvals.kickoff && st.decisions['SM-099'] && st.decisions['SM-099'].status === 'decided' && L.unitById(st.units, 'BCN').status === 'done'; q('#demo-done').click(); const exp = ['pm/learn:history', 'pm/learn:kickoff', 'pm/plan', 'pm/plan', 'pm/learn:kickoff', 'pm/today', 'pm/today', 'client/today', 'pm/value', 'pm/learn:history']; return { pass: n === '10' && /Built from earlier go-lives only/.test(step1) && JSON.stringify(seen) === JSON.stringify(exp) && /1 of 5 accepted/.test(sum) && ok && q('#demo').hidden, detail: JSON.stringify(seen) + ' ' + sum }; });
+  t('Guided demo: 11 steps; actions validate, PM records the scenario share, client accepts an action (PM sees 1 of 5 accepted), slow training, record the client choice and add Barcelona', () => { UI.reset(); q('#btn-demo').click(); const seen = []; let sum = ''; const n = q('#demo .eyebrow').textContent.match(/of (\d+)/)[1]; const step1 = q('#demo p:not(.eyebrow)').textContent; for (let i = 0; i < 11; i++) { const d = q('#demo-do'); if (d) d.click(); seen.push(UI.ui.role + '/' + UI.ui.screen + (UI.ui.screen === 'learn' ? ':' + UI.ui.learnTab : '')); if (i === 5) sum = (q('#ack-summary') || {}).textContent || ''; if (i < 10) q('#demo-next').click(); } const st = UI.state; const ok = st.approvals.plan && st.approvals.kickoff && st.planShareCommitted === 50 && st.decisions['SM-099'] && st.decisions['SM-099'].status === 'decided' && L.unitById(st.units, 'BCN').status === 'done'; q('#demo-done').click(); const exp = ['pm/learn:history', 'pm/learn:kickoff', 'pm/plan', 'pm/plan', 'pm/plan', 'pm/learn:kickoff', 'pm/today', 'pm/today', 'client/today', 'pm/value', 'pm/learn:history']; return { pass: n === '11' && /Built from earlier go-lives only/.test(step1) && JSON.stringify(seen) === JSON.stringify(exp) && /1 of 5 accepted/.test(sum) && ok && q('#demo').hidden, detail: JSON.stringify(seen) + ' ' + sum }; });
   t('Reset restores the seed and the clock', () => { const seed = JSON.stringify(L.createState()); UI.setRole('pm'); q('#btn-advance').click(); UI.go('explorer'); q('#edit-issues').click(); q('[data-act=del-issue]').click(); const dirty = JSON.stringify(UI.state) !== seed; q('#btn-reset').click(); return dirty && JSON.stringify(UI.state) === seed && /Mon 15 Feb 2027/.test(q('#clock').textContent); });
   t('Issues tab: first 12 rows, "Show all", filters and PM edit mode; planned vs actual on History', () => { UI.reset(); UI.setRole('pm'); UI.go('explorer'); const rows = () => document.querySelectorAll('#main .issues-table tbody tr').length; const first = rows(); const total = UI.state.issues.length; q('#show-all').click(); const all = rows(); const sel = q('#fx-category'); sel.value = 'training'; fire(sel, 'change'); const tr = rows(); const st = q('#fx-status'); st.value = 'open'; fire(st, 'change'); const open = rows(); const txt = q('#main .issues-table').textContent; const noEdit = !q('[data-act=del-issue]'); q('#edit-issues').click(); const edit = !!q('[data-act=del-issue]'); UI.go('programme'); q('#pa-MAD').click(); return first === 12 && all === total && tr < all && open === 1 && /SM-099/.test(txt) && noEdit && edit && /Madrid DC/.test(q('#pa-t').textContent) && q('#ex-headline') === null ? true : [first, all, total, tr, open, noEdit, edit]; });
   t('Keyboard: skip link first, focusable chart segments (links), tooltips reachable', () => { UI.reset(); const first = document.querySelector('a, button, input, select, textarea, [tabindex="0"]'); UI.go('programme'); const segs = [...document.querySelectorAll('svg .seg[tabindex="0"]')]; const units = new Set(segs.map(g => g.dataset.unit)); return first.classList.contains('skip') && units.size === 4 && segs.every(g => g.getAttribute('role') === 'link' && g.getAttribute('aria-label')) && document.querySelectorAll('.term[tabindex="0"]').length >= 2; });
