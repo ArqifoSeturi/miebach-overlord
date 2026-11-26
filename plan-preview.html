@@ -355,6 +355,12 @@ details.why ul{margin:6px 0 0;padding-left:18px}
 .scn-grid .big{font-family:var(--serif);font-size:1.7rem;font-weight:700;line-height:1.1}
 .big.good,#scn-delta.good,#v2-delta.good{color:var(--good)}
 .big.bad,#scn-delta.bad,#v2-delta.bad{color:var(--repeat)}
+.scn-summary{background:#f1edfd;border:1px solid #d7ccf7;border-radius:8px;padding:10px 12px;font-size:.92rem;line-height:1.5;margin:6px 0 10px}
+.scn-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,1.1fr);gap:16px;align-items:start}
+.scn-chartcard{padding:12px}
+.rebase{border-left:3px solid #c0362c;background:#fff8f3;border-radius:0 8px 8px 0;padding:10px 12px;font-size:.9rem;line-height:1.5;margin:12px 0}
+.sen-layout{display:grid;grid-template-columns:minmax(300px,1.2fr) minmax(0,1fr);gap:16px;align-items:start;margin-top:8px}
+@media (max-width:900px){ .scn-layout,.sen-layout{grid-template-columns:1fr} }
 @media (max-width:640px){ .scn-grid{grid-template-columns:1fr} }
 /* @@CSS-MORE */
 .hero{align-items:start}
@@ -1575,9 +1581,49 @@ function buildScenario(state, sharePct) {
     p80SlipDays: Math.max(0, Math.round(sim.p80Days - PLANNED_DAYS)),
     probOnTime: uniform.length ? null : sim.probOnTime
   };
+  // Histogram of the scenario runs (same bins as buildPlan) so the chart can redraw the shifted distribution.
+  const hist = []; const lo = Math.floor(sim.minDays / 7) * 7, hi = Math.ceil(sim.maxDays / 7) * 7 + 7;
+  for (let x = lo; x < hi; x += 7) hist.push({ from: x, to: x + 7, n: 0 });
+  sim.sorted.forEach(v => { const b = hist[Math.min(hist.length - 1, Math.floor((v - lo) / 7))]; if (b) b.n++; });
+  scen.hist = hist; scen.runs = sim.runs; scen.minDays = sim.minDays; scen.maxDays = sim.maxDays; scen.p80Days = sim.p80Days;
   const slipDelta = Math.round(scen.p80SlipDays - base.p80SlipDays); // negative = improvement
   const probDelta = (scen.probOnTime == null || base.probOnTime == null) ? null : scen.probOnTime - base.probOnTime;
-  return { base: { p80SlipDays: base.p80SlipDays, probOnTime: base.probOnTime, p80Date: base.p80Date }, scenario: scen, slipDelta, probDelta };
+  // Days saved at P80, valued as a low–base–high money range (assumed cost per delay day). Never added to measured numbers.
+  const a = (state.assumptions) || {};
+  const perDay = { low: a.codLow || 8000, base: a.codBase || 25000, high: a.codHigh || 85000 };
+  const daysSaved = Math.max(0, -slipDelta);
+  const valueSaved = { low: daysSaved * perDay.low, base: daysSaved * perDay.base, high: daysSaved * perDay.high };
+  return { base: { p80SlipDays: base.p80SlipDays, probOnTime: base.probOnTime, p80Date: base.p80Date, hist: base.hist, runs: base.runs, p80Days: base.p80Days, minDays: Math.min(...base.hist.map(b => b.from)), maxDays: Math.max(...base.hist.map(b => b.to)) }, scenario: scen, slipDelta, probDelta, daysSaved, perDay, valueSaved, reduced: scenarioReducedTypes(state) };
+}
+/* Which repeat issue subtypes the scenario acts on, with the allocated repeat days behind them, for a plain cause→effect line. */
+function scenarioReducedTypes(state) {
+  const info = repeatInfo(state.units, state.issues);
+  const byType = {};
+  completedUnits(state.units).slice(1).forEach(u => {
+    const al = allocateUnit(u, state.issues);
+    state.issues.filter(x => x.unit === u.id && info[x.id] && info[x.id].repeat).forEach(x => {
+      const days = (al.byIssue[x.id] || {}).allocated || 0; if (days <= 0) return;
+      const key = x.category + '|' + x.subtype;
+      byType[key] = byType[key] || { category: x.category, subtype: x.subtype, label: subtypeLabel(x.subtype), days: 0 };
+      byType[key].days += days;
+    });
+  });
+  return Object.keys(byType).map(k => byType[k]).sort((a, b) => b.days - a.days);
+}
+/* Re-baseline helper: the first go-live date (kickoff + whole weeks) at which the modelled chance reaches a target
+   confidence (default 80%), plus the chance the current target date gives. Pure, seeded, deterministic. */
+function rebaselineDate(state, confidence) {
+  confidence = confidence == null ? 0.8 : confidence;
+  const mil = unitById(state.units, 'MIL'), inputs = planInputs(state), sim = simulatePlan(inputs);
+  const atTarget = sim.sorted.filter(v => v <= PLANNED_DAYS + 1e-9).length / sim.runs;
+  // Smallest whole-week horizon whose cumulative share ≥ confidence.
+  let days = Math.ceil(sim.maxDays / 7) * 7;
+  for (let w = 0; w <= Math.ceil(sim.maxDays / 7); w++) {
+    const horizon = w * 7;
+    const share = sim.sorted.filter(v => v <= horizon + 1e-9).length / sim.runs;
+    if (share >= confidence) { days = horizon; break; }
+  }
+  return { confidence, date: addDays(mil.kickoff, days), days, weeks: Math.round(days / 7), slipDays: Math.max(0, Math.round(days - PLANNED_DAYS)), atTargetProb: atTarget, target: mil.planned_go_live };
 }
 /* Sensitivity (item 16): how much does each milestone duration (±1 week on min/median/max together)
    and each cost-of-delay level move the outcome. Ranked by absolute change in P80 slip days. */
@@ -2150,7 +2196,7 @@ G.LL = {
   ACK_LABEL, kickoffActionStatus, acceptAction, askAction, recordAction, replyQuestion, resetChangedAcks, ackActor,
   trendText, IMPORT_FILE_LIMIT, importGuide, templateCSV, EXPORT_HEADERS, exportHistoryCSV,
   RESOLUTION_NOTES, pastExamples, ruleChoiceText, RANK_RULES, slackCounts, issueSlipMap, ISSUE_STATUS, filterIssues, issuesLink, parseIssuesLink, filterLabel, riskStats, topRisks, BACKTEST_SEED, sampleN, backtestPack, compareRules, rankRule, backtestText,
-  unitRepeatOverrun, scenarioInputs, buildScenario, planSensitivity, scenarioNote,
+  unitRepeatOverrun, scenarioInputs, buildScenario, planSensitivity, scenarioNote, scenarioReducedTypes, rebaselineDate,
   /* @@EXPORTS */
 };
 })(typeof globalThis !== 'undefined' ? globalThis : window);
@@ -2527,31 +2573,78 @@ function renderPlan(role, pfx) {
 }
 /* OVERLORD rhombus-with-eye mark, inline SVG, no network. */
 function overlordMark(size) { size = size || 20; return '<svg class="ovl-mark" width="' + size + '" height="' + size + '" viewBox="0 0 40 40" role="img" aria-label="OVERLORD"><polygon points="20,2 38,20 20,38 2,20" fill="#5136b3"/><path d="M9 20 Q 20 11 31 20 Q 20 29 9 20 Z" fill="#fff"/><circle cx="20" cy="20" r="4" fill="#2a1a63"/><circle cx="20" cy="20" r="1.5" fill="#fff"/></svg>'; }
+/* Small histogram that overlays the baseline and scenario distributions and both P80 markers. */
+function scenarioHistSVG(sc) {
+  const b = sc.base, s = sc.scenario;
+  const W = 440, H = 150, m = { l: 8, r: 8, t: 10, b: 26 }, iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const lo = Math.min(b.minDays, s.minDays), hi = Math.max(b.maxDays, s.maxDays) || lo + 7;
+  const X = days => m.l + (days - lo) / (hi - lo) * iw;
+  const allShares = b.hist.map(x => x.n / b.runs).concat(s.hist.map(x => x.n / s.runs));
+  const top = Math.max(...allShares) || 0.05;
+  const bars = (hist, runs, fill, opacity) => hist.map(x => { const hgt = (x.n / runs) / top * ih; const bw = Math.max(1, (X(x.to) - X(x.from)) - 2); return '<rect x="' + (X(x.from) + 1) + '" y="' + (m.t + ih - hgt) + '" width="' + bw + '" height="' + hgt + '" fill="' + fill + '" opacity="' + opacity + '"/>'; }).join('');
+  let g = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Baseline and scenario go-live distributions. Baseline P80 week ' + L.round1(b.p80Days / 7) + ', scenario P80 week ' + L.round1(s.p80Days / 7) + '.">';
+  g += bars(b.hist, b.runs, '#c3cede', 0.9) + bars(s.hist, s.runs, '#5136b3', 0.55);
+  [[L.PLANNED_DAYS, '#c0362c', 'Plan'], [b.p80Days, '#8a93a6', 'P80 base'], [s.p80Days, '#5136b3', 'P80 now']].forEach((z, k) => { const x = X(z[0]); g += '<line x1="' + x + '" x2="' + x + '" y1="' + m.t + '" y2="' + (m.t + ih) + '" stroke="' + z[1] + '" stroke-width="1.5" stroke-dasharray="' + (k === 0 ? '2 2' : '4 3') + '"/><text x="' + Math.min(W - 44, x + 3) + '" y="' + (m.t + 10 + k * 11) + '" font-size="9" style="fill:' + z[1] + '">' + z[2] + '</text>'; });
+  for (let w = Math.ceil(lo / 7); w * 7 <= hi; w += 2) { const x = X(w * 7); g += '<text x="' + x + '" y="' + (H - 8) + '" text-anchor="middle" font-size="9">' + w + '</text>'; }
+  g += '<text x="' + (m.l + iw / 2) + '" y="' + (H - 0) + '" text-anchor="middle" font-size="9">weeks after kickoff</text>';
+  return g + '</svg>';
+}
 /* PLAN P3 item 15: scenario control. */
 function scenarioSection() {
   const sc = L.buildScenario(state, ui.planShare);
   const sign = n => (n > 0 ? '+' + n : '' + n);
   const slip = sc.slipDelta, probTxt = sc.probDelta == null ? 'probability not shown (history too uniform)' : (sc.probDelta >= 0 ? '+' : '') + Math.round(sc.probDelta * 100) + ' points';
+  const reduced = sc.reduced.slice(0, 2).map(r => r.label).join(' and ') || 'repeat issue types';
+  // Plain-language summary sentence (slider → days → money range).
+  let summary;
+  if (sc.scenario.sharePct === 0) summary = 'Drag the slider to see what acting on the kickoff pack could save. Nothing is removed yet.';
+  else if (sc.daysSaved === 0) summary = 'At ' + sc.scenario.sharePct + '%, the modelled P80 date does not move; the overrun here is not mainly from repeat issues.';
+  else summary = 'If acting on the kickoff pack removes ' + sc.scenario.sharePct + '% of the repeat-issue overrun (mostly ' + esc(reduced) + '), the P80 go-live moves ' + sc.daysSaved + ' days earlier, worth about ' + L.euro(sc.valueSaved.low) + ' to ' + L.euro(sc.valueSaved.high) + ' at the assumed cost of delay.';
   let h = '<section class="section ovl-section" aria-labelledby="scn-h"><h2 id="scn-h">' + overlordMark(22) + ' OVERLORD scenario · acting on the kickoff pack</h2>';
   h += '<p class="meta-line"><span class="dot modelled" aria-hidden="true"></span>Modelled · ' + esc(L.scenarioNote()) + '</p>';
-  h += '<p class="note">If the team acts on the Milan kickoff pack, a share of the repeat-issue overrun seen at earlier units would not recur. Drag to set that share.</p>';
+  h += '<p class="scn-summary" id="scn-summary">' + summary + '</p>';
   h += '<div class="scn-control"><label for="plan-share">Share of repeat-issue overrun removed</label>';
   h += '<input type="range" id="plan-share" min="0" max="100" step="5" value="' + ui.planShare + '" data-change="plan-share" aria-describedby="plan-share-val"><output id="plan-share-val">' + ui.planShare + '%</output></div>';
-  h += '<div class="scn-grid"><div class="card"><p class="small muted">Baseline P80 slip</p><div class="big">' + sc.base.p80SlipDays + ' days</div><p class="small muted">at ' + L.fmtDate(sc.base.p80Date) + '</p></div>';
+  h += '<div class="scn-layout"><div class="scn-grid"><div class="card"><p class="small muted">Baseline P80 slip</p><div class="big">' + sc.base.p80SlipDays + ' days</div><p class="small muted">at ' + L.fmtDate(sc.base.p80Date) + '</p></div>';
   h += '<div class="card"><p class="small muted">Scenario P80 slip (' + sc.scenario.sharePct + '%)</p><div class="big">' + sc.scenario.p80SlipDays + ' days</div><p class="small muted">at ' + L.fmtDate(sc.scenario.p80Date) + '</p></div>';
   h += '<div class="card"><p class="small muted">Change in P80 slip</p><div class="big ' + (slip < 0 ? 'good' : slip > 0 ? 'bad' : '') + '" id="scn-delta">' + sign(slip) + ' days</div><p class="small muted">chance of 7 Jun ' + esc(probTxt) + '</p></div></div>';
+  h += '<div class="card scn-chartcard"><p class="small muted">Go-live distribution: grey is the baseline, purple is this scenario</p>' + scenarioHistSVG(sc) + '</div></div>';
+  // Re-baseline helper.
+  const rb = L.rebaselineDate(state, 0.8);
+  h += '<div class="rebase"><strong>Re-baseline helper.</strong> The current target ' + L.fmtDate(rb.target) + ' has a modelled chance of about ' + Math.round(rb.atTargetProb * 100) + '%. For an 80% chance the go-live would need to move to about <strong>' + L.fmtDate(rb.date) + '</strong> (' + rb.slipDays + ' days later than plan). Modelled, low evidence.</div>';
   h += '<p class="small muted">This drives value-ledger line V2. The history is small and fictional (n = ' + L.completedUnits(state.units).length + ' units).</p></section>';
   return h;
 }
-/* PLAN P3 item 16: sensitivity view. */
+/* PLAN P3 item 16: sensitivity view, as a tornado chart plus the numbers. */
+function tornadoSVG(rows) {
+  const maxImpact = Math.max(1, ...rows.map(r => Math.max(Math.abs(r.minusWeek), Math.abs(r.plusWeek))));
+  // Left gutter holds the labels; the zero axis and all bars live strictly to the right of it.
+  const W = 480, rowH = 30, H = rows.length * rowH + 30, gutter = 148, pad = 44;
+  const cx = gutter + (W - gutter - pad) / 2, half = (W - gutter - pad) / 2;
+  const X = d => cx + (d / maxImpact) * half;
+  let g = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Tornado chart: change in P80 slip days for each milestone shifted one week down or up.">';
+  g += '<line x1="' + cx + '" x2="' + cx + '" y1="6" y2="' + (H - 20) + '" stroke="#98a2b3"/>';
+  rows.forEach((r, i) => {
+    const y = 10 + i * rowH;
+    g += '<text x="6" y="' + (y + 13) + '" text-anchor="start" font-size="10" style="fill:var(--ink)">' + esc(r.label) + '</text>';
+    const dn = X(r.minusWeek), up = X(r.plusWeek);
+    g += '<rect x="' + Math.min(cx, dn) + '" y="' + (y + 1) + '" width="' + Math.abs(dn - cx) + '" height="9" fill="#0e6a63"/>';
+    g += '<text x="' + (dn <= cx ? dn - 3 : dn + 3) + '" y="' + (y + 9) + '" text-anchor="' + (dn <= cx ? 'end' : 'start') + '" font-size="9" style="fill:#0e6a63">' + (r.minusWeek > 0 ? '+' : '') + r.minusWeek + '</text>';
+    g += '<rect x="' + Math.min(cx, up) + '" y="' + (y + 12) + '" width="' + Math.abs(up - cx) + '" height="9" fill="#c0362c"/>';
+    g += '<text x="' + (up >= cx ? up + 3 : up - 3) + '" y="' + (y + 20) + '" text-anchor="' + (up >= cx ? 'start' : 'end') + '" font-size="9" style="fill:#c0362c">' + (r.plusWeek > 0 ? '+' : '') + r.plusWeek + '</text>';
+  });
+  g += '<text x="' + cx + '" y="' + (H - 4) + '" text-anchor="middle" font-size="9">← a week earlier · P80 slip days · a week later →</text>';
+  return g + '</svg>';
+}
 function sensitivitySection() {
   const s = L.planSensitivity(state);
   const sign = n => (n > 0 ? '+' + n : '' + n);
   let h = '<section class="section" aria-labelledby="sen-h"><h2 id="sen-h">Sensitivity · what moves the date and the value most</h2>';
   h += '<p class="meta-line"><span class="dot modelled" aria-hidden="true"></span>Modelled · each milestone shifted ±1 week, the rest held, 10,000 seeded runs</p>';
-  h += '<div class="tablewrap"><table class="mstable"><thead><tr><th>Milestone</th><th>Party</th><th class="num">−1 week on P80 slip</th><th class="num">+1 week on P80 slip</th><th class="num">Biggest effect</th></tr></thead><tbody>';
-  s.rows.forEach((r, i) => { h += '<tr><td>' + esc(r.label) + (i === 0 ? ' <span class="chip">most sensitive</span>' : '') + '</td><td>' + esc(r.party) + '</td><td class="num">' + sign(r.minusWeek) + ' days</td><td class="num">' + sign(r.plusWeek) + ' days</td><td class="num">' + r.impact + ' days</td></tr>'; });
-  h += '</tbody></table></div>';
+  h += '<div class="sen-layout"><div class="card">' + tornadoSVG(s.rows) + '<p class="small muted">Green = a week earlier, red = a week later. Longest bars move the date most.</p></div>';
+  h += '<div class="tablewrap"><table class="mstable"><thead><tr><th>Milestone</th><th class="num">−1 wk</th><th class="num">+1 wk</th><th class="num">Effect</th></tr></thead><tbody>';
+  s.rows.forEach((r, i) => { h += '<tr><td>' + esc(r.label) + (i === 0 ? ' <span class="chip">most sensitive</span>' : '') + '</td><td class="num">' + sign(r.minusWeek) + '</td><td class="num">' + sign(r.plusWeek) + '</td><td class="num">' + r.impact + ' d</td></tr>'; });
+  h += '</tbody></table></div></div>';
   h += '<h3>Cost of delay on the P80 slip (' + s.baseP80Slip + ' days)</h3><p class="note">Always a range; this is an assumption, never added to measured or modelled numbers.</p><div class="tablewrap"><table class="mstable"><thead><tr><th>Level</th><th class="num">€/day</th><th class="num">P80 slip cost</th></tr></thead><tbody>';
   s.costRows.forEach(c => { h += '<tr><td>' + (c.level === 'base' ? 'Base (placeholder)' : c.level.charAt(0).toUpperCase() + c.level.slice(1)) + '</td><td class="num">' + L.euro(c.perDay) + '</td><td class="num">' + L.euro(c.p80Cost) + '</td></tr>'; });
   h += '</tbody></table></div></section>';
@@ -3164,6 +3257,9 @@ function LL_SELFTEST(L) {
   t('Plan scenario (item 15): a larger share removes at least as much slip as a smaller one', () => { const s = S(); return L.buildScenario(s, 100).scenario.p80SlipDays <= L.buildScenario(s, 50).scenario.p80SlipDays; });
   t('Plan V2: value ledger V2 equals the scenario P80 slip delta (modelled, not measured)', () => { const s = S(); const sc = L.buildScenario(s, 50); return sc.slipDelta === sc.scenario.p80SlipDays - sc.base.p80SlipDays; });
   t('Plan sensitivity (item 16): every milestone ranked by its effect on P80 slip; cost of delay is a low–base–high range', () => { const s = S(); const sv = L.planSensitivity(s); return sv.rows.length === L.MILESTONES.length && sv.rows.every((r, i, a) => i === 0 || a[i - 1].impact >= r.impact) && sv.costRows.length === 3 && sv.costRows[0].p80Cost <= sv.costRows[2].p80Cost; });
+  t('Plan scenario: days saved valued as a low–base–high money range, never a single figure', () => { const s = S(); const sc = L.buildScenario(s, 50); return sc.daysSaved === Math.max(0, -sc.slipDelta) && sc.valueSaved.low === sc.daysSaved * sc.perDay.low && sc.valueSaved.high === sc.daysSaved * sc.perDay.high && sc.valueSaved.low <= sc.valueSaved.high; });
+  t('Plan scenario: reduced repeat types are listed, ranked by allocated days, each a real taxonomy subtype', () => { const s = S(); const r = L.scenarioReducedTypes(s); return r.length > 0 && r.every((x, i, a) => i === 0 || a[i - 1].days >= x.days) && r.every(x => L.subtypeLabel(x.subtype) === x.label); });
+  t('Plan re-baseline: an 80% go-live date is on or after the P80 date and gives the current target chance', () => { const s = S(); const p = L.buildPlan(s), rb = L.rebaselineDate(s, 0.8); return rb.date >= p.p80Date - L.DAY && Math.abs(rb.atTargetProb - p.probOnTime) < 1e-9 && rb.weeks >= 12; });
   t('Gate: the plan is a draft until the PM validates; client sees the validated snapshot only', () => { const s = S(); const a = L.clientView(s, 'plan'); const no = L.approve(s, 'client', 'plan'); L.approve(s, 'pm', 'plan'); const snap = JSON.stringify(L.clientView(s, 'plan').content); L.setPlanInput(s, 'pm', 'HW', 'max', 20); return a === null && !no.ok && JSON.stringify(L.clientView(s, 'plan').content) === snap && L.draftChanged(s, 'plan'); });
 
   /* --- M3: RUN views, approval gate, log --- */
